@@ -1,0 +1,399 @@
+/* ===============================
+   E-CONCOURS - Styles CSS
+   =============================== */
+
+/* Reset et base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1440px;
+    margin: 0 auto;
+    background: #F9FAFB;
+    min-height: 100vh;
+}
+
+
+/* ==== Contenu principal ==== */
+.main-content {
+    padding: 3rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.payment-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: start;
+}
+
+/* En-tête */
+.section-header {
+    grid-column: 1 / -1;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 0.5rem;
+}
+
+.subtitle {
+    font-size: 1rem;
+    color: #666;
+}
+
+/* Carte de paiement */
+.payment-card {
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 2rem;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.payment-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.icon {
+    width: 24px;
+    height: 24px;
+}
+
+.payment-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #1a1a1a;
+}
+
+/* Méthodes de paiement */
+.payment-methods {
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.payment-btn {
+    flex: 1;
+    min-width: 80px;
+    height: 60px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    background-color: #fff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    padding: 0.5rem;
+}
+
+.payment-btn:hover {
+    border-color: #999;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.payment-logo {
+    max-width: 100%;
+    max-height: 40px;
+    object-fit: contain;
+}
+
+.payment-logo-small {
+    max-height: 30px;
+    margin-left: -10px;
+}
+
+.visa-btn {
+    display: flex;
+    gap: 0.25rem;
+}
+
+/* Formulaire */
+.payment-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #333;
+}
+
+.input-wrapper {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 0.875rem 1rem;
+    background-color: #fafafa;
+}
+
+.phone-placeholder {
+    color: #999;
+    font-size: 0.95rem;
+}
+
+.form-hint {
+    font-size: 0.8rem;
+    color: #888;
+    margin-top: 0.25rem;
+}
+
+.btn-pay {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background-color: #07b544;
+    color: #fff;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-pay:hover {
+    background-color: #333;
+}
+
+.btn-icon {
+    width: 20px;
+    height: 20px;
+}
+
+.security-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    color: #666;
+}
+
+.badge-icon {
+    width: 16px;
+    height: 16px;
+}
+
+/* ===============================
+   Récapitulatif
+   =============================== */
+.summary-card {
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 2rem;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.summary-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-bottom: 1.5rem;
+}
+
+.summary-content {
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.summary-item {
+    margin-bottom: 1rem;
+}
+
+.concours-name {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-bottom: 0.5rem;
+}
+
+.concours-name .label,
+.concours-fee .label {
+    color: #666;
+    font-weight: 500;
+}
+
+.concours-fee {
+    font-size: 0.95rem;
+    color: #333;
+}
+
+.total-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.total-label {
+    font-weight: 600;
+    color: #1a1a1a;
+}
+
+.divider {
+    flex: 1;
+    border-bottom: 1px dashed #ccc;
+}
+
+.total-amount {
+    display: block;
+    text-align: right;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-top: 0.5rem;
+}
+
+.security-info {
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+}
+
+.info-icon {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    margin-top: 0.2rem;
+}
+
+.security-text {
+    font-size: 0.8rem;
+    color: #666;
+    line-height: 1.5;
+}
+
+
+/* ===============================
+   Responsive
+   =============================== */
+@media (max-width: 1024px) {
+    .payment-section {
+        grid-template-columns: 1fr;
+    }
+    
+    .footer-content {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+    
+    .nav-links {
+        order: 3;
+        width: 100%;
+        justify-content: center;
+        gap: 1rem;
+    }
+    
+    .coat-of-arms {
+        position: static;
+        transform: none;
+    }
+    
+    .payment-methods {
+        justify-content: center;
+    }
+    
+    .payment-btn {
+        flex: 0 0 calc(50% - 0.5rem);
+    }
+    
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav-links {
+        display: none;
+    }
+    
+    .payment-btn {
+        flex: 0 0 100%;
+    }
+    
+    .title {
+        font-size: 1.4rem;
+    }
+}
+
+.otp-section {
+    margin-top: 25px;
+    text-align: center;
+}
+
+.otp-info {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 15px;
+}
+
+.otp-inputs {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.otp-input {
+    width: 45px;
+    height: 55px;
+    font-size: 22px;
+    text-align: center;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    outline: none;
+    transition: 0.2s;
+}
+
+.otp-input:focus {
+    border-color: #ff7a00;
+    box-shadow: 0 0 5px rgba(255,122,0,0.5);
+}
+
+.btn-confirm {
+    background: #ff7a00;
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}

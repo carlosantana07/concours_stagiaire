@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des concours</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body>
+
+
+    <section class="login-page">
+        <div class="login-container">
+
+            <div class="login-header">
+                <i class="fas fa-user-circle"></i>
+                <h1>Connexion à mon profil</h1>
+                <p>Accédez à votre espace personnel</p>
+            </div>
+
+            <form class="login-form">
+
+                <!-- Téléphone -->
+                <div class="form-group">
+                    <label>Numéro de téléphone</label>
+                    <div class="input-group">
+                        <i class="fas fa-phone"></i>
+                        <input type="text" placeholder="01 23 45 67 89" required>
+                    </div>
+                </div>
+
+                <!-- Mot de passe -->
+                <div class="form-group">
+                    <label>Mot de passe</label>
+                    <div class="input-group">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="password" placeholder="••••••••" required>
+                        <i class="fas fa-eye toggle-password" onclick="togglePassword()"></i>
+                    </div>
+                </div>
+
+                <!-- Bouton -->
+                <button type="submit" class="btn-primary">Se connecter</button>
+
+                <!-- Liens oubli -->
+                <div class="forgot-links">
+                    <a href="#"><i class="fas fa-key"></i> Mot de passe oublié ?</a>
+                    <!-- <a href="#"><i class="fas fa-phone"></i> Numéro oublié ?</a> -->
+                </div>
+
+                <!-- Création compte -->
+                <div class="register-link">
+                    <p>Vous n'avez pas de compte ?</p>
+                    <a href="inscription.php">Créer un compte</a>
+                </div>
+
+            </form>
+        </div>
+    </section>
+
+</body>
+
+</html>
