@@ -17,34 +17,41 @@
             <h1>Contactez-Nous</h1>
             <p style="text-align: center; color: #666; margin-bottom: 30px;">Envoyez un message</p>
 
-            <form>
+            <form id="contactForm">
+
                 <div class="form-group">
-                    <label for="nom">Nom <span class="required">*</span></label>
-                    <input type="text" id="nom" placeholder="Votre nom complet" required>
+                    <label>Nom <span class="required">*</span></label>
+                    <input type="text" name="nom" id="nom" required>
                 </div>
 
                 <div class="form-group">
-                    <label for="email">Adresse Mail</label>
-                    <input type="email" id="email" placeholder="votre.email@exemple.com">
+                    <label>Adresse Mail</label>
+                    <input type="email" name="email" id="email">
                 </div>
 
-                <div class="form-group">
-                    <label for="tel">Téléphone</label>
-                    <input type="tel" id="tel" placeholder="01 23 45 67 89">
-                </div>
+                <!-- <div class="form-group">
+                    <label>Téléphone</label>
+                    <input type="tel" name="telephone" id="tel">
+                </div> -->
 
                 <div class="form-group">
-                    <label for="message">Message</label>
-                    <textarea id="message" placeholder="Décrivez votre demande ou question..."></textarea>
+                    <label>Message</label>
+                    <textarea name="message" id="message"></textarea>
                 </div>
 
                 <button type="submit" class="btn-submit">Envoyer</button>
+
             </form>
         </main>
 
     </section>
 
-    <?php include ('footer.php'); ?>
+    <?php include('footer.php'); ?>
+    <script type="module">
+        import AuthController from "../controllers/AuthController.js";
+
+        AuthController.initContact();
+    </script>
 
 </body>
 

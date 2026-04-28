@@ -23,9 +23,9 @@
   <!-- ===== HERO ===== -->
 
   <section class="hero">
-    <h1 class="title">Bienvenue sur <span style="color:#FCD116;">E-CONCOURS</span></h1>
+    <h1 class="title" style="color: #fff;">Bienvenue sur <span style="color:#FCD116;">E-CONCOURS</span></h1>
 
-    <p class="subtitle">
+    <p class="subtitle" style="color: #fff;">
       Le portail officiel d'accès aux concours de la Fonction Publique
     </p>
 

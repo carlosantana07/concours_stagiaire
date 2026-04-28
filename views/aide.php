@@ -31,7 +31,7 @@
 
             <div class="help-accordion-item">
                 <span class="help-accordion-icon">></span>
-                <span class="help-accordion-text">Comment s'inscrire à un concours ?</span>
+                <a class="help-accordion-text" href="">Comment s'inscrire à un concours ?</a>
             </div>
 
             <div class="help-accordion-item">

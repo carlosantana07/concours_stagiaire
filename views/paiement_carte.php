@@ -6,17 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>E-CONCOURS - Finaliser l'inscription</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"> -->
+    <!-- <link rel="stylesheet" href="style.css"> -->
     <link rel="stylesheet" href="../assets/css/style.css">
     <style>
         /* CSS intégré ci-dessous */
     </style>
 </head>
 
-<body>
+<body style="background: #fff">
+    <?php include("header.php") ?>
     <div class="container">
-        <?php include("header.php") ?>
 
         <main class="main-content">
             <div class="payment-section">
@@ -32,54 +32,46 @@
                         <h2 class="payment-title">Moyen de paiement</h2>
                     </div>
 
-                    <div class="payment-methods">
-                        <button class="payment-btn">
+                     <div class="payment-methods">
+                        <a class="payment-btn" href="paiement.php">
                             <img src="../assets/image/Orange-Money.jpg" alt="Orange Money" class="payment-logo">
-                        </button>
+                        </a>
 
-                        <button class="payment-btn">
+                        <a class="payment-btn" href="paiement.php">
                             <img src="../assets/image/moov.png" alt="Moov Money" class="payment-logo">
-                        </button>
+                        </a>
 
-                        <button class="payment-btn">
+                        <a class="payment-btn" href="paiement_carte.php">
                             <img src="../assets/image/carte bancaire.png" alt="Carte Bancaire" class="payment-logo">
-                        </button>
+                        </a>
 
-                        <button class="payment-btn visa-btn">
+                        <a class="payment-btn visa-btn" href="paiement_carte.php">
                             <img src="../assets/image/Visa.png" alt="Visa" class="payment-logo">
-                        </button>
-                    </div>
-
-                    <div class="security-badge">
-                        <img src="https://cdn-icons-png.flaticon.com/512/2913/2913133.png" alt="sécurité" class="badge-icon">
-                        <span>Paiement 100% sécurisé et chiffré</span>
+                        </a>
                     </div>
 
                     <form class="payment-form">
                         <div class="form-group">
-                            <label class="form-label">Numéro de téléphone</label>
-                            <div class="input-wrapper">
-                                <span class="phone-placeholder">+226 xx xx xx xx</span>
-                            </div>
-                            <p class="form-hint">Composez le code suivant sur votre numéro Orange Money
-                                pour recevoir un OTP par SMS</p>
-                            <p class="form-hint" style="font-weight: bold; text-align: center; color: black;">*144*4*6*800#</p>
-
-                        </div>
-
-                        <div class="otp-section">
-    
-                            <div class="otp-inputs">
-                                <p class="otp-info">Saisissez le code à 6 chiffres reçu par SMS</p>
-                                <input type="text" maxlength="1" class="otp-input">
-                                <input type="text" maxlength="1" class="otp-input">
-                                <input type="text" maxlength="1" class="otp-input">
-                                <input type="text" maxlength="1" class="otp-input">
-                                <input type="text" maxlength="1" class="otp-input">
-                                <input type="text" maxlength="1" class="otp-input">
+                            <label class="form-label">Nom sur la carte</label>
+                            <div>
+                                <input type="text" class="input-wrapper" placeholder="TAO Luc">
                             </div>
 
-                            
+                            <label class="form-label">Numéro de la carte</label>
+                            <div>
+                                <input type="text" class="input-wrapper" placeholder="0000 0000 0000 0000">
+                            </div>
+                            <div class="row">
+                                <label class="form-label">Date d'expiration</label>
+                                <div>
+                                    <input type="text" class="input-wrapper" placeholder="MM/AA">
+                                </div>
+
+                                <label class="form-label">CVC / CVV</label>
+                                <div>
+                                    <input type="text" class="input-wrapper" placeholder="123456">
+                                </div>
+                            </div>
                         </div>
 
                         <button type="submit" class="btn-pay">
@@ -118,8 +110,8 @@
                     </div>
 
                     <div class="security-info">
-                        <i class="fa-solid fa-shield-halved"></i>
-                        <p class="security-text">
+                        <p>
+                            <i class="fa-solid fa-shield-halved"></i>
                             Vos informations de paiement sont traitées de manière sécurisée.
                             Nous ne stockons pas les détails de votre carte ou compte.
                         </p>
@@ -127,8 +119,9 @@
                 </div>
             </div>
         </main>
-        <?php include("footer.php") ?>
+
     </div>
+    <?php include("footer.php") ?>
 </body>
 
 </html>

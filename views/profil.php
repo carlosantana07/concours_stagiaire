@@ -21,7 +21,7 @@
             <div class="profile-avatar">
               <i class="fa-solid fa-user"></i>
             </div>
-            <div class="profile-name">Sare Sarah</div>
+            <div class="profile-name"></div>
           </div>
         </section>
       </div>
@@ -34,12 +34,12 @@
         </div>
 
         <div class="profile-grid">
-          <div><strong>Nom</strong><br>Sare</div>
-          <div><strong>Prénom</strong><br>Sarah</div>
-          <div><strong>Date de naissance</strong><br>03/11/2001</div>
-          <div><strong>Lieu de naissance</strong><br>Libreville</div>
-          <div><strong>Téléphone</strong><br>55713339</div>
-          <div><strong>Email</strong><br>saresarah11@icloud.com</div>
+          <div><strong>Nom</strong><br></div>
+          <div><strong>Prénom</strong><br></div>
+          <div><strong>Date de naissance</strong><br></div>
+          <div><strong>Lieu de naissance</strong><br></div>
+          <div><strong>Téléphone</strong><br></div>
+          <div><strong>Email</strong><br></div>
         </div>
       </section>
 
@@ -87,54 +87,16 @@
         </div>
       </section>
 
-      <!-- ===== MES RESULTATS ===== -->
-      <section class="profile-card">
-        <div class="profile-card-header">
-          <h3>Mes résultats</h3>
-          <a class="profile-btn-outline" href="#">Voir tout</a>
-        </div>
-
-        <div class="profile-table">
-          <div class="profile-row header multi">
-            <span>Concours</span>
-            <span>Epreuves</span>
-            <span>Type</span>
-            <span>Coeff</span>
-            <span>Note</span>
-            <span>Statut</span>
-          </div>
-
-          <div class="profile-row multi">
-            <span>Santé</span>
-            <span>Culture générale</span>
-            <span>Ecrit</span>
-            <span>2</span>
-            <span>En attente</span>
-            <span class="status pending">En attente</span>
-          </div>
-
-          <div class="profile-row multi">
-            <span>Education</span>
-            <span>SVT</span>
-            <span>Ecrit</span>
-            <span>3</span>
-            <span>En attente</span>
-            <span class="status pending">En attente</span>
-          </div>
-
-          <div class="profile-row multi">
-            <span>Douanes</span>
-            <span>Mathématiques</span>
-            <span>Pratique</span>
-            <span>3</span>
-            <span>En attente</span>
-            <span class="status pending">En attente</span>
-          </div>
-        </div>
-      </section>
-
     </div>
   </main>
+  
+  <script type="module">
+    import CandidatController from "../controllers/CandidatController.js";
+
+    document.addEventListener("DOMContentLoaded", () => {
+      CandidatController.loadProfil();
+    });
+  </script>
 
 </body>
 

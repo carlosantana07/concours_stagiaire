@@ -20,14 +20,14 @@
                 <p>Accédez à votre espace personnel</p>
             </div>
 
-            <form class="login-form">
+            <form class="login-form" id="loginForm">
 
                 <!-- Téléphone -->
                 <div class="form-group">
                     <label>Numéro de téléphone</label>
                     <div class="input-group">
                         <i class="fas fa-phone"></i>
-                        <input type="text" placeholder="01 23 45 67 89" required>
+                        <input type="text" placeholder="01 23 45 67 89" name="telephone" required>
                     </div>
                 </div>
 
@@ -36,7 +36,7 @@
                     <label>Mot de passe</label>
                     <div class="input-group">
                         <i class="fas fa-lock"></i>
-                        <input type="password" id="password" placeholder="••••••••" required>
+                        <input type="password" id="password" placeholder="••••••••" name="mot_de_passe" required>
                         <i class="fas fa-eye toggle-password" onclick="togglePassword()"></i>
                     </div>
                 </div>
@@ -46,7 +46,7 @@
 
                 <!-- Liens oubli -->
                 <div class="forgot-links">
-                    <a href="#"><i class="fas fa-key"></i> Mot de passe oublié ?</a>
+                    <a href="mdp_oublie.php"><i class="fas fa-key"></i> Mot de passe oublié ?</a>
                     <!-- <a href="#"><i class="fas fa-phone"></i> Numéro oublié ?</a> -->
                 </div>
 
@@ -59,6 +59,14 @@
             </form>
         </div>
     </section>
+
+    <script type="module">
+        import AuthController from "../controllers/AuthController.js";
+
+        document.addEventListener("DOMContentLoaded", () => {
+            AuthController.initLogin();
+        });
+    </script>
 
 </body>
 
