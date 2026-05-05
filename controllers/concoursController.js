@@ -12,22 +12,11 @@ export default class ConcoursController {
         this.currentCategorie = "";
 
         await this.loadCategories();
-        await this.loadConcours();
+        await this.loadAllConcours();
+        await this.loadConcours(1);
 
         this.bindEvents();
     }
-
-    // EVENTS
-
-    static bindEvents() {
-
-        this.select.addEventListener("change", () => {
-
-            this.currentCategorie = this.select.value;
-            this.loadConcours(1);
-        });
-    }
-
     // LOAD CATEGORIES
 
     static async loadCategories() {
@@ -49,18 +38,80 @@ export default class ConcoursController {
         });
     }
 
-    // LOAD CONCOURS
-    static async loadConcours() {
+    //LOAD CONCOURS
+    
 
-        const res = await ConcoursModel.getConcours();
+    static async loadAllConcours() {
 
-        if (!res.ok) return;
+        let page = 1;
+        let allConcours = [];
 
-        this.allCategories = res.data.data;
+        while (true) {
 
-        this.isFiltering = false;
+            const res = await ConcoursModel.getConcours(page);
 
-        this.renderConcours(this.allCategories);
+            if (!res.ok) break;
+
+            const { data, totalPages } = res.data;
+
+            // EXTRAIRE les concours
+            data.forEach(cat => {
+                (cat.concours || []).forEach(c => {
+                    allConcours.push({
+                        ...c,
+                        categorieId: cat.id
+                    });
+                });
+            });
+
+            if (page >= totalPages) break;
+
+            page++;
+        }
+
+        this.allConcours = allConcours;
+    }
+
+    static async loadConcours(page = 1) {
+
+        const limit = 10;
+
+        let filtered = [...this.allConcours];
+
+        // filtre catégorie CORRECT
+        if (this.currentCategorie !== "") {
+
+            const catId = Number(this.currentCategorie);
+
+            filtered = filtered.filter(c => c.categorieId === catId);
+        }
+
+        // CAS VIDE
+        if (filtered.length === 0) {
+
+            this.container.innerHTML = `
+            <div class="empty-card">
+                <i class="fa-solid fa-triangle-exclamation empty-icon"></i>
+                <p>Aucun concours disponible dans cette catégorie</p>
+            </div>
+            `;
+
+            this.pagination.innerHTML = "";
+            return;
+        }
+
+        const start = (page - 1) * limit;
+        const end = start + limit;
+
+        const paginated = filtered.slice(start, end);
+
+        this.renderConcours(paginated);
+
+        const totalPages = Math.ceil(filtered.length / limit);
+
+        this.renderPagination(page, totalPages);
+
+        this.currentPage = page;
     }
 
     static isFiltering = false;
@@ -68,76 +119,114 @@ export default class ConcoursController {
 
         this.select.addEventListener("change", () => {
 
-            const selectedId = this.select.value;
+            console.log("CATEGORIE SELECTED:", this.select.value);
 
-            this.isFiltering = selectedId !== "";
+            this.currentCategorie = this.select.value;
 
-            let filtered = this.allCategories;
-
-            if (this.isFiltering) {
-                filtered = this.allCategories.filter(cat => cat.id == selectedId);
-            }
-
-            this.renderConcours(filtered);
+            this.loadConcours(1);
         });
     }
 
-    static renderConcours(categories) {
+    // static renderConcours(categories) {
+
+    //     this.container.innerHTML = "";
+    //     let hasConcours = false;
+    //     categories.forEach(categorie => {
+
+    //         const concoursList = categorie.concours || [];
+
+    //         concoursList.forEach(concours => {
+    //             hasConcours = true;
+
+    //             const card = document.createElement("div");
+    //             card.className = "concours-card";
+
+    //             card.innerHTML = `
+    //             <h2>${concours.nom}</h2>
+
+    //             <div class="concours-footer">
+    //                 <div class="infos">
+    //                     <span>
+    //                         <i class="fa-solid fa-calendar-days"></i>
+    //                         ${this.formatDate(concours.date_debut)}
+    //                     </span>
+
+    //                     <span>
+    //                         <i class="fa-solid fa-users"></i>
+    //                         ${concours.nombre_postes || 0} postes
+    //                     </span>
+    //                 </div>
+
+    //                 <a href="detail_concours.php?id=${concours.id_concours}" class="btn-primary">
+    //                     Voir détails
+    //                 </a>
+    //             </div>
+    //         `;
+
+    //             this.container.appendChild(card);
+    //         });
+    //     });
+
+
+    //     // MESSAGE UNIQUEMENT SI FILTRE + VIDE
+    //     if (this.isFiltering && !hasConcours) {
+
+    //         this.container.innerHTML = `
+    //         <div class="empty-card">
+    //             <i class="fa-solid fa-triangle-exclamation empty-icon"></i>
+    //             <p>Aucun concours disponible dans cette catégorie</p>
+    //         </div>
+    //     `;
+    //     }
+    // }
+
+    static renderConcours(concoursList) {
 
         this.container.innerHTML = "";
 
-        let hasConcours = false;
+        concoursList.forEach(concours => {
+            // hasConcours = true;
 
-        categories.forEach(categorie => {
+            const card = document.createElement("div");
+            card.className = "concours-card";
 
-            if (categorie.concours && categorie.concours.length > 0) {
+            card.innerHTML = `
+                <h2>${concours.nom}</h2>
 
-                hasConcours = true;
+                <div class="concours-footer">
+                    <div class="infos">
+                        <span>
+                            <i class="fa-solid fa-calendar-days"></i>
+                            ${this.formatDate(concours.date_debut)}
+                        </span>
 
-                categorie.concours.forEach(concours => {
-
-                    const card = document.createElement("div");
-                    card.className = "concours-card";
-
-                    card.innerHTML = `
-                    <h2>${concours.nom || concours.titre || "Sans nom"}</h2>
-
-                    <div class="concours-footer">
-                        <div class="infos">
-                            <span>
-                                <i class="fa-solid fa-calendar-days"></i>
-                                ${this.formatDate(concours.date_debut || concours.dateDebut)}
-                            </span>
-
-                            <span>
-                                <i class="fa-solid fa-users"></i>
-                                ${concours.nombre_postes || concours.nbPostes || 0} postes
-                            </span>
-                        </div>
-
-                        <a href="detail_concours.php?id=${concours.id_concours || concours.id}" class="btn-primary">
-                            Voir détails
-                        </a>
+                        <span>
+                            <i class="fa-solid fa-users"></i>
+                            ${concours.nombre_postes || 0} postes
+                        </span>
                     </div>
-                `;
 
-                    this.container.appendChild(card);
-                });
-            }
+                    <a href="detail_concours.php?id=${concours.id_concours}" class="btn-primary">
+                        Voir détails
+                    </a>
+                </div>
+            `;
+
+            this.container.appendChild(card);
         });
 
+
         // MESSAGE UNIQUEMENT SI FILTRE + VIDE
-        if (this.isFiltering && !hasConcours) {
+        // if (this.isFiltering && !hasConcours) {
 
-            this.container.innerHTML = `
-            <div class="empty-card">
-                <i class="fa-solid fa-triangle-exclamation empty-icon"></i>
-                <p>Aucun concours disponible dans cette catégorie</p>
-            </div>
-        `;
-        }
+        //     this.container.innerHTML = `
+        //     <div class="empty-card">
+        //         <i class="fa-solid fa-triangle-exclamation empty-icon"></i>
+        //         <p>Aucun concours disponible dans cette catégorie</p>
+        //     </div>
+        // `;
+        // }
     }
-
 
     // PAGINATION
 

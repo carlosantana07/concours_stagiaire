@@ -62,14 +62,14 @@
                             <input type="date" name="date_delivrance" placeholder="Date de délivrance" required>
                         </div>
 
-                        <!-- <div class="form-group">
+                        <div class="form-group">
                             <label>Type de concours <span class="required">*</span></label>
                             <select required name="type_concours">
                                 <option value="">Sélectionnez le type de concours</option>
                                 <option value="Direct">Direct</option>
                                 <option value="Professionnel">Professionnel</option>
                             </select>
-                        </div> -->
+                        </div>
 
                         <div class="form-group">
                             <label>Matricule</label>

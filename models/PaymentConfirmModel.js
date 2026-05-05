@@ -1,5 +1,5 @@
 const API_URL = "http://localhost:4000/api/payment";
-const API = "http://localhost:4000/api/inscription";
+const API = "http://localhost:4000/api/candidat";
 
 export default class PaymentConfirmModel {
 
@@ -21,7 +21,7 @@ export default class PaymentConfirmModel {
 
         const token = localStorage.getItem("token");
 
-        const res = await fetch(`${API}/get-recepisser`, {
+        const res = await fetch(`${API}/recepisse`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

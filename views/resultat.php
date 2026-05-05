@@ -6,9 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MES RESULTATS</title>
     <link rel="stylesheet" href="../assets/css/style.css" />
-    <link
-        rel="stylesheet"
-        href="https://cdjns.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 
 <body style="background: #fff;">
@@ -30,8 +28,8 @@
                     <th>STATUT</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
+            <tbody id="resultatsBody">
+                <!-- <tr>
                     <td rowspan="3" class="nom-concours">Santé</td>
                     <td>Culture générale</td>
                     <td>Ecrit</td>
@@ -92,17 +90,24 @@
                     <td>Ecrit</td>
                     <td>3</td>
                     <td>En attente</td>
-                </tr>
+                </tr> -->
             </tbody>
         </table>
         <div class="pagination">
-            <button class="btn-suivant">
-                Suivant <span class="fleche">→</span>
-            </button>
+            <button class="btn-prev">← Précédent</button>
+            <button class="btn-suivant">Suivant →</button>
         </div>
     </div>
     <!-- ===== FOOTER ===== -->
     <?php include("footer.php") ?>
+    <script type="module">
+        import CandidatController from "../controllers/CandidatController.js";
+
+        document.addEventListener("DOMContentLoaded", () => {
+            CandidatController.loadResultats();
+            CandidatController.initPaginationResultats();
+        });
+    </script>
 
 
 </body>

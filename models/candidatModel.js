@@ -19,4 +19,80 @@ export default class CandidatModel {
         };
     }
 
+    static async getMesInscriptions(token, page = 1) {
+
+        const res = await fetch(
+            `${API_URL}/mes-candidatures?page=${page}`,
+            {
+                method: "GET",
+                headers: {
+                    "Authorization": "Bearer " + token
+                }
+            }
+        );
+
+        const data = await res.json();
+
+        return { ok: res.ok, data };
+    }
+
+    static async updateProfil(data, token) {
+
+        const res = await fetch(`${API_URL}/profil`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + token
+            },
+            body: JSON.stringify(data)
+        });
+
+        const result = await res.json();
+
+        return {
+            ok: res.ok,
+            data: result
+        };
+    }
+
+    // static async getMesCandidatures(token) {
+    //     const res = await fetch(
+    //         `${API_URL}/mes-candidatures?page=${this.currentPage}`,
+    //         {
+    //             headers: {
+    //                 Authorization: `Bearer ${token}`
+    //             }
+    //         }
+    //     );
+
+    //     const data = await res.json();
+
+    //     return {
+    //         ok: res.ok,
+    //         data
+    //     };
+    // }
+
+
+
+    static async getResultats(token) {
+
+        const res = await fetch(`${API_URL}/resultats`, {
+            headers: {
+                Authorization: "Bearer " + token
+            }
+        });
+
+        const data = await res.json();
+
+        return {
+            ok: res.ok,
+            data
+        };
+    }
 }
+
+
+
+
+

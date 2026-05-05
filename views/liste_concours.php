@@ -42,6 +42,7 @@
         import ConcoursController from "../controllers/ConcoursController.js";
 
         ConcoursController.init();
+
     </script>
 
 </body>

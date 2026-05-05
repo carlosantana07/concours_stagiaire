@@ -30,7 +30,7 @@
       <section class="profile-card">
         <div class="profile-card-header">
           <h3>Informations personnelles</h3>
-          <a class="profile-btn-outline" href="#">Modifier</a>
+          <a class="profile-btn-outline btn-edit" id="btnEditProfilPerso">Modifier</a>
         </div>
 
         <div class="profile-grid">
@@ -47,7 +47,7 @@
       <section class="profile-card">
         <div class="profile-card-header">
           <h3>Informations professionnelles</h3>
-          <a class="profile-btn-outline" href="#">Modifier</a>
+          <a class="profile-btn-outline btn-edit" id="btnEditProfil">Modifier</a>
         </div>
 
         <div class="profile-grid">
@@ -61,42 +61,37 @@
       <section class="profile-card">
         <div class="profile-card-header">
           <h3>Mes candidatures</h3>
-          <a class="profile-btn-outline" href="#">Voir tout</a>
+          <a class="profile-btn-outline" id="btnVoirCandidatures">Voir tout</a>
         </div>
 
-        <div class="profile-table">
+        <div id="candidaturesContainer" class="profile-table">
           <div class="profile-row header">
             <span>Concours</span>
             <span>Statut</span>
           </div>
 
-          <div class="profile-row">
-            <span>Santé</span>
-            <span class="status paid">Payé</span>
-          </div>
-
-          <div class="profile-row">
-            <span>Education</span>
-            <span class="status unpaid">Pas payé</span>
-          </div>
-
-          <div class="profile-row">
-            <span>Douanes</span>
-            <span class="status paid">Payé</span>
-          </div>
+          <!-- JS injecte ici -->
         </div>
       </section>
 
     </div>
   </main>
-  
+
   <script type="module">
     import CandidatController from "../controllers/CandidatController.js";
 
     document.addEventListener("DOMContentLoaded", () => {
       CandidatController.loadProfil();
+      CandidatController.initModal();
+      CandidatController.initUpdateForm();
+      CandidatController.initCandidaturesModal();
+      CandidatController.loadMoreCandidatures();
+
     });
   </script>
+
+
+  <?php include("../views/modal_profil.php"); ?>
 
 </body>
 
