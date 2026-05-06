@@ -231,7 +231,7 @@ export default class ConcoursController {
 
         const prev = document.createElement("span");
         prev.innerHTML = "&laquo;";
-        prev.className = page === 1 ? "disabled" : "page-item";
+        prev.className = page === 1 ? "page-item disabled" : "page-item";
 
         if (page > 1) {
             prev.onclick = () => this.loadConcours(page - 1);
@@ -244,7 +244,7 @@ export default class ConcoursController {
             const span = document.createElement("span");
             span.innerText = i;
 
-            span.className = (i === page) ? "active" : "page-item";
+            span.className = (i === page) ? "page-item active" : "page-item";
 
             span.onclick = () => this.loadConcours(i);
 
@@ -253,7 +253,7 @@ export default class ConcoursController {
 
         const next = document.createElement("span");
         next.innerHTML = "&raquo;";
-        next.className = page === totalPages ? "disabled" : "page-item";
+        next.className = page === totalPages ? "page-item disabled" : "page-item";
 
         if (page < totalPages) {
             next.onclick = () => this.loadConcours(page + 1);
