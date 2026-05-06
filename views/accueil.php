@@ -59,7 +59,7 @@
     <h2 style="font-size:32px; margin-bottom:10px;">Comment s'inscrire ?</h2>
     <div style="width:80px; height:4px; background:#009E49; margin:10px auto;"></div>
 
-    <div class="cards-container">
+    <div class="cards-container" style="justify-content: center;">
       <div class="card">
         <div class="icon icon-green"> <i class="fa-solid fa-user-plus"> </i></div>
         <div class="text">

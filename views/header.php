@@ -16,7 +16,6 @@
 
         <!-- utilisateur NON connecté -->
         <div id="guest-buttons">
-            <a class="btn-secondary" href="connexion.php">Mon compte</a>
             <a class="btn-primary" href="inscription.php">Créer un compte</a>
         </div>
 
