@@ -4,6 +4,40 @@ export default class PaymentController {
 
     static async init() {
 
+
+        const orangeBtn = document.getElementById("orange-btn");
+        const moovBtn = document.getElementById("moov-btn");
+
+        const hintText = document.getElementById("hint-text");
+        const codeText = document.getElementById("code-text");
+
+        function setActive(selectedBtn) {
+            // retirer active partout
+            document.querySelectorAll(".payment-btn").forEach(btn => {
+                btn.classList.remove("active");
+            });
+
+            // ajouter active sur le bouton cliqué
+            selectedBtn.classList.add("active");
+        }
+
+        // Orange Money
+        orangeBtn.addEventListener("click", () => {
+            setActive(orangeBtn);
+
+            hintText.textContent = "Composez le code suivant sur votre numéro Orange Money pour recevoir un OTP par SMS";
+            codeText.textContent = "*144*4*6*800#";
+        });
+
+        // Moov Money
+        moovBtn.addEventListener("click", () => {
+            setActive(moovBtn);
+
+            hintText.textContent = "Composez le code suivant sur votre numéro Moov Money pour recevoir un OTP par SMS";
+            codeText.textContent = "*555*1*2*900#";
+        });
+
+
         this.concoursId = new URLSearchParams(window.location.search).get("id");
 
         this.form = document.querySelector(".payment-form");

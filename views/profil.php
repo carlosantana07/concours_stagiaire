@@ -14,7 +14,9 @@
     <div class="profile-container">
 
       <!-- ===== HEADER PROFIL ===== -->
+
       <h1 class="profile-title">Mon Profil</h1>
+  
       <div class="profil-grid">
         <section class="profile-card profile-header-card">
           <div class="profile-header">
