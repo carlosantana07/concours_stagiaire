@@ -55,13 +55,8 @@ export default class ConcoursController {
             const { data, totalPages } = res.data;
 
             // EXTRAIRE les concours
-            data.forEach(cat => {
-                (cat.concours || []).forEach(c => {
-                    allConcours.push({
-                        ...c,
-                        categorieId: cat.id
-                    });
-                });
+            data.forEach(concours => {
+                allConcours.push(concours);
             });
 
             if (page >= totalPages) break;
@@ -83,7 +78,7 @@ export default class ConcoursController {
 
             const catId = Number(this.currentCategorie);
 
-            filtered = filtered.filter(c => c.categorieId === catId);
+            filtered = filtered.filter(c => c.categorie?.id === catId);
         }
 
         // CAS VIDE
