@@ -30,19 +30,23 @@ export default class CandidatController {
             const c = res.data.data;
             this.currentUser = c;
 
-            // ===== HEADER BANNER =====
-            document.querySelector(".profile-name").innerText = (c.nom || "") + " " + (c.prenom || "");
-            document.querySelector(".profile-email").innerText = c.email || "";
+            // HEADER
+            document.querySelector(".profil-name").innerText = (c.nom || "") + " " + (c.prenom || "");
+            document.querySelector(".profil-email").innerText = c.email || "";
 
             // INITIALES AVATAR
             const initiales = ((c.nom || "")[0] || "") + ((c.prenom || "")[0] || "");
             document.getElementById("profileAvatar").innerText = initiales.toUpperCase();
 
-            // ===== INFOS PERSO =====
+            // INFOS PERSO
             document.getElementById("infoNom").innerText = c.nom || "-";
             document.getElementById("infoPrenom").innerText = c.prenom || "-";
-            document.getElementById("infoDateNaissance").innerText = this.formatDate(c.date_naissance);
+            document.getElementById("infoDateNaissance").innerText = c.date_naissance || "-";
             document.getElementById("infoLieuNaissance").innerText = c.lieu_naissance || "-";
+            document.getElementById("infoMinistere").innerText = c.ministere || "-";
+            document.getElementById("infoEmploi").innerText = c.emploi || "-";
+            document.getElementById("infoMatricule").innerText = c.matricule || "-";
+
             document.getElementById("infoEmail").innerText = c.email || "-";
             document.getElementById("infoTelephone").innerText = c.telephone || "-";
 
@@ -66,24 +70,23 @@ export default class CandidatController {
         }
 
         const container = document.getElementById("candidaturesContainer");
-
         const data = res.data.data.slice(0, 5);
 
         container.innerHTML = `
-        <div class="cand-row header">
-            <span>Concours</span>
-            <span>Statut</span>
-        </div>
+            <div class="profil-cand-row header">
+                <span>Concours</span>
+                <span>Statut</span>
+            </div>
         `;
 
         data.forEach(cand => {
             container.innerHTML += `
-            <div class="cand-row">
-                <span>${cand.concours?.nom || "-"}</span>
-                <span class="status ${cand.statut_inscription === "VALIDEE" ? "paid" : "unpaid"}">
-                    ${cand.statut_inscription === "VALIDEE" ? "Payé" : "En attente"}
-                </span>
-            </div>
+                <div class="profil-cand-row">
+                    <span>${cand.concours?.nom || "-"}</span>
+                    <span class="status ${cand.statut_inscription === "VALIDEE" ? "paid" : "unpaid"}">
+                        ${cand.statut_inscription === "VALIDEE" ? "Payé" : "En attente"}
+                    </span>
+                </div>
             `;
         });
     }
@@ -106,9 +109,7 @@ export default class CandidatController {
             }
 
             alert("Profil mis à jour avec succès");
-
             document.getElementById("modalProfil").classList.add("hidden");
-
             this.loadProfil();
         });
     }
@@ -173,7 +174,6 @@ export default class CandidatController {
     static initEvents() {
 
         const btnEdit = document.getElementById("btnEditProfilPerso");
-        const btnVoir = document.getElementById("btnVoirCandidatures");
 
         if (btnEdit) {
             btnEdit.addEventListener("click", () => {
@@ -202,10 +202,10 @@ export default class CandidatController {
             this.hasMore = true;
 
             container.innerHTML = `
-            <div class="cand-row header">
-                <span>Concours</span>
-                <span>Statut</span>
-            </div>
+                <div class="profil-cand-row header">
+                    <span>Concours</span>
+                    <span>Statut</span>
+                </div>
             `;
 
             await this.loadMoreCandidatures();
@@ -259,13 +259,13 @@ export default class CandidatController {
             items.forEach(cand => {
 
                 const row = document.createElement("div");
-                row.className = "cand-row";
+                row.className = "profil-cand-row";
 
                 row.innerHTML = `
-                <span>${cand.concours?.nom || "-"}</span>
-                <span class="status ${cand.statut_inscription === "VALIDEE" ? "paid" : "unpaid"}">
-                    ${cand.statut_inscription === "VALIDEE" ? "Payé" : "En attente"}
-                </span>
+                    <span>${cand.concours?.nom || "-"}</span>
+                    <span class="status ${cand.statut_inscription === "VALIDEE" ? "paid" : "unpaid"}">
+                        ${cand.statut_inscription === "VALIDEE" ? "Payé" : "En attente"}
+                    </span>
                 `;
 
                 container.appendChild(row);
@@ -308,17 +308,16 @@ export default class CandidatController {
             this.resultatsPage = 1;
 
             document.getElementById("resultatsBody").innerHTML = `
-            <div class="empty-card" style="text-align:center;display:flex;flex-direction:column;gap:10px;padding:20px;">
-                <i class="fa-solid fa-triangle-exclamation empty-icon"></i>
-                <p>Aucun résultat disponible</p>
-            </div>
+                <div class="empty-card" style="text-align:center;display:flex;flex-direction:column;gap:10px;padding:20px;">
+                    <i class="fa-solid fa-triangle-exclamation empty-icon"></i>
+                    <p>Aucun résultat disponible</p>
+                </div>
             `;
             return;
         }
 
         this.allResultats = data;
         this.resultatsPage = 1;
-
         this.renderResultats();
     }
 
@@ -345,19 +344,19 @@ export default class CandidatController {
 
                 if (index === 0) {
                     concoursCell = `
-                    <td rowspan="${rowspan}" class="nom-concours">
-                        ${concoursBlock.concours.nom}
-                    </td>
+                        <td rowspan="${rowspan}" class="nom-concours">
+                            ${concoursBlock.concours.nom}
+                        </td>
                     `;
                 }
 
                 tr.innerHTML = `
-                ${concoursCell}
-                <td>${exam.intitule}</td>
-                <td>${exam.type_examen}</td>
-                <td>${exam.coefficient}</td>
-                <td>${exam.note ?? "En attente"}</td>
-                ${index === 0 ? `<td rowspan="${rowspan}">${exam.statut ?? "En attente"}</td>` : ""}
+                    ${concoursCell}
+                    <td>${exam.intitule}</td>
+                    <td>${exam.type_examen}</td>
+                    <td>${exam.coefficient}</td>
+                    <td>${exam.note ?? "En attente"}</td>
+                    ${index === 0 ? `<td rowspan="${rowspan}">${exam.statut ?? "En attente"}</td>` : ""}
                 `;
 
                 tbody.appendChild(tr);
@@ -371,21 +370,13 @@ export default class CandidatController {
         const btnPrev = document.querySelector(".btn-prev");
 
         const updateButtons = () => {
-
-            const totalPages = Math.ceil(
-                this.allResultats.length / this.resultatsPerPage
-            );
-
+            const totalPages = Math.ceil(this.allResultats.length / this.resultatsPerPage);
             btnPrev.disabled = this.resultatsPage === 1;
             btnNext.disabled = this.resultatsPage >= totalPages;
         };
 
         btnNext.addEventListener("click", () => {
-
-            const totalPages = Math.ceil(
-                this.allResultats.length / this.resultatsPerPage
-            );
-
+            const totalPages = Math.ceil(this.allResultats.length / this.resultatsPerPage);
             if (this.resultatsPage < totalPages) {
                 this.resultatsPage++;
                 this.renderResultats();
@@ -394,7 +385,6 @@ export default class CandidatController {
         });
 
         btnPrev.addEventListener("click", () => {
-
             if (this.resultatsPage > 1) {
                 this.resultatsPage--;
                 this.renderResultats();

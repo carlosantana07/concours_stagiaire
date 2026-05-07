@@ -50,18 +50,6 @@
                 <input name="matricule" placeholder="Matricule" class="input">
             </div>
 
-            <hr>
-
-            <h4>Changer mot de passe</h4>
-
-            <div class="form-group">
-                <input type="password" name="ancien_mot_de_passe" placeholder="Ancien mot de passe" class="input">
-            </div>
-
-            <div class="form-group">
-                <input type="password" name="nouveau_mot_de_passe" placeholder="Nouveau mot de passe" class="input">
-            </div>
-
             <button type="submit" class="btn-primary full">Enregistrer</button>
 
         </form>
