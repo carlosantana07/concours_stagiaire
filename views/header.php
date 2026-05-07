@@ -34,5 +34,69 @@
         </div>
 
     </div>
-    <script src="../assets/js/script.js"></script>
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById("accountMenu");
+            menu.style.display = menu.style.display === "block" ? "none" : "block";
+        }
+
+        // fermer menu si clic dehors
+        document.addEventListener("click", function(e) {
+            const wrapper = document.getElementById("account-wrapper");
+
+            if (wrapper && !wrapper.contains(e.target)) {
+                document.getElementById("accountMenu").style.display = "none";
+            }
+        });
+
+        // logout
+        function logout() {
+            localStorage.removeItem("token");
+            alert("Déconnecté");
+
+            window.location.href = "accueil.php";
+        }
+
+        // gestion affichage login / guest
+        window.addEventListener("DOMContentLoaded", () => {
+            const token = localStorage.getItem("token");
+
+            const guest = document.getElementById("guest-buttons");
+            const account = document.getElementById("account-wrapper");
+
+            if (token) {
+                guest.style.display = "none";
+                account.style.display = "inline-flex";
+            } else {
+                guest.style.display = "inline-flex";
+                account.style.display = "none";
+            }
+        });
+
+        window.addEventListener("DOMContentLoaded", () => {
+
+            const links = document.querySelectorAll("nav a");
+
+            const routes = {
+                "detail_concours.php": "liste_concours.php",
+                "inscription_concours.php": "liste_concours.php",
+
+            };
+
+            let page = window.location.pathname.split("/").pop().split("?")[0];
+
+            page = routes[page] || page;
+
+            links.forEach(link => {
+
+                const linkPage = link.getAttribute("href");
+
+                if (linkPage === page) {
+                    link.classList.add("active");
+                }
+
+            });
+        });
+
+    </script>
 </header>

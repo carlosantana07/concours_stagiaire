@@ -1,4 +1,5 @@
 const API = "http://localhost:4000/api/concours";
+import { authFetch } from "../assets/utils/authFetch.js";
 
 export default class ConcoursModel {
 
@@ -10,7 +11,7 @@ export default class ConcoursModel {
             url += `&categorie=${categorie}`;
         }
 
-        const res = await fetch(url);
+        const res = await authFetch(url);
         const data = await res.json();
 
         return { ok: res.ok, data };
@@ -18,7 +19,7 @@ export default class ConcoursModel {
 
     static async getCategories() {
 
-        const res = await fetch(`${API}/categories`);
+        const res = await authFetch(`${API}/categories`);
         const data = await res.json();
 
         return { ok: res.ok, data };
@@ -26,7 +27,7 @@ export default class ConcoursModel {
 
     static async getDetail(id) {
 
-        const res = await fetch(`${API}/detail/${id}`);
+        const res = await authFetch(`${API}/detail/${id}`);
         const data = await res.json();
 
         return { ok: res.ok, data };

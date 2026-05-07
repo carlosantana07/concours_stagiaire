@@ -1,27 +1,3 @@
-window.addEventListener("DOMContentLoaded", () => {
-
-    const links = document.querySelectorAll("nav a");
-
-    const routes = {
-        "detail_concours.php": "liste_concours.php",
-        "inscription_concours.php": "liste_concours.php"
-    };
-
-    let page = window.location.pathname.split("/").pop().split("?")[0];
-
-    page = routes[page] || page;
-
-    links.forEach(link => {
-
-        const linkPage = link.getAttribute("href");
-
-        if (linkPage === page) {
-            link.classList.add("active");
-        }
-
-    });
-});
-
 // ====PAGE FAQ==== //
 
 document.querySelectorAll(".help-accordion-item").forEach(item => {
@@ -39,80 +15,80 @@ document.querySelectorAll(".help-accordion-item").forEach(item => {
 
 });
 
-function toggleMenu() {
-    const menu = document.getElementById("accountMenu");
-    menu.style.display = menu.style.display === "block" ? "none" : "block";
-}
+// ===== AUTO LOGOUT =====
 
-// fermer menu si clic dehors
-document.addEventListener("click", function (e) {
-    const wrapper = document.getElementById("account-wrapper");
+// let inactivityTimer;
 
-    if (wrapper && !wrapper.contains(e.target)) {
-        document.getElementById("accountMenu").style.display = "none";
-    }
-});
+// // 3 minutes
+// const INACTIVITY_LIMIT = 3 * 60 * 1000;
 
-// logout
-function logout() {
-    localStorage.removeItem("token");
-    alert("Déconnecté");
+// // sauvegarder dernière activité
+// function updateLastActivity() {
+//     localStorage.setItem("lastActivity", Date.now());
+// }
 
-    window.location.href = "accueil.php";
-}
+// // déconnexion
+// function logoutUser() {
 
-// gestion affichage login / guest
-window.addEventListener("DOMContentLoaded", () => {
-    const token = localStorage.getItem("token");
+//     localStorage.removeItem("token");
+//     localStorage.removeItem("lastActivity");
 
-    const guest = document.getElementById("guest-buttons");
-    const account = document.getElementById("account-wrapper");
+//     alert("Session expirée pour inactivité");
 
-    if (token) {
-        guest.style.display = "none";
-        account.style.display = "inline-flex";
-    } else {
-        guest.style.display = "inline-flex";
-        account.style.display = "none";
-    }
-});
+//     window.location.href = "accueil.php";
+// }
 
-// ===== AUTO LOGOUT INACTIVITÉ =====
+// // reset timer
+// function resetInactivityTimer() {
 
-let inactivityTimer;
+//     clearTimeout(inactivityTimer);
 
-// durée avant déconnexion 
-const INACTIVITY_LIMIT = 30 * 60 * 1000;
+//     updateLastActivity();
 
-function resetInactivityTimer() {
+//     inactivityTimer = setTimeout(() => {
+//         logoutUser();
+//     }, INACTIVITY_LIMIT);
+// }
 
-    clearTimeout(inactivityTimer);
+// // événements activité
+// ["click", "mousemove", "keydown", "scroll", "touchstart"].forEach(event => {
+//     document.addEventListener(event, resetInactivityTimer);
+// });
 
-    inactivityTimer = setTimeout(() => {
+// // au chargement
+// window.addEventListener("DOMContentLoaded", () => {
 
-        alert("Session expirée pour inactivité");
+//     const token = localStorage.getItem("token");
 
-        localStorage.removeItem("token");
+//     if (!token) return;
 
-        window.location.href = "accueil.php";
+//     const lastActivity = localStorage.getItem("lastActivity");
 
-    }, INACTIVITY_LIMIT);
-}
+//     // première connexion
+//     if (!lastActivity) {
+//         updateLastActivity();
+//     }
 
-// événements à surveiller
-["click", "mousemove", "keydown", "scroll", "touchstart"].forEach(event => {
-    document.addEventListener(event, resetInactivityTimer);
-});
+//     const now = Date.now();
+//     const diff = now - parseInt(lastActivity);
 
-// lancer au chargement
-window.addEventListener("DOMContentLoaded", () => {
-    console.log("AUTO LOGOUT LOADED");
+//     // temps dépassé
+//     if (diff > INACTIVITY_LIMIT) {
 
-    const token = localStorage.getItem("token");
+//         logoutUser();
+//         return;
+//     }
 
-    if (token) {
-        resetInactivityTimer();
-    }
-});
+//     // relancer timer
+//     resetInactivityTimer();
+// });
+
+
+
+
+
+
+
+
 
 
