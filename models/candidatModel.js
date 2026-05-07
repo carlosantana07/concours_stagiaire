@@ -1,7 +1,7 @@
 const API_URL = "http://localhost:4000/api/candidat";
 import { authFetch } from "../assets/utils/authFetch.js";
 
-const res = await authFetch(url);
+
 
 export default class CandidatModel {
 
