@@ -28,42 +28,27 @@ export default class CandidatController {
             }
 
             const c = res.data.data;
-            this.currentUser = c; // stocker les infos pour pré-remplissage form
+            this.currentUser = c;
 
-            // ===== HEADER =====
-            document.querySelector(".profile-name").innerText =
-                (c.nom || "") + " " + (c.prenom || "");
+            // HEADER
+            document.querySelector(".profil-name").innerText = (c.nom || "") + " " + (c.prenom || "");
+            document.querySelector(".profil-email").innerText = c.email || "";
 
-            const grids = document.querySelectorAll(".profile-grid");
+            // INITIALES AVATAR
+            const initiales = ((c.nom || "")[0] || "") + ((c.prenom || "")[0] || "");
+            document.getElementById("profileAvatar").innerText = initiales.toUpperCase();
 
-            // ===== INFOS PERSO =====
-            grids[0].innerHTML = `
-                <div><strong>Nom</strong><br>${c.nom || "-"}</div>
-                <div><strong>Prénom</strong><br>${c.prenom || "-"}</div>
-                <div><strong>Date de naissance</strong><br>${this.formatDate(c.date_naissance)}</div>
-                <div><strong>Lieu de naissance</strong><br>${c.lieu_naissance || "-"}</div>
-                <div><strong>Téléphone</strong><br>${c.telephone || "-"}</div>
-                <div><strong>Email</strong><br>${c.email || "-"}</div>
-            `;
+            // INFOS PERSO
+            document.getElementById("infoNom").innerText = c.nom || "-";
+            document.getElementById("infoPrenom").innerText = c.prenom || "-";
+            document.getElementById("infoDateNaissance").innerText = c.date_naissance || "-";
+            document.getElementById("infoLieuNaissance").innerText = c.lieu_naissance || "-";
+            document.getElementById("infoMinistere").innerText = c.ministere || "-";
+            document.getElementById("infoEmploi").innerText = c.emploi || "-";
+            document.getElementById("infoMatricule").innerText = c.matricule || "-";
 
-            // ===== INFOS PRO =====
-            const hasProInfo =
-                c.matricule || c.ministere || c.emploi;
-
-            // cacher la section si vide
-            const proSection = grids[1].closest(".profile-card");
-
-            if (!hasProInfo) {
-                proSection.style.display = "none";
-            } else {
-                proSection.style.display = "block";
-
-                grids[1].innerHTML = `
-        <div><strong>Matricule</strong><br>${c.matricule || "-"}</div>
-        <div><strong>Ministère</strong><br>${c.ministere || "-"}</div>
-        <div><strong>Emploi actuel</strong><br>${c.emploi || "-"}</div>
-    `;
-            }
+            document.getElementById("infoEmail").innerText = c.email || "-";
+            document.getElementById("infoTelephone").innerText = c.telephone || "-";
 
         } catch (err) {
             console.log(err);
@@ -71,7 +56,6 @@ export default class CandidatController {
         }
 
         await this.loadCandidatures();
-
     }
 
     static async loadCandidatures() {
@@ -86,26 +70,24 @@ export default class CandidatController {
         }
 
         const container = document.getElementById("candidaturesContainer");
-
         const data = res.data.data.slice(0, 5);
 
         container.innerHTML = `
-        <div class="profile-row header">
-            <span>Concours</span>
-            <span>Statut</span>
-        </div>
-    `;
-
-        // container.innerHTML = html;
-        data.forEach(cand => {
-            container.innerHTML += `
-            <div class="profile-row">
-                <span>${cand.concours?.nom || "-"}</span>
-                <span class="status ${cand.statut_inscription === "VALIDEE" ? "paid" : "unpaid"}">
-                    ${cand.statut_inscription === "VALIDEE" ? "Payé" : "En attente"}
-                </span>
+            <div class="profil-cand-row header">
+                <span>Concours</span>
+                <span>Statut</span>
             </div>
         `;
+
+        data.forEach(cand => {
+            container.innerHTML += `
+                <div class="profil-cand-row">
+                    <span>${cand.concours?.nom || "-"}</span>
+                    <span class="status ${cand.statut_inscription === "VALIDEE" ? "paid" : "unpaid"}">
+                        ${cand.statut_inscription === "VALIDEE" ? "Payé" : "En attente"}
+                    </span>
+                </div>
+            `;
         });
     }
 
@@ -127,14 +109,10 @@ export default class CandidatController {
             }
 
             alert("Profil mis à jour avec succès");
-
             document.getElementById("modalProfil").classList.add("hidden");
-
             this.loadProfil();
         });
     }
-
-
 
     static initModal() {
 
@@ -142,22 +120,18 @@ export default class CandidatController {
         const openBtns = document.querySelectorAll(".btn-edit");
         const closeBtn = document.querySelector(".close-btn");
 
-        // ouvrir modal
         openBtns.forEach(btn => {
             btn.addEventListener("click", (e) => {
                 e.preventDefault();
                 modal.classList.remove("hidden");
-
                 this.prefillForm();
             });
         });
 
-        // fermer
         closeBtn.addEventListener("click", () => {
             modal.classList.add("hidden");
         });
 
-        // fermer en cliquant dehors
         window.addEventListener("click", (e) => {
             if (e.target === modal) {
                 modal.classList.add("hidden");
@@ -170,14 +144,12 @@ export default class CandidatController {
         const c = this.currentUser;
         const formatDate = new Date(c.date_naissance).toLocaleDateString('fr-FR');
 
-
         document.querySelector("[name='nom']").value = c.nom || "";
         document.querySelector("[name='prenom']").value = c.prenom || "";
         document.querySelector("[name='date_naissance']").value = formatDate || "";
         document.querySelector("[name='lieu_naissance']").value = c.lieu_naissance || "";
         document.querySelector("[name='telephone']").value = c.telephone || "";
         document.querySelector("[name='email']").value = c.email || "";
-
         document.querySelector("[name='emploi']").value = c.emploi || "";
         document.querySelector("[name='ministere']").value = c.ministere || "";
         document.querySelector("[name='matricule']").value = c.matricule || "";
@@ -202,12 +174,10 @@ export default class CandidatController {
     static initEvents() {
 
         const btnEdit = document.getElementById("btnEditProfilPerso");
-        const btnVoir = document.getElementById("btnVoirCandidatures");
 
         if (btnEdit) {
             btnEdit.addEventListener("click", () => {
                 document.getElementById("modalProfil").classList.remove("hidden");
-                // CandidatController.loadModal();
             });
         }
     }
@@ -232,11 +202,11 @@ export default class CandidatController {
             this.hasMore = true;
 
             container.innerHTML = `
-            <div class="profile-row header">
-                <span>Concours</span>
-                <span>Statut</span>
-            </div>
-        `;
+                <div class="profil-cand-row header">
+                    <span>Concours</span>
+                    <span>Statut</span>
+                </div>
+            `;
 
             await this.loadMoreCandidatures();
         });
@@ -246,7 +216,6 @@ export default class CandidatController {
             document.body.style.overflow = "auto";
         });
 
-        // IMPORTANT : scroll SUR LE BON ELEMENT
         container.addEventListener("scroll", () => {
             const bottom =
                 container.scrollTop + container.clientHeight >= container.scrollHeight - 5;
@@ -276,11 +245,9 @@ export default class CandidatController {
                 {
                     headers: { Authorization: `Bearer ${token}` }
                 }
-
             );
 
             const result = await res.json();
-
             const items = result.data || [];
 
             if (items.length === 0) {
@@ -292,21 +259,19 @@ export default class CandidatController {
             items.forEach(cand => {
 
                 const row = document.createElement("div");
-                row.className = "profile-row";
+                row.className = "profil-cand-row";
 
                 row.innerHTML = `
-                <span>${cand.concours?.nom || "-"}</span>
-                <span class="status ${cand.statut_inscription === "VALIDEE" ? "paid" : "unpaid"}">
-                    ${cand.statut_inscription === "VALIDEE" ? "Payé" : "En attente"}
-                </span>
-            `;
+                    <span>${cand.concours?.nom || "-"}</span>
+                    <span class="status ${cand.statut_inscription === "VALIDEE" ? "paid" : "unpaid"}">
+                        ${cand.statut_inscription === "VALIDEE" ? "Payé" : "En attente"}
+                    </span>
+                `;
 
                 container.appendChild(row);
             });
 
-            // pagination propre
             this.currentPage++;
-
             this.hasMore = this.currentPage <= result.pageTot;
 
         } catch (err) {
@@ -316,7 +281,6 @@ export default class CandidatController {
         this.isLoading = false;
         loading.classList.add("hidden");
 
-        // AUTO LOAD SI PAS DE SCROLL
         setTimeout(() => {
             if (container.scrollHeight <= container.clientHeight && this.hasMore) {
                 this.loadMoreCandidatures();
@@ -325,136 +289,6 @@ export default class CandidatController {
     }
 
     static async loadResultats() {
-
-        // this.allResultats = [
-        //     {
-        //         concours: { nom: "Test Concours A" },
-        //         examens: [
-        //             {
-        //                 intitule: "Math",
-        //                 type_examen: "Ecrit",
-        //                 coefficient: 2,
-        //                 note: 12,
-        //                 statut: "EN_ATTENTE"
-        //             },
-        //             {
-        //                 intitule: "Français",
-        //                 type_examen: "Ecrit",
-        //                 coefficient: 3,
-        //                 note: 14,
-        //                 statut: "EN_ATTENTE"
-        //             }
-        //         ]
-        //     },
-        //     {
-        //         concours: { nom: "Test Concours B" },
-        //         examens: [
-        //             {
-        //                 intitule: "Culture G",
-        //                 type_examen: "Ecrit",
-        //                 coefficient: 2,
-        //                 note: 10,
-        //                 statut: "EN_ATTENTE"
-        //             }
-        //         ]
-        //     },
-        //     {
-        //         concours: { nom: "Test Concours A" },
-        //         examens: [
-        //             {
-        //                 intitule: "Math",
-        //                 type_examen: "Ecrit",
-        //                 coefficient: 2,
-        //                 note: 12,
-        //                 statut: "EN_ATTENTE"
-        //             },
-        //             {
-        //                 intitule: "Français",
-        //                 type_examen: "Ecrit",
-        //                 coefficient: 3,
-        //                 note: 14,
-        //                 statut: "EN_ATTENTE"
-        //             }
-        //         ]
-        //     },
-        //     {
-        //         concours: { nom: "Test Concours B" },
-        //         examens: [
-        //             {
-        //                 intitule: "Culture G",
-        //                 type_examen: "Ecrit",
-        //                 coefficient: 2,
-        //                 note: 10,
-        //                 statut: "EN_ATTENTE"
-        //             }
-        //         ]
-        //     },
-        //     {
-        //         concours: { nom: "Test Concours A" },
-        //         examens: [
-        //             {
-        //                 intitule: "Math",
-        //                 type_examen: "Ecrit",
-        //                 coefficient: 2,
-        //                 note: 12,
-        //                 statut: "EN_ATTENTE"
-        //             },
-        //             {
-        //                 intitule: "Français",
-        //                 type_examen: "Ecrit",
-        //                 coefficient: 3,
-        //                 note: 14,
-        //                 statut: "EN_ATTENTE"
-        //             }
-        //         ]
-        //     },
-        //     {
-        //         concours: { nom: "Test Concours B" },
-        //         examens: [
-        //             {
-        //                 intitule: "Culture G",
-        //                 type_examen: "Ecrit",
-        //                 coefficient: 2,
-        //                 note: 10,
-        //                 statut: "EN_ATTENTE"
-        //             }
-        //         ]
-        //     },
-        //     {
-        //         concours: { nom: "Test Concours A" },
-        //         examens: [
-        //             {
-        //                 intitule: "Math",
-        //                 type_examen: "Ecrit",
-        //                 coefficient: 2,
-        //                 note: 12,
-        //                 statut: "EN_ATTENTE"
-        //             },
-        //             {
-        //                 intitule: "Français",
-        //                 type_examen: "Ecrit",
-        //                 coefficient: 3,
-        //                 note: 14,
-        //                 statut: "EN_ATTENTE"
-        //             }
-        //         ]
-        //     },
-        //     {
-        //         concours: { nom: "Test Concours B" },
-        //         examens: [
-        //             {
-        //                 intitule: "Culture G",
-        //                 type_examen: "Ecrit",
-        //                 coefficient: 2,
-        //                 note: 10,
-        //                 statut: "EN_ATTENTE"
-        //             }
-        //         ]
-        //     }
-        // ];
-
-        // this.resultatsPage = 1;
-        // this.renderResultats();
 
         const token = localStorage.getItem("token");
 
@@ -474,84 +308,18 @@ export default class CandidatController {
             this.resultatsPage = 1;
 
             document.getElementById("resultatsBody").innerHTML = `
-            <div class="empty-card" style="text-align: center; align-items: center; display: flex; flex-direction: column; gap: 10px; padding: 20px;">
-                <i class="fa-solid fa-triangle-exclamation empty-icon"></i>
-                <p>Aucun résultat disponible</p>
-            </div>
+                <div class="empty-card" style="text-align:center;display:flex;flex-direction:column;gap:10px;padding:20px;">
+                    <i class="fa-solid fa-triangle-exclamation empty-icon"></i>
+                    <p>Aucun résultat disponible</p>
+                </div>
             `;
             return;
         }
 
-        // IMPORTANT
         this.allResultats = data;
         this.resultatsPage = 1;
-
         this.renderResultats();
     }
-
-    // static async loadResultats() {
-
-    //     const token = localStorage.getItem("token");
-    //     const tbody = document.getElementById("resultatsBody");
-
-    //     const res = await CandidatModel.getResultats(token);
-
-    //     if (!res.ok) {
-    //         tbody.innerHTML = `<tr><td colspan="6">Erreur chargement</td></tr>`;
-    //         return;
-    //     }
-
-    //     const data = res.data.data;
-
-    //     if (!data || data.length === 0) {
-    //         tbody.innerHTML = `
-    //         <div class="empty-card" style="text-align: center; align-items: center; display: flex; flex-direction: column; gap: 10px; padding: 20px;">
-    //             <i class="fa-solid fa-triangle-exclamation empty-icon"></i>
-    //             <p>Aucun résultat disponible</p>
-    //         </div>
-    //         `;
-    //         return;
-
-    //     }
-
-    //     tbody.innerHTML = "";
-
-    //     data.forEach(concoursBlock => {
-
-    //         const examens = concoursBlock.examens;
-    //         const rowspan = examens.length;
-
-    //         examens.forEach((exam, index) => {
-
-    //             const tr = document.createElement("tr");
-
-    //             let concoursCell = "";
-
-    //             // afficher le nom du concours UNE seule fois
-    //             if (index === 0) {
-    //                 concoursCell = `
-    //                     <td rowspan="${rowspan}" class="nom-concours">
-    //                         ${concoursBlock.concours.nom}
-    //                     </td>
-    //                 `;
-    //             }
-
-    //             tr.innerHTML = `
-    //                 ${concoursCell}
-    //                 <td>${exam.intitule}</td>
-    //                 <td>${exam.type_examen}</td>
-    //                 <td>${exam.coefficient}</td>
-    //                 <td>${exam.note ?? "En attente"}</td>
-    //                 ${index === 0 ? `<td rowspan="${rowspan}">
-    //                     ${exam.statut ?? "En attente"}
-    //                 </td>` : ""}
-    //             `;
-
-    //             tbody.appendChild(tr);
-    //         });
-
-    //     });
-    // }
 
     static renderResultats() {
 
@@ -576,22 +344,20 @@ export default class CandidatController {
 
                 if (index === 0) {
                     concoursCell = `
-                    <td rowspan="${rowspan}" class="nom-concours">
-                        ${concoursBlock.concours.nom}
-                    </td>
-                `;
+                        <td rowspan="${rowspan}" class="nom-concours">
+                            ${concoursBlock.concours.nom}
+                        </td>
+                    `;
                 }
 
                 tr.innerHTML = `
-                ${concoursCell}
-                <td>${exam.intitule}</td>
-                <td>${exam.type_examen}</td>
-                <td>${exam.coefficient}</td>
-                <td>${exam.note ?? "En attente"}</td>
-                ${index === 0 ? `<td rowspan="${rowspan}">
-                    ${exam.statut ?? "En attente"}
-                </td>` : ""}
-            `;
+                    ${concoursCell}
+                    <td>${exam.intitule}</td>
+                    <td>${exam.type_examen}</td>
+                    <td>${exam.coefficient}</td>
+                    <td>${exam.note ?? "En attente"}</td>
+                    ${index === 0 ? `<td rowspan="${rowspan}">${exam.statut ?? "En attente"}</td>` : ""}
+                `;
 
                 tbody.appendChild(tr);
             });
@@ -604,24 +370,13 @@ export default class CandidatController {
         const btnPrev = document.querySelector(".btn-prev");
 
         const updateButtons = () => {
-
-            const totalPages = Math.ceil(
-                this.allResultats.length / this.resultatsPerPage
-            );
-
-            // désactiver précédent si page 1
+            const totalPages = Math.ceil(this.allResultats.length / this.resultatsPerPage);
             btnPrev.disabled = this.resultatsPage === 1;
-
-            // désactiver suivant si dernière page
             btnNext.disabled = this.resultatsPage >= totalPages;
         };
 
         btnNext.addEventListener("click", () => {
-
-            const totalPages = Math.ceil(
-                this.allResultats.length / this.resultatsPerPage
-            );
-
+            const totalPages = Math.ceil(this.allResultats.length / this.resultatsPerPage);
             if (this.resultatsPage < totalPages) {
                 this.resultatsPage++;
                 this.renderResultats();
@@ -630,7 +385,6 @@ export default class CandidatController {
         });
 
         btnPrev.addEventListener("click", () => {
-
             if (this.resultatsPage > 1) {
                 this.resultatsPage--;
                 this.renderResultats();
@@ -638,8 +392,6 @@ export default class CandidatController {
             }
         });
 
-        // initialisation
         updateButtons();
     }
-
 }
