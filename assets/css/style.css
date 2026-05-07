@@ -9,6 +9,7 @@
 body {
   background: #e7e9ec;
   color: #FFFFFF;
+  /* padding-top: 80px; */
 }
 
 a {
@@ -51,6 +52,16 @@ nav a {
   font-weight: 500;
   font-size: 16px;
   color: #374151;
+}
+
+nav a.active {
+    color: #86e9aa;
+    font-weight: 600;
+}
+
+nav a:hover {
+  /* color: #2dd87d; */
+  border-bottom: 2px solid #055d2e;
 }
 
 .nav-buttons {
@@ -119,6 +130,11 @@ nav a {
   align-items: center;
   justify-content: center;
   cursor: pointer;
+}
+
+.guest-button{
+  display: flex;
+  gap: 16px;
 }
 
 /* ===== Flag Bar ===== */
@@ -823,19 +839,30 @@ footer h3 {
 
 /* CHAQUE ITEM DE LA LISTE */
 .help-accordion-item {
+  width: 1000px;
+  max-width: 90%;
   background-color: #ffffff;
   padding: 15px 23px;
-  height: 80px;
-  display: flex;
-  align-items: center;
   cursor: pointer;
   transition: background-color 0.3s;
   /* Uniquement une bordure fine en bas si vous voulez l'effet de votre photo */
   border-bottom: 1px solid #eeeeee;
   border-radius: 12px;
   border: 1px solid #f0f0f0;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
   transition: all 0.3s ease;
-}
+} 
+
+/* .help-accordion-item {
+    width: 800px;
+    max-width: 90%;
+    background: #fff;
+    padding: 15px 20px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+} */
 
 /* L'ITEM SURVOYÉ */
 .help-accordion-item:hover {
@@ -860,6 +887,40 @@ footer h3 {
   /* Un gris moyen pour le texte */
   font-size: 1.1rem;
   font-weight: normal;
+  text-align: center;
+}
+
+.help-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    font-size: 14px;
+    color: #555;
+    padding-left: 20px;
+}
+
+.help-accordion-item.active .help-answer {
+    max-height: 200px;
+    margin-top: 10px;
+}
+
+.help-question {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.help-accordion-icon {
+    width: 24px;
+    min-width: 24px;
+    text-align: center;
+    font-size: 16px;
+    color: #16A34A;
+}
+
+.help-accordion-item.active .help-accordion-icon {
+    transform: rotate(90deg);
 }
 
 /* ===== PAGE CONTACT ===== */
@@ -1658,9 +1719,15 @@ h1 {
   padding: 0.5rem;
 }
 
+.payment-btn.active {
+    border: 2px solid #07b544;
+    border-radius: 8px;
+    box-shadow: 0 0 8px rgba(7, 181, 68, 0.4);
+}
+
 .payment-btn:hover {
-  border-color: #999;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-color: #eda11e;
+  box-shadow: 0 2px 4px rgba(223, 151, 28, 0.1);
 }
 
 .payment-logo {

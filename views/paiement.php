@@ -6,12 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>E-CONCOURS - Finaliser l'inscription</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <!-- <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"> -->
-    <!-- <link rel="stylesheet" href="style.css"> -->
     <link rel="stylesheet" href="../assets/css/style.css">
-    <style>
-        /* CSS intégré ci-dessous */
-    </style>
 </head>
 
 <body style="background: #fff">
@@ -33,21 +28,13 @@
                     </div>
 
                     <div class="payment-methods">
-                        <a class="payment-btn" href="paiement.php">
+                        <a class="payment-btn" id="orange-btn">
                             <img src="../assets/image/Orange-Money.jpg" alt="Orange Money" class="payment-logo">
                         </a>
 
-                        <a class="payment-btn" href="paiement.php">
+                        <a class="payment-btn" id="moov-btn">
                             <img src="../assets/image/moov.png" alt="Moov Money" class="payment-logo">
                         </a>
-
-                        <!-- <a class="payment-btn" href="paiement_carte.php">
-                            <img src="../assets/image/carte bancaire.png" alt="Carte Bancaire" class="payment-logo">
-                        </a>
-
-                        <a class="payment-btn visa-btn" href="paiement_carte.php">
-                            <img src="../assets/image/Visa.png" alt="Visa" class="payment-logo">
-                        </a> -->
                     </div>
 
                     <form class="payment-form">
@@ -56,9 +43,9 @@
                             <div>
                                 <input class="input-wrapper" placeholder="+226 xx xx xx xx">
                             </div>
-                            <p class="form-hint">Composez le code suivant sur votre numéro Orange Money
+                            <p class="form-hint" id="hint-text">Composez le code suivant sur votre numéro Orange Money
                                 pour recevoir un OTP par SMS</p>
-                            <p class="form-hint" style="font-weight: bold; text-align: center; color: black;">*144*4*6*800#</p>
+                            <p id="code-text" class="form-hint" style="font-weight: bold; text-align: center; color: black;">*144*4*6*800#</p>
 
                         </div>
 
