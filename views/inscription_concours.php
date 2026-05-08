@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,48 +7,30 @@
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
-
 <body>
 
-    <main class="page">
+    <?php include("header.php") ?>
 
+    <main class="page">
         <div class="page-container">
 
             <div class="intro-text">
-                <p> Veuillez renseigner avec soin le formulaire et cliquer sur le bouton "Suivant".</p>
+                <p>Veuillez renseigner avec soin le formulaire et cliquer sur le bouton "Suivant".</p>
             </div>
 
             <form class="page-form" id="formInscription">
 
                 <!-- INFORMATIONS CONCOURS -->
                 <section class="page-card">
+                    <h2 class="section-title">Informations du concours</h2>
                     <div class="form-group">
-                        <h2 class="section-title">Informations du concours</h2>
-                        <div id="nomConcours" class="input" style="display: inline; text-align: center; align-items: center;">Chargement...</div>
+                        <div id="nomConcours" class="concours-name-display">Chargement...</div>
                     </div>
-
                     <div class="form-group">
-                        <label>Centre de composition <span class="required">*</span></label>
+                        <label>Centre de composition <span class="required">(obligatoire)</span></label>
                         <select class="input" name="centre" required>
-                            <option>Choisir un centre</option>
+                            <option value="">Choisir un centre</option>
                         </select>
-                    </div>
-                </section>
-
-                <!-- CNIB -->
-                <section class="page-card">
-                    <h2 class="section-title">CNIB</h2>
-
-                    <div class="grid-2">
-                        <div class="form-group">
-                            <label>N°CNIB <span class="required">*</span></label>
-                            <input type="text" class="input" name="cnib" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label>Date de délivrance <span class="required">*</span></label>
-                            <input type="text" class="input" placeholder="jj/mm/aaaa" name="date_delivrance" required>
-                        </div>
                     </div>
                 </section>
 
@@ -58,40 +39,41 @@
                     <h2 class="section-title">Diplôme</h2>
 
                     <div class="form-group">
-                        <label>Etablissement <span class="required">*</span></label>
-                        <input type="text" class="input" name="etablissement" required>
+                        <label>Etablissement <span class="required">(obligatoire)</span></label>
+                        <input type="text" class="input" name="etablissement" placeholder="Nom de l'établissement" required>
                     </div>
 
                     <div class="grid-2">
                         <div class="form-group">
                             <label>Référence diplôme</label>
-                            <input type="text" class="input" name="reference_diplome">
+                            <input type="text" class="input" name="reference_diplome" placeholder="Référence">
                         </div>
-
                         <div class="form-group">
-                            <label>Date de signature</label>
-                            <input type="text" class="input" name="date_signature">
+                            <label>Année d'obtention</label>
+                            <input type="number" class="input" name="annee_obtention" min="1900" max="2100" placeholder="ex: 2020">
                         </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Domaine de compétence</label>
-                        <input type="text" class="input" name="domaine_competence">
                     </div>
 
                     <div class="form-group">
                         <label>Niveau d'étude</label>
-                        <input type="text" class="input" name="niveau_etude">
+                        <input type="text" class="input" name="niveau_etude" placeholder="ex: Licence, Master...">
                     </div>
 
                     <div class="form-group">
-                        <label>Intitulé du diplôme <span class="required">*</span></label>
-                        <input type="text" class="input" name="intitule_diplome" required>
+                        <label>Copie du diplôme <span class="required">(obligatoire)</span></label>
+                        <div class="upload-zone" id="upload-diplome">
+                            <i class="fa-solid fa-cloud-arrow-up"></i>
+                            <p>Glissez votre fichier ici ou <span>cliquez pour parcourir</span></p>
+                            <small>PDF, JPG, PNG — max 2 Mo</small>
+                            <input type="file" name="diplome_file" accept=".pdf,.jpg,.jpeg,.png" hidden>
+                        </div>
                     </div>
+
                 </section>
 
                 <!-- ACTIONS -->
                 <div class="form-actions">
+<<<<<<< HEAD
                     <a href="liste_concours.php" class="btn btn-secondary">Annuler</a>
                     <button id="paiement" type="submit" class="btn btn-primary">Suivant</button>
                 </div>
@@ -102,20 +84,59 @@
                         <img src="../assets/image/bf_loader_v3.svg" alt="">
                     </svg>
 
+=======
+                    <a href="liste_concours.php" class="btn btn-secondary1">Annuler</a>
+                    <button type="submit" class="btn btn-primary">Suivant</button>
+>>>>>>> 859a5a7763a366c75d9b1759c23a51ac81904ded
                 </div>
 
             </form>
-
         </div>
-
     </main>
 
+<<<<<<< HEAD
+=======
+    <script>
+        document.querySelectorAll(".upload-zone").forEach(zone => {
+            zone.addEventListener("click", () => {
+                zone.querySelector("input[type='file']").click();
+            });
+
+            zone.querySelector("input[type='file']").addEventListener("change", (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    zone.classList.add("uploaded");
+                    zone.querySelector("p").innerHTML = `<i class="fa-solid fa-file" style="margin-right:6px;"></i><strong>${file.name}</strong>`;
+                    zone.querySelector("i.fa-cloud-arrow-up") && (zone.querySelector("i").className = "fa-solid fa-circle-check");
+                }
+            });
+
+            zone.addEventListener("dragover", (e) => {
+                e.preventDefault();
+                zone.classList.add("drag-over");
+            });
+
+            zone.addEventListener("dragleave", () => {
+                zone.classList.remove("drag-over");
+            });
+
+            zone.addEventListener("drop", (e) => {
+                e.preventDefault();
+                zone.classList.remove("drag-over");
+                const file = e.dataTransfer.files[0];
+                if (file) {
+                    zone.classList.add("uploaded");
+                    zone.querySelector("p").innerHTML = `<strong>${file.name}</strong>`;
+                }
+            });
+        });
+    </script>
+
+>>>>>>> 859a5a7763a366c75d9b1759c23a51ac81904ded
     <script type="module">
         import InscriptionController from "../controllers/InscriptionController.js";
-
         InscriptionController.init();
 
     </script>
 </body>
-
 </html>
