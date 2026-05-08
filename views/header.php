@@ -27,20 +27,31 @@
             </button>
 
             <div class="account-menu" id="accountMenu">
+<<<<<<< Updated upstream
                 <a id="profilLink"><i class="fa fa-user"></i> Mon profil</a>
+=======
+                <a href="profil.php" id="profilLink"><i class="fa fa-user"></i> Mon profil</a>
+>>>>>>> Stashed changes
                 <a href="resultat.php"><i class="fa fa-chart-bar"></i> Mes résultats</a>
                 <a href="#" style="color: red;" onclick="logout()"><i class="fa fa-sign-out"></i> Se déconnecter</a>
             </div>
         </div>
 
     </div>
+<<<<<<< Updated upstream
 
+=======
+    
+>>>>>>> Stashed changes
     <div id="pageLoader" class="page-loader hidden">
 
         <svg class="loader-svg" viewBox="0 0 100 100">
             <img src="../assets/image/bf_loader_v3.svg" alt="">
         </svg>
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
     </div>
 
     <script>
@@ -89,7 +100,8 @@
             const routes = {
                 "detail_concours.php": "liste_concours.php",
                 "inscription_concours.php": "liste_concours.php",
-                "resultat.php": "profil.php"
+                "resultat.php": "liste_concours.php"
+
             };
 
             let page = window.location.pathname.split("/").pop().split("?")[0];

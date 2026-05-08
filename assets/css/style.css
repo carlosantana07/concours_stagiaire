@@ -847,11 +847,11 @@ footer h3 {
 .login-container {
   width: 100%;
   max-width: 500px;
-  /* PLUS GRAND */
+  /* 🔥 PLUS GRAND */
   background: #FFFFFF;
   border-radius: 16px;
   padding: 50px;
-  /* plus d’espace */
+  /* 🔥 plus d’espace */
   color: #111827;
   box-shadow: 0px 25px 50px rgba(0, 0, 0, 0.1);
 }
@@ -2724,7 +2724,7 @@ button:disabled {
     transform: rotate(-90deg);
 }
 
-.loader-svg circle {
+.loader-svg img {
     fill: none;
     stroke: #16A34A;
     stroke-width: 8;
@@ -2742,27 +2742,4 @@ button:disabled {
     100% {
         stroke-dashoffset: 0;
     }
-}
-
-.form-error {
-    color: #DC2626;
-    font-size: 14px;
-    margin-top: 8px;
-    text-align: center;
-    min-height: 18px;
-}
-
-.form-message {
-    font-size: 14px;
-    text-align: center;
-    margin-top: 10px;
-    min-height: 20px;
-}
-
-.form-message.error {
-    color: #DC2626;
-}
-
-.form-message.success {
-    color: #16A34A;
 }
