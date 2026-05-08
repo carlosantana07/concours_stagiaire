@@ -73,29 +73,14 @@
 
                 <!-- ACTIONS -->
                 <div class="form-actions">
-<<<<<<< HEAD
-                    <a href="liste_concours.php" class="btn btn-secondary">Annuler</a>
-                    <button id="paiement" type="submit" class="btn btn-primary">Suivant</button>
-                </div>
-
-                <div id="pageLoader" class="page-loader hidden">
-
-                    <svg class="loader-svg" viewBox="0 0 100 100">
-                        <img src="../assets/image/bf_loader_v3.svg" alt="">
-                    </svg>
-
-=======
                     <a href="liste_concours.php" class="btn btn-secondary1">Annuler</a>
                     <button type="submit" class="btn btn-primary">Suivant</button>
->>>>>>> 859a5a7763a366c75d9b1759c23a51ac81904ded
                 </div>
 
             </form>
         </div>
     </main>
 
-<<<<<<< HEAD
-=======
     <script>
         document.querySelectorAll(".upload-zone").forEach(zone => {
             zone.addEventListener("click", () => {
@@ -132,7 +117,6 @@
         });
     </script>
 
->>>>>>> 859a5a7763a366c75d9b1759c23a51ac81904ded
     <script type="module">
         import InscriptionController from "../controllers/InscriptionController.js";
         InscriptionController.init();
