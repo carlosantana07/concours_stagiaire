@@ -85,8 +85,19 @@ export default class InscriptionController {
 
             localStorage.setItem("id_inscription", idInscription);
 
-            alert("Inscription réussie !");
-            window.location.href = "paiement.php?id=" + this.concoursId;
+            // AFFICHER LE LOADER
+            const loader = document.getElementById("pageLoader");
+
+            loader.classList.remove("hidden");
+
+            // REDIRECTION AVEC ANIMATION
+            setTimeout(() => {
+
+                window.location.href =
+                    "paiement.php?id=" + this.concoursId;
+
+            }, 1200);
+
         });
     }
 }

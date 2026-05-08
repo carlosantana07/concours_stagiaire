@@ -17,30 +17,39 @@ export default class AuthController {
                 mot_de_passe
             };
 
-            console.log("DATA LOGIN :", data);
+            // console.log("DATA LOGIN :", data);
 
             try {
 
                 const res = await AuthModel.login(data);
 
-                console.log("REPONSE LOGIN :", res.data);
+                // console.log("REPONSE LOGIN :", res.data);
 
                 // TRÈS IMPORTANT
+                const errorEl = document.getElementById("formError");
+
+                errorEl.textContent = "";
+
                 if (!res.ok) {
-                    alert(res.data.error || "Numéro ou mot de passe incorrect");
+
+                    errorEl.textContent =
+                        res.data.error || "Numéro ou mot de passe incorrect";
+
                     return;
                 }
 
-                // succès uniquement ici
+                // succès uniquement
                 localStorage.setItem("token", res.data.token);
 
-                alert("Connexion réussie");
+                // alert("Connexion réussie");
+                errorEl.textContent = "";
 
                 window.location.href = "accueil.php";
 
             } catch (err) {
                 console.log(err);
-                alert("Erreur serveur");
+                // alert("Erreur serveur");
+
             }
 
         });
@@ -179,7 +188,19 @@ export default class AuthController {
                 sessionStorage.setItem("otp_token", res.data.candidat.token);
 
                 // redirection OTP
-                window.location.href = "otp.php";
+                //window.location.href = "otp.php";
+                // AFFICHER LE LOADER
+                const loader = document.getElementById("pageLoader");
+
+                loader.classList.remove("hidden");
+
+                // REDIRECTION AVEC ANIMATION
+                setTimeout(() => {
+
+                    window.location.href = "otp.php";
+
+
+                }, 1200);
 
             } catch (err) {
                 console.log(err);

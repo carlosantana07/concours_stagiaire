@@ -1,11 +1,11 @@
 const API_URL = "http://localhost:4000/api/auth";
-import { authFetch } from "../assets/utils/authFetch.js";
+// import { authFetch } from "../assets/utils/authFetch.js";
 
 
 export default class AuthModel {
 
     static async login(data) {
-        const res = await authFetch(`${API_URL}/login`, {
+        const res = await fetch(`${API_URL}/login`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data)
@@ -16,7 +16,7 @@ export default class AuthModel {
     }
 
     static async register(data) {
-        const res = await authFetch(`${API_URL}/register`, {
+        const res = await fetch(`${API_URL}/register`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data)
@@ -27,7 +27,7 @@ export default class AuthModel {
     }
 
     static async verifyOtp(data, token) {
-        const res = await authFetch(`${API_URL}/verify`, {
+        const res = await fetch(`${API_URL}/verify`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -42,7 +42,7 @@ export default class AuthModel {
 
     // AJOUT ICI
     static async resendOtp(email) {
-        const res = await authFetch(`${API_URL}/resend-otp-code`, {
+        const res = await fetch(`${API_URL}/resend-otp-code`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -56,7 +56,7 @@ export default class AuthModel {
 
     static async forgotPassword(data) {
 
-        const res = await authFetch(`${API_URL}/forgot-password`, {
+        const res = await fetch(`${API_URL}/forgot-password`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -74,7 +74,7 @@ export default class AuthModel {
 
     static async resetPassword(data, token) {
 
-        const res = await authFetch(`${API_URL}/reset-password`, {
+        const res = await fetch(`${API_URL}/reset-password`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -95,7 +95,7 @@ export default class AuthModel {
 
         const token = localStorage.getItem("token"); 
 
-        const res = await authFetch(`${API_URL}/contact-us`, {
+        const res = await fetch(`${API_URL}/contact-us`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

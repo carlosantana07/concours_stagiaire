@@ -1,5 +1,5 @@
 const API_URL = "http://localhost:4000/api/candidat";
-import { authFetch } from "../assets/utils/authFetch.js";
+// import { authFetch } from "../assets/utils/authFetch.js";
 
 
 
@@ -7,7 +7,7 @@ export default class CandidatModel {
 
     static async getProfil(token) {
 
-        const res = await authFetch(`${API_URL}/profil`, {
+        const res = await fetch(`${API_URL}/profil`, {
             method: "GET",
             headers: {
                 "Authorization": "Bearer " + token
@@ -24,7 +24,7 @@ export default class CandidatModel {
 
     static async getMesInscriptions(token, page = 1) {
 
-        const res = await authFetch(
+        const res = await fetch(
             `${API_URL}/mes-candidatures?page=${page}`,
             {
                 method: "GET",
@@ -41,7 +41,7 @@ export default class CandidatModel {
 
     static async updateProfil(data, token) {
 
-        const res = await authFetch(`${API_URL}/profil`, {
+        const res = await fetch(`${API_URL}/profil`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
@@ -60,7 +60,7 @@ export default class CandidatModel {
 
     static async getResultats(token) {
 
-        const res = await authFetch(`${API_URL}/resultats`, {
+        const res = await fetch(`${API_URL}/resultats`, {
             headers: {
                 Authorization: "Bearer " + token
             }

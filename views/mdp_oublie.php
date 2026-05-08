@@ -39,7 +39,7 @@
             <div class="input-group" id="telGroup" style="display:none;">
                 <input type="text" name="telephone" placeholder="Votre téléphone">
             </div>
-
+            <p id="formMessage" class="form-message"></p>
             <button class="btn-primary">Envoyer le code</button>
 
             <div class="link">

@@ -93,7 +93,15 @@
                 <!-- ACTIONS -->
                 <div class="form-actions">
                     <a href="liste_concours.php" class="btn btn-secondary">Annuler</a>
-                    <button type="submit" class="btn btn-primary">Suivant</button>
+                    <button id="paiement" type="submit" class="btn btn-primary">Suivant</button>
+                </div>
+
+                <div id="pageLoader" class="page-loader hidden">
+
+                    <svg class="loader-svg" viewBox="0 0 100 100">
+                        <img src="../assets/image/bf_loader_v3.svg" alt="">
+                    </svg>
+
                 </div>
 
             </form>
@@ -101,11 +109,12 @@
         </div>
 
     </main>
-    
+
     <script type="module">
         import InscriptionController from "../controllers/InscriptionController.js";
 
         InscriptionController.init();
+
     </script>
 </body>
 

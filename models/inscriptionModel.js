@@ -1,11 +1,11 @@
 const API_URL = "http://localhost:4000/api";
-import { authFetch } from "../assets/utils/authFetch.js";
+// import { authFetch } from "../assets/utils/authFetch.js";
 
 export default class InscriptionModel {
 
     static async getConcoursDetail(id) {
 
-        const res = await authFetch(`${API_URL}/concours/detail/${id}`);
+        const res = await fetch(`${API_URL}/concours/detail/${id}`);
         const data = await res.json();
 
         return { ok: res.ok, data };
@@ -13,7 +13,7 @@ export default class InscriptionModel {
 
     static async inscrire(data) {
 
-        const res = await authFetch(`${API_URL}/inscription/s-inscrire`, {
+        const res = await fetch(`${API_URL}/inscription/s-inscrire`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

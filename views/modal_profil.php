@@ -1,5 +1,5 @@
 <!-- MODAL -->
-<div id="modalProfil" class="modal hidden">
+<div id="modalProfil" class="modal hidden" style="padding-top: 80px;">
 
     <div class="modal-content large">
 

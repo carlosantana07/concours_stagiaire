@@ -1,6 +1,6 @@
 const API_URL = "http://localhost:4000/api/payment";
 const API = "http://localhost:4000/api/candidat";
-import { authFetch } from "../assets/utils/authFetch.js";
+// import { authFetch } from "../assets/utils/authFetch.js";
 
 
 export default class PaymentConfirmModel {
@@ -8,7 +8,7 @@ export default class PaymentConfirmModel {
     static async getPaymentInfo(concoursId, token) {
         // console.log("ID CONCOURS:", concoursId);
 
-        const res = await authFetch(`http://localhost:4000/api/concours/detail/${concoursId}`, {
+        const res = await fetch(`http://localhost:4000/api/concours/detail/${concoursId}`, {
             headers: {
                 "Authorization": "Bearer " + token
             }
@@ -23,7 +23,7 @@ export default class PaymentConfirmModel {
 
         const token = localStorage.getItem("token");
 
-        const res = await authFetch(`${API}/recepisse`, {
+        const res = await fetch(`${API}/recepisse`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
