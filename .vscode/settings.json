@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/a9ff6917-51d0-488c-b215-002ab60fb54f/resourceGroups/TESTPLATEFORMS/providers/Microsoft.Web/sites/CONCOURS-FRONTEND",
+    "appService.deploySubpath": "."
+}

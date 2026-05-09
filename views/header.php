@@ -5,7 +5,7 @@
     </div>
 
     <nav>
-        <a href="accueil.php">Accueil</a>
+        <a href="../index.php">Accueil</a>
         <a href="liste_concours.php">Concours</a>
         <!-- <a href="">Ministères</a> -->
         <a href="contact.php">Contactez-nous</a>
@@ -62,7 +62,7 @@
             localStorage.removeItem("token");
             alert("Déconnecté");
 
-            window.location.href = "accueil.php";
+            window.location.href = "index.php";
         }
 
         // gestion affichage login / guest
