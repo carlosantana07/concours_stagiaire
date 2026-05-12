@@ -29,68 +29,7 @@
                 </tr>
             </thead>
             <tbody id="resultatsBody">
-                <!-- <tr>
-                    <td rowspan="3" class="nom-concours">Santé</td>
-                    <td>Culture générale</td>
-                    <td>Ecrit</td>
-                    <td>2</td>
-                    <td>En attente</td>
-                    <td rowspan="3">En attente</td>
-                </tr>
-                <tr>
-                    <td>SVT</td>
-                    <td>Ecrit</td>
-                    <td>3</td>
-                    <td>En attente</td>
-                </tr>
-                <tr class="separateur-bloc">
-                    <td>Mathématiques</td>
-                    <td>Ecrit</td>
-                    <td>3</td>
-                    <td>En attente</td>
-                </tr>
-
-                <tr>
-                    <td rowspan="3" class="nom-concours">Education</td>
-                    <td>Culture générale</td>
-                    <td>Ecrit</td>
-                    <td>2</td>
-                    <td>En attente</td>
-                    <td rowspan="3">En attente</td>
-                </tr>
-                <tr>
-                    <td>SVT</td>
-                    <td>Ecrit</td>
-                    <td>3</td>
-                    <td>En attente</td>
-                </tr>
-                <tr class="separateur-bloc">
-                    <td>Mathématiques</td>
-                    <td>Ecrit</td>
-                    <td>3</td>
-                    <td>En attente</td>
-                </tr>
-
-                <tr>
-                    <td rowspan="3" class="nom-concours">Douanes</td>
-                    <td>Culture générale</td>
-                    <td>Ecrit</td>
-                    <td>2</td>
-                    <td>En attente</td>
-                    <td rowspan="3">En attente</td>
-                </tr>
-                <tr>
-                    <td>SVT</td>
-                    <td>Ecrit</td>
-                    <td>3</td>
-                    <td>En attente</td>
-                </tr>
-                <tr class="separateur-bloc">
-                    <td>Mathématiques</td>
-                    <td>Ecrit</td>
-                    <td>3</td>
-                    <td>En attente</td>
-                </tr> -->
+                
             </tbody>
         </table>
         <div class="pagination">

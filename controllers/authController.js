@@ -44,7 +44,7 @@ export default class AuthController {
                 // alert("Connexion réussie");
                 errorEl.textContent = "";
 
-                window.location.href = "index.php";
+                window.location.href = "accueil.php";
 
             } catch (err) {
                 console.log(err);

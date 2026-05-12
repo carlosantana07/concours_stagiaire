@@ -65,7 +65,7 @@
             localStorage.removeItem("token");
             alert("Déconnecté");
 
-            window.location.href = "index.php";
+            window.location.href = "accueil.php";
         }
 
         // gestion affichage login / guest

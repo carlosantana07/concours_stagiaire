@@ -94,7 +94,7 @@
   </section>
 
   <!-- ===== AIDE ===== -->
-  <section style="display:flex; justify-content:center; align-items: center; padding:60px 0; background:#F9FAFB;">
+  <section class="cards-contain">
     <div class="card" style="width:800px; height: 420px; align-items: center; justify-content: center; text-align:center; background: #F9FAFB;">
       <div class="icon icon-red"> <i class="fa-solid fa-headset"></i> </div>
       <h2 style="color:#111827;">Besoin d'aide ?</h2>
