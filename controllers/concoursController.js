@@ -189,16 +189,9 @@ export default class ConcoursController {
                 <h2>${concours.nom}</h2>
 
                 <div class="concours-footer">
-                    <div class="infos">
-                        <span>
-                            <i class="fa-solid fa-calendar-days"></i>
-                            ${this.formatDate(concours.date_debut)}
-                        </span>
-
-                        <span>
-                            <i class="fa-solid fa-users"></i>
-                            ${concours.nombre_postes || 0} postes
-                        </span>
+                   <div class="infos">
+                        <span><i class="fa-solid fa-calendar-days"></i> ${this.formatDate(concours.date_debut)}</span>
+                        <span><i class="fa-solid fa-users"></i> ${concours.nombre_postes || 0} postes</span>
                     </div>
 
                     <a href="detail_concours.php?id=${concours.id_concours}" class="btn-primary">

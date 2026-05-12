@@ -41,7 +41,7 @@ export default class CandidatController {
             // INFOS PERSO
             document.getElementById("infoNom").innerText = c.nom || "-";
             document.getElementById("infoPrenom").innerText = c.prenom || "-";
-            document.getElementById("infoDateNaissance").innerText = c.date_naissance || "-";
+            document.getElementById("infoDateNaissance").innerText =c.date_naissance || "-";
             document.getElementById("infoLieuNaissance").innerText = c.lieu_naissance || "-";
             document.getElementById("infoMinistere").innerText = c.ministere || "-";
             document.getElementById("infoEmploi").innerText = c.emploi || "-";
