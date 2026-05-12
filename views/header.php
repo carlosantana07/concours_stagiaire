@@ -15,7 +15,13 @@
             <a href="aide.php">Aide</a>
         </nav>
 
-        <div class="nav-buttons">
+    <nav>
+        <a href="../index.php">Accueil</a>
+        <a href="liste_concours.php">Concours</a>
+        <!-- <a href="">Ministères</a> -->
+        <a href="contact.php">Contactez-nous</a>
+        <a href="aide.php">Aide</a>
+    </nav>
 
             <!-- utilisateur NON connecté -->
             <div id="guest-buttons" class="guest-button">
@@ -67,7 +73,7 @@
             localStorage.removeItem("token");
             alert("Déconnecté");
 
-            window.location.href = "accueil.php";
+            window.location.href = "index.php";
         }
 
         // gestion affichage login / guest
