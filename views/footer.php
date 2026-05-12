@@ -23,7 +23,7 @@
     </div>
 
     <div class="footer-col">
-      <h3>Contact</h3>
+      <h3>Contacts</h3>
 
       <div class="footer-contact">
 
