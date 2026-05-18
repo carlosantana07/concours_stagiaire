@@ -30,6 +30,8 @@
                 <input type="password" name="mot_de_passe" placeholder="Nouveau mot de passe">
             </div>
 
+              <p id="formMessage" class="form-message"></p>
+
             <button class="btn-primary">Réinitialiser</button>
 
             <div class="link">

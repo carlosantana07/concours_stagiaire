@@ -41,7 +41,7 @@
                         <i class="fas fa-eye toggle-password" onclick="togglePassword()"></i>
                     </div>
                 </div>
-                
+
                 <p id="formError" class="form-error"></p>
 
                 <!-- Bouton -->

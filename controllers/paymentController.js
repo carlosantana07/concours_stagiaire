@@ -90,18 +90,23 @@ export default class PaymentController {
         e.preventDefault();
 
         const token = localStorage.getItem("token");
+        const messageEl = document.getElementById("paymentMessage");
+
         const id_inscription = Number(localStorage.getItem("id_inscription"));
 
-        if (!id_inscription) {
-            alert("Aucune inscription trouvée");
-            return;
-        }
         const urlParams = new URLSearchParams(window.location.search);
         const id_concours = urlParams.get("id");
 
+        // reset message
+        messageEl.style.display = "none";
+        messageEl.textContent = "";
 
         if (!id_inscription) {
-            alert("Aucune inscription trouvée");
+
+            messageEl.style.display = "block";
+            messageEl.style.color = "red";
+            messageEl.textContent = "Aucune inscription trouvée";
+
             return;
         }
 
@@ -111,26 +116,46 @@ export default class PaymentController {
         const phone = this.form.querySelector("input").value;
 
         const data = {
-            // telephone: phone,
-            // otp: otp,
             id_inscription: Number(id_inscription),
             id_concours: Number(id_concours)
         };
 
         console.log("DATA PAIEMENT:", data);
 
-        const res = await PaymentModel.initPayment(data, token);
+        try {
 
-        console.log("PAIEMENT:", res.data);
+            const res = await PaymentModel.initPayment(data, token);
 
-        if (!res.ok) {
-            alert(res.data.erreurs?.join("\n") || "Erreur paiement");
-            return;
+            console.log("PAIEMENT:", res.data);
+
+            if (!res.ok) {
+
+                messageEl.style.display = "block";
+                messageEl.style.color = "red";
+                messageEl.textContent =
+                    res.data.erreurs?.join("\n") ||
+                    "Erreur paiement";
+
+                return;
+            }
+
+            messageEl.style.display = "block";
+            messageEl.style.color = "green";
+            messageEl.textContent = "Paiement initié avec succès";
+
+            setTimeout(() => {
+                window.location.href =
+                    "paiement_confirme.php?id=" + id_concours;
+            }, 1000);
+
+        } catch (err) {
+
+            console.log(err);
+
+            messageEl.style.display = "block";
+            messageEl.style.color = "red";
+            messageEl.textContent = "Erreur serveur";
         }
-
-        alert("Paiement initié");
-
-        window.location.href = "paiement_confirme.php?id=" + id_concours;
     }
 }
 

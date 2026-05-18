@@ -39,6 +39,8 @@
                     <textarea name="message" id="message"></textarea>
                 </div>
 
+                <p id="formMessage" class="form-message"></p>
+
                 <button type="submit" class="btn-submit">Envoyer</button>
 
             </form>

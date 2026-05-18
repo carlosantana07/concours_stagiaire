@@ -22,11 +22,19 @@ export default class CandidatController {
         try {
             const res = await CandidatModel.getProfil(token);
 
+            const messageEl = document.getElementById("profilMessage");
+
+            messageEl.style.display = "none";
+            messageEl.textContent = "";
+
             if (!res.ok) {
-                alert(res.data.error || "Erreur chargement profil");
+
+                messageEl.style.display = "block";
+                messageEl.textContent =
+                    res.data.error || "Erreur chargement profil";
+
                 return;
             }
-
             const c = res.data.data;
             this.currentUser = c;
 
@@ -41,7 +49,7 @@ export default class CandidatController {
             // INFOS PERSO
             document.getElementById("infoNom").innerText = c.nom || "-";
             document.getElementById("infoPrenom").innerText = c.prenom || "-";
-            document.getElementById("infoDateNaissance").innerText =c.date_naissance || "-";
+            document.getElementById("infoDateNaissance").innerText = c.date_naissance || "-";
             document.getElementById("infoLieuNaissance").innerText = c.lieu_naissance || "-";
             document.getElementById("infoMinistere").innerText = c.ministere || "-";
             document.getElementById("infoEmploi").innerText = c.emploi || "-";
@@ -51,8 +59,13 @@ export default class CandidatController {
             document.getElementById("infoTelephone").innerText = c.telephone || "-";
 
         } catch (err) {
-            console.log(err);
-            alert("Erreur serveur");
+
+            // console.log(err);
+
+            const messageEl = document.getElementById("profilMessage");
+
+            messageEl.style.display = "block";
+            messageEl.textContent = "Erreur serveur";
         }
 
         await this.loadCandidatures();
@@ -64,11 +77,19 @@ export default class CandidatController {
 
         const res = await CandidatModel.getMesInscriptions(token);
 
+        const messageEl = document.getElementById("candidaturesMessage");
+
+        messageEl.style.display = "none";
+        messageEl.textContent = "";
+
         if (!res.ok) {
-            console.log(res.data);
+
+            messageEl.style.display = "block";
+            messageEl.textContent =
+                res.data.error || "Erreur chargement candidatures";
+
             return;
         }
-
         const container = document.getElementById("candidaturesContainer");
         const data = res.data.data.slice(0, 5);
 
@@ -102,13 +123,20 @@ export default class CandidatController {
             const data = Object.fromEntries(new FormData(form).entries());
 
             const res = await CandidatModel.updateProfil(data, token);
+            
+            const messageEl = document.getElementById("profilMessage");
+
+            messageEl.style.display = "none";
+            messageEl.textContent = "";
 
             if (!res.ok) {
-                alert(res.data.error);
+                messageEl.style.display = "block";
+                messageEl.textContent = res.data.error || "Erreur mise à jour profil";
                 return;
             }
 
-            alert("Profil mis à jour avec succès");
+            messageEl.style.display = "block";
+            messageEl.textContent = "Profil mis à jour avec succès";
             document.getElementById("modalProfil").classList.add("hidden");
             this.loadProfil();
         });
@@ -275,7 +303,7 @@ export default class CandidatController {
             this.hasMore = this.currentPage <= result.pageTot;
 
         } catch (err) {
-            console.error(err);
+            // console.error(err);
         }
 
         this.isLoading = false;

@@ -64,6 +64,8 @@
 
                         </div>
 
+                        <p id="paymentMessage" class="form-message"></p>
+
                         <button type="submit" class="btn-pay">
                             <i class="fa-solid fa-lock"></i>
                             <span>Payer 800 FCFA</span>

@@ -63,7 +63,7 @@
         // logout
         function logout() {
             localStorage.removeItem("token");
-            alert("Déconnecté");
+            // alert("Déconnecté");
 
             window.location.href = "accueil.php";
         }

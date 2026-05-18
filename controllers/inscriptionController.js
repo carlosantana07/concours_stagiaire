@@ -56,15 +56,71 @@ export default class InscriptionController {
     }
 
     // EVENTS
+    // static bindEvents() {
+
+    //     this.form.addEventListener("submit", async (e) => {
+    //         e.preventDefault();
+
+    //         const formData = new FormData(this.form);
+    //         const data = Object.fromEntries(formData.entries());
+
+    //         // ICI (IMPORTANT)
+    //         data.id_centre = Number(data.centre);
+    //         delete data.centre;
+
+    //         data.id_concours = Number(this.concoursId);
+
+    //         console.log("DATA ENVOYÉE :", data);
+
+    //         const res = await InscriptionModel.inscrire(data);
+
+    //         if (!res.ok) {
+    //             alert(res.data.error);
+    //             return;
+    //         }
+
+    //         console.log("REPONSE COMPLETE:", res.data);
+
+    //         const idInscription = res.data.data.id_inscription;
+
+    //         localStorage.setItem("id_inscription", idInscription);
+
+    //         // AFFICHER LE LOADER
+    //         const loader = document.getElementById("pageLoader");
+
+    //         loader.classList.remove("hidden");
+
+    //         // REDIRECTION AVEC ANIMATION
+    //         setTimeout(() => {
+
+    //             window.location.href =
+    //                 "paiement.php?id=" + this.concoursId;
+
+    //         }, 1200);
+
+    //     });
+    // }
+
     static bindEvents() {
 
+        const messageEl =
+            document.getElementById("inscriptionMessage");
+
         this.form.addEventListener("submit", async (e) => {
+
             e.preventDefault();
 
-            const formData = new FormData(this.form);
-            const data = Object.fromEntries(formData.entries());
+            const formData =
+                new FormData(this.form);
 
-            // ICI (IMPORTANT)
+            const data =
+                Object.fromEntries(formData.entries());
+
+            // reset message
+            messageEl.style.display = "none";
+            messageEl.textContent = "";
+
+            // transformation
             data.id_centre = Number(data.centre);
             delete data.centre;
 
@@ -72,31 +128,59 @@ export default class InscriptionController {
 
             console.log("DATA ENVOYÉE :", data);
 
-            const res = await InscriptionModel.inscrire(data);
+            try {
 
-            if (!res.ok) {
-                alert(res.data.error);
-                return;
+                const res =
+                    await InscriptionModel.inscrire(data);
+
+                if (!res.ok) {
+
+                    messageEl.style.display = "block";
+                    messageEl.style.color = "red";
+                    messageEl.textContent =
+                        res.data.error || "Erreur inscription";
+
+                    return;
+                }
+
+                console.log("REPONSE COMPLETE:", res.data);
+
+                const idInscription =
+                    res.data.data.id_inscription;
+
+                localStorage.setItem(
+                    "id_inscription",
+                    idInscription
+                );
+
+                messageEl.style.display = "block";
+                messageEl.style.color = "green";
+                messageEl.textContent =
+                    "Inscription réussie";
+
+                // loader
+                const loader =
+                    document.getElementById("pageLoader");
+
+                loader.classList.remove("hidden");
+
+                setTimeout(() => {
+
+                    window.location.href =
+                        "paiement.php?id=" +
+                        this.concoursId;
+
+                }, 1200);
+
+            } catch (err) {
+
+                console.log(err);
+
+                messageEl.style.display = "block";
+                messageEl.style.color = "red";
+                messageEl.textContent =
+                    "Erreur serveur";
             }
-
-            console.log("REPONSE COMPLETE:", res.data);
-
-            const idInscription = res.data.data.id_inscription;
-
-            localStorage.setItem("id_inscription", idInscription);
-
-            // AFFICHER LE LOADER
-            const loader = document.getElementById("pageLoader");
-
-            loader.classList.remove("hidden");
-
-            // REDIRECTION AVEC ANIMATION
-            setTimeout(() => {
-
-                window.location.href =
-                    "paiement.php?id=" + this.concoursId;
-
-            }, 1200);
 
         });
     }

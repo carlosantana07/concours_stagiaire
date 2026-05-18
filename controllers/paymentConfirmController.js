@@ -6,31 +6,52 @@ export default class PaymentConfirmController {
 
         const token = localStorage.getItem("token");
 
+        const messageEl =
+            document.getElementById("paymentMessage");
+
         if (!token) {
-            window.location.href = "connexion.php";
+
+            messageEl.style.display = "block";
+            messageEl.textContent = "Session expirée, veuillez vous reconnecter";
+
+            setTimeout(() => {
+                window.location.href = "connexion.php";
+            }, 1500);
+
             return;
         }
 
-        // ID CONCOURS (URL)
-        const concoursId = new URLSearchParams(window.location.search).get("id");
+        const concoursId =
+            new URLSearchParams(window.location.search).get("id");
 
-        // ID INSCRIPTION (localStorage)
-        this.id_inscription = localStorage.getItem("id_inscription");
-
-        // console.log("ID INSCRIPTION :", this.id_inscription);
-        // console.log("ID CONCOURS :", concoursId);
+        this.id_inscription =
+            localStorage.getItem("id_inscription");
 
         if (!this.id_inscription) {
-            alert("Aucune inscription trouvée");
+
+            messageEl.style.display = "block";
+            messageEl.textContent =
+                "Aucune inscription trouvée";
+
             return;
         }
 
-        // charger infos concours
-        await this.loadPaymentInfo(concoursId, token);
+        try {
 
-        // UI + events
-        this.loadUI();
-        this.bindEvents();
+            await this.loadPaymentInfo(concoursId, token);
+
+            this.loadUI();
+            this.bindEvents();
+
+        } catch (err) {
+
+            console.log(err);
+
+            messageEl.style.display = "block";
+            messageEl.textContent =
+                "Erreur lors du chargement des informations";
+
+        }
     }
 
     static async loadPaymentInfo(id, token) {
@@ -63,32 +84,52 @@ export default class PaymentConfirmController {
     static bindEvents() {
 
         const btn = document.getElementById("downloadReceipt");
+        const messageEl = document.getElementById("paymentMessage");
 
         btn.addEventListener("click", async () => {
+
+            // reset message
+            messageEl.style.display = "none";
+            messageEl.textContent = "";
 
             try {
 
                 if (!this.id_inscription) {
-                    alert("Inscription introuvable");
+
+                    messageEl.style.display = "block";
+                    messageEl.textContent = "Inscription introuvable";
+
                     return;
                 }
 
-                const blob = await PaymentConfirmModel.getRecepisse(this.id_inscription);
+                const blob =
+                    await PaymentConfirmModel.getRecepisse(
+                        this.id_inscription
+                    );
 
-                const url = window.URL.createObjectURL(blob);
+                const url =
+                    window.URL.createObjectURL(blob);
 
-                const a = document.createElement("a");
+                const a =
+                    document.createElement("a");
+
                 a.href = url;
                 a.download = "recepisse.pdf";
+
                 document.body.appendChild(a);
                 a.click();
 
                 a.remove();
+
                 window.URL.revokeObjectURL(url);
 
             } catch (err) {
+
                 console.log(err);
-                alert(err.error || "Erreur téléchargement reçu");
+
+                messageEl.style.display = "block";
+                messageEl.textContent =
+                    "Erreur lors du téléchargement du reçu";
             }
         });
     }

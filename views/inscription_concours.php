@@ -71,6 +71,8 @@
 
                 </section>
 
+                <p id="inscriptionMessage" class="form-message"></p>
+
                 <!-- ACTIONS -->
                 <div class="form-actions">
                     <a href="liste_concours.php" class="btn btn-secondary1">Annuler</a>

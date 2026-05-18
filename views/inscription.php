@@ -143,6 +143,7 @@
 
                     </div>
                 </div>
+                <p id="formMessage" class="form-message"></p>
                 <!-- BOUTON -->
                 <div class="register-actions">
                     <button type="submit" class="btn-primary">Créer mon compte</button>

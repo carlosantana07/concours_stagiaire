@@ -50,6 +50,8 @@
                 <input name="matricule" placeholder="Matricule" class="input">
             </div>
 
+            <p id="profilMessage" class="form-message"></p>
+
             <button type="submit" class="btn-primary full">Enregistrer</button>
 
         </form>

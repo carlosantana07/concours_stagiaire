@@ -47,6 +47,8 @@
         </div>
       </div>
 
+      <p id="profilMessage" class="form-message"></p>
+
       <!-- TAB INFORMATIONS -->
       <div class="profil-tab-content active1" id="tab-informations">
         <div class="profil-two-col">
@@ -161,6 +163,7 @@
               <i class="fa-solid fa-file-lines" style="color:#9ca3af"></i>
               <span>Mes candidatures</span>
             </div>
+            <p id="candidaturesMessage" class="form-message"></p>
             <a class="profil-voir-tout" id="btnVoirCandidatures">
               Voir toutes <i class="fa-solid fa-chevron-right"></i>
             </a>

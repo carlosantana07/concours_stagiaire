@@ -45,6 +45,8 @@
 
             </div>
 
+            <p id="paymentMessage" class="form-message"></p>
+
             <div class="btn-group">
 
                 <button id="downloadReceipt" class="btn-download">

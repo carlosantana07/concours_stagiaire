@@ -34,6 +34,7 @@
                 </div>
 
                 <input type="hidden" name="otp" id="otp">
+                <p id="formMessage" class="form-message"></p>
 
                 <button type="submit" class="otp-btn-primary">Vérifier</button>
                 <div class="otp-resend">
