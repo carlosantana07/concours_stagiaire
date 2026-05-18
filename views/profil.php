@@ -8,6 +8,81 @@
   <link rel="stylesheet" href="../assets/css/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+    document.getElementById("btnChangerMdp").addEventListener("click", async () => {
+
+        const ancien = document.getElementById("motDePasseActuel").value;
+        const nouveau = document.getElementById("nouveauMotDePasse").value;
+        const confirmer = document.getElementById("confirmerMotDePasse").value;
+        const msg = document.getElementById("msgChangerMdp");
+
+        msg.style.display = "block";
+
+        if (!ancien || !nouveau || !confirmer) {
+            msg.style.color = "#ef4444";
+            msg.innerText = "⚠️ Veuillez remplir tous les champs.";
+            return;
+        }
+
+        if (nouveau !== confirmer) {
+            msg.style.color = "#ef4444";
+            msg.innerText = "⚠️ Les mots de passe ne correspondent pas.";
+            return;
+        }
+
+        if (nouveau.length < 8) {
+            msg.style.color = "#ef4444";
+            msg.innerText = "⚠️ Le mot de passe doit contenir au moins 8 caractères.";
+            return;
+        }
+
+        const token = localStorage.getItem("token");
+
+        try {
+
+            const res = await fetch("http://localhost:4000/api/candidat/profil", {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    ancien_mot_de_passe: ancien,
+                    nouveau_mot_de_passe: nouveau
+                })
+            });
+
+            const data = await res.json();
+
+            if (!res.ok) {
+                msg.style.color = "#ef4444";
+                msg.innerText = "❌ " + (data.error || "Erreur lors du changement.");
+                return;
+            }
+
+            msg.style.color = "#16a34a";
+            msg.innerText = "✅ Mot de passe modifié avec succès !";
+
+            document.getElementById("motDePasseActuel").value = "";
+            document.getElementById("nouveauMotDePasse").value = "";
+            document.getElementById("confirmerMotDePasse").value = "";
+
+        } catch (err) {
+
+            console.error(err);
+
+            msg.style.color = "#ef4444";
+            msg.innerText = "❌ Erreur serveur. Réessayez.";
+        }
+
+    });
+
+});
+</script>
+
 <body>
 
   <?php include("header.php") ?>
@@ -128,32 +203,33 @@
 
       <!-- TAB SECURITE -->
       <div class="profil-tab-content" id="tab-securite">
-        <div class="profil-card" style="max-width:560px;">
-          <div class="profil-card-title">
-            <i class="fa-solid fa-shield" style="color:#9ca3af"></i>
-            <span>Sécurité du compte</span>
+      <div class="profil-card" style="max-width:560px;">
+        <div class="profil-card-title">
+          <i class="fa-solid fa-shield" style="color:#9ca3af"></i>
+          <span>Sécurité du compte</span>
+        </div>
+        <div class="profil-divider"></div>
+        <div class="profil-fields">
+          <div class="profil-field">
+            <p class="profil-label">MOT DE PASSE ACTUEL</p>
+            <input type="password" class="profil-input" id="motDePasseActuel" placeholder="••••••••">
           </div>
-          <div class="profil-divider"></div>
-          <div class="profil-fields">
-            <div class="profil-field">
-              <p class="profil-label">MOT DE PASSE ACTUEL</p>
-              <input type="password" class="profil-input" placeholder="••••••••">
-            </div>
-            <div class="profil-field">
-              <p class="profil-label">NOUVEAU MOT DE PASSE</p>
-              <input type="password" class="profil-input" placeholder="••••••••">
-              <small style="color:#9ca3af;font-size:12px;margin-top:4px;">Minimum 8 caractères, avec au moins une majuscule et un chiffre.</small>
-            </div>
-            <div class="profil-field">
-              <p class="profil-label">CONFIRMER LE MOT DE PASSE</p>
-              <input type="password" class="profil-input" placeholder="••••••••">
-            </div>
-            <button class="profil-btn-save">
-              <i class="fa-solid fa-lock"></i> Changer le mot de passe
-            </button>
+          <div class="profil-field">
+            <p class="profil-label">NOUVEAU MOT DE PASSE</p>
+            <input type="password" class="profil-input" id="nouveauMotDePasse" placeholder="••••••••">
+            <small style="color:#9ca3af;font-size:12px;margin-top:4px;">Minimum 8 caractères, avec au moins une majuscule et un chiffre.</small>
           </div>
+          <div class="profil-field">
+            <p class="profil-label">CONFIRMER LE MOT DE PASSE</p>
+            <input type="password" class="profil-input" id="confirmerMotDePasse" placeholder="••••••••">
+          </div>
+          <div id="msgChangerMdp" style="font-size:13px;display:none;"></div>
+          <button class="profil-btn-save" id="btnChangerMdp">
+            <i class="fa-solid fa-lock"></i> Changer le mot de passe
+          </button>
         </div>
       </div>
+    </div>
 
       <!-- TAB CANDIDATURES -->
       <div class="profil-tab-content" id="tab-candidatures">
