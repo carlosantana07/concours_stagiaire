@@ -38,7 +38,7 @@
 
     <div class="nav-buttons">
       <a href="liste_concours.php" class="btn-primary"><i class="fa-solid fa-magnifying-glass"></i> Voir les concours</a>
-      <a href="inscription.php" class="btn-secondary"><i class="fa-solid fa-user-plus"></i> Créer un compte</a>
+      <a href="inscription.php" id="btnInscription" class="btn-secondary"><i class="fa-solid fa-user-plus"></i> Créer un compte</a>
     </div>
 
 
@@ -108,9 +108,21 @@
   </section>
 
   <!-- ===== FOOTER ===== -->
-   
+
   <?php include("footer.php") ?>
 
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+
+      const token = localStorage.getItem("token");
+      const btnInscription = document.getElementById("btnInscription");
+
+      if (token && btnInscription) {
+        btnInscription.style.display = "none";
+      }
+
+    });
+  </script>
 </body>
 
 </html>

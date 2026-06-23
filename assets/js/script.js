@@ -1,87 +1,71 @@
-// ====PAGE FAQ==== //
+//===== AUTO LOGOUT =====
 
-document.querySelectorAll(".help-accordion-item").forEach(item => {
+let inactivityTimer;
 
-    item.querySelector(".help-question").addEventListener("click", () => {
-
-        // fermer les autres (mode pro)
-        document.querySelectorAll(".help-accordion-item").forEach(i => {
-            if (i !== item) i.classList.remove("active");
-        });
-
-        // toggle
-        item.classList.toggle("active");
-    });
-
-});
-
-// ===== AUTO LOGOUT =====
-
-// let inactivityTimer;
-
-// // 3 minutes
+// 3 minutes
+const INACTIVITY_LIMIT = 1440 * 60 * 1000;
 // const INACTIVITY_LIMIT = 3 * 60 * 1000;
 
-// // sauvegarder dernière activité
-// function updateLastActivity() {
-//     localStorage.setItem("lastActivity", Date.now());
-// }
+// sauvegarder dernière activité
+function updateLastActivity() {
+    localStorage.setItem("lastActivity", Date.now());
+}
 
-// // déconnexion
-// function logoutUser() {
+// déconnexion
+function logoutUser() {
 
-//     localStorage.removeItem("token");
-//     localStorage.removeItem("lastActivity");
+    localStorage.removeItem("token");
+    localStorage.removeItem("lastActivity");
 
-//     alert("Session expirée pour inactivité");
+    alert("Session expirée pour inactivité");
 
-//     window.location.href = "accueil.php";
-// }
+    window.location.href = "accueil.php";
+}
 
-// // reset timer
-// function resetInactivityTimer() {
+// reset timer
+function resetInactivityTimer() {
 
-//     clearTimeout(inactivityTimer);
+    clearTimeout(inactivityTimer);
 
-//     updateLastActivity();
+    updateLastActivity();
 
-//     inactivityTimer = setTimeout(() => {
-//         logoutUser();
-//     }, INACTIVITY_LIMIT);
-// }
+    inactivityTimer = setTimeout(() => {
+        logoutUser();
+    }, INACTIVITY_LIMIT);
+}
 
-// // événements activité
-// ["click", "mousemove", "keydown", "scroll", "touchstart"].forEach(event => {
-//     document.addEventListener(event, resetInactivityTimer);
-// });
+// événements activité
+["click", "mousemove", "keydown", "scroll", "touchstart"].forEach(event => {
+    document.addEventListener(event, resetInactivityTimer);
+});
 
-// // au chargement
-// window.addEventListener("DOMContentLoaded", () => {
+// au chargement
+window.addEventListener("DOMContentLoaded", () => {
 
-//     const token = localStorage.getItem("token");
+    const token = localStorage.getItem("token");
 
-//     if (!token) return;
+    if (!token) return;
 
-//     const lastActivity = localStorage.getItem("lastActivity");
+    const lastActivity = localStorage.getItem("lastActivity");
 
-//     // première connexion
-//     if (!lastActivity) {
-//         updateLastActivity();
-//     }
+    // première connexion
+    if (!lastActivity) {
+        updateLastActivity();
+    }
 
-//     const now = Date.now();
-//     const diff = now - parseInt(lastActivity);
+    const now = Date.now();
+    const diff = now - parseInt(lastActivity);
 
-//     // temps dépassé
-//     if (diff > INACTIVITY_LIMIT) {
+    // temps dépassé
+    if (diff > INACTIVITY_LIMIT) {
 
-//         logoutUser();
-//         return;
-//     }
+        logoutUser();
+        return;
+    }
 
-//     // relancer timer
-//     resetInactivityTimer();
-// });
+    // relancer timer
+    resetInactivityTimer();
+});
 
 
 

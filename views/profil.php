@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,77 +11,77 @@
 </head>
 
 <script>
-document.addEventListener("DOMContentLoaded", () => {
+  document.addEventListener("DOMContentLoaded", () => {
 
     document.getElementById("btnChangerMdp").addEventListener("click", async () => {
 
-        const ancien = document.getElementById("motDePasseActuel").value;
-        const nouveau = document.getElementById("nouveauMotDePasse").value;
-        const confirmer = document.getElementById("confirmerMotDePasse").value;
-        const msg = document.getElementById("msgChangerMdp");
+      const ancien = document.getElementById("motDePasseActuel").value;
+      const nouveau = document.getElementById("nouveauMotDePasse").value;
+      const confirmer = document.getElementById("confirmerMotDePasse").value;
+      const msg = document.getElementById("msgChangerMdp");
 
-        msg.style.display = "block";
+      msg.style.display = "block";
 
-        if (!ancien || !nouveau || !confirmer) {
-            msg.style.color = "#ef4444";
-            msg.innerText = "⚠️ Veuillez remplir tous les champs.";
-            return;
+      if (!ancien || !nouveau || !confirmer) {
+        msg.style.color = "#ef4444";
+        msg.innerText = " Veuillez remplir tous les champs.";
+        return;
+      }
+
+      if (nouveau !== confirmer) {
+        msg.style.color = "#ef4444";
+        msg.innerText = "Les mots de passe ne correspondent pas.";
+        return;
+      }
+
+      if (nouveau.length < 8) {
+        msg.style.color = "#ef4444";
+        msg.innerText = "Le mot de passe doit contenir au moins 8 caractères.";
+        return;
+      }
+
+      const token = localStorage.getItem("token");
+
+      try {
+
+        const res = await fetch("http://localhost:4000/api/candidat/profil", {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+          },
+          body: JSON.stringify({
+            ancien_mot_de_passe: ancien,
+            nouveau_mot_de_passe: nouveau
+          })
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+          msg.style.color = "#ef4444";
+          msg.innerText = " " + (data.error || "Erreur lors du changement.");
+          return;
         }
 
-        if (nouveau !== confirmer) {
-            msg.style.color = "#ef4444";
-            msg.innerText = "⚠️ Les mots de passe ne correspondent pas.";
-            return;
-        }
+        msg.style.color = "#16a34a";
+        msg.innerText = "Mot de passe modifié avec succès !";
 
-        if (nouveau.length < 8) {
-            msg.style.color = "#ef4444";
-            msg.innerText = "⚠️ Le mot de passe doit contenir au moins 8 caractères.";
-            return;
-        }
+        document.getElementById("motDePasseActuel").value = "";
+        document.getElementById("nouveauMotDePasse").value = "";
+        document.getElementById("confirmerMotDePasse").value = "";
 
-        const token = localStorage.getItem("token");
+      } catch (err) {
 
-        try {
+        console.error(err);
 
-            const res = await fetch("http://localhost:4000/api/candidat/profil", {
-                method: "PUT",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${token}`
-                },
-                body: JSON.stringify({
-                    ancien_mot_de_passe: ancien,
-                    nouveau_mot_de_passe: nouveau
-                })
-            });
-
-            const data = await res.json();
-
-            if (!res.ok) {
-                msg.style.color = "#ef4444";
-                msg.innerText = "❌ " + (data.error || "Erreur lors du changement.");
-                return;
-            }
-
-            msg.style.color = "#16a34a";
-            msg.innerText = "✅ Mot de passe modifié avec succès !";
-
-            document.getElementById("motDePasseActuel").value = "";
-            document.getElementById("nouveauMotDePasse").value = "";
-            document.getElementById("confirmerMotDePasse").value = "";
-
-        } catch (err) {
-
-            console.error(err);
-
-            msg.style.color = "#ef4444";
-            msg.innerText = "❌ Erreur serveur. Réessayez.";
-        }
+        msg.style.color = "#ef4444";
+        msg.innerText = " Erreur serveur. Réessayez.";
+      }
 
     });
 
-});
+  });
 </script>
 
 <body>
@@ -119,13 +120,16 @@ document.addEventListener("DOMContentLoaded", () => {
           <button class="profil-tab" data-tab="candidatures">
             <i class="fa-solid fa-file-lines"></i> Mes candidatures
           </button>
+          <button class="profil-tab" data-tab="documents">
+            <i class="fa-solid fa-file-upload"></i> Mes documents
+          </button>
         </div>
       </div>
 
       <p id="profilMessage" class="form-message"></p>
 
       <!-- TAB INFORMATIONS -->
-      <div class="profil-tab-content active1" id="tab-informations">
+      <div class="profil-tab-content active" id="tab-informations">
         <div class="profil-two-col">
 
           <div class="profil-card">
@@ -143,7 +147,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <p class="profil-label">PRÉNOM(S)</p>
                 <p class="profil-value" id="infoPrenom">-</p>
               </div>
-              
+
               <div class="profil-field">
                 <p class="profil-label">
                   <i class="fa-regular fa-calendar" style="color:#9ca3af; margin-right:4px;"></i>
@@ -163,10 +167,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
               <div class="profil-field">
                 <p class="profil-label">EMPLOI</p>
-                <p class="profil-value" id="infoEmploi">-</p> 
+                <p class="profil-value" id="infoEmploi">-</p>
               </div>
 
-            <div class="profil-field">
+              <div class="profil-field">
                 <p class="profil-label">MATRICULE</p>
                 <p class="profil-value" id="infoMatricule">-</p>
               </div>
@@ -203,33 +207,33 @@ document.addEventListener("DOMContentLoaded", () => {
 
       <!-- TAB SECURITE -->
       <div class="profil-tab-content" id="tab-securite">
-      <div class="profil-card" style="max-width:560px;">
-        <div class="profil-card-title">
-          <i class="fa-solid fa-shield" style="color:#9ca3af"></i>
-          <span>Sécurité du compte</span>
-        </div>
-        <div class="profil-divider"></div>
-        <div class="profil-fields">
-          <div class="profil-field">
-            <p class="profil-label">MOT DE PASSE ACTUEL</p>
-            <input type="password" class="profil-input" id="motDePasseActuel" placeholder="••••••••">
+        <div class="profil-card" style="max-width:560px;">
+          <div class="profil-card-title">
+            <i class="fa-solid fa-shield" style="color:#9ca3af"></i>
+            <span>Sécurité du compte</span>
           </div>
-          <div class="profil-field">
-            <p class="profil-label">NOUVEAU MOT DE PASSE</p>
-            <input type="password" class="profil-input" id="nouveauMotDePasse" placeholder="••••••••">
-            <small style="color:#9ca3af;font-size:12px;margin-top:4px;">Minimum 8 caractères, avec au moins une majuscule et un chiffre.</small>
+          <div class="profil-divider"></div>
+          <div class="profil-fields">
+            <div class="profil-field">
+              <p class="profil-label">MOT DE PASSE ACTUEL</p>
+              <input type="password" class="profil-input" id="motDePasseActuel" placeholder="••••••••">
+            </div>
+            <div class="profil-field">
+              <p class="profil-label">NOUVEAU MOT DE PASSE</p>
+              <input type="password" class="profil-input" id="nouveauMotDePasse" placeholder="••••••••">
+              <small style="color:#9ca3af;font-size:12px;margin-top:4px;">Minimum 8 caractères, avec au moins une majuscule et un chiffre.</small>
+            </div>
+            <div class="profil-field">
+              <p class="profil-label">CONFIRMER LE MOT DE PASSE</p>
+              <input type="password" class="profil-input" id="confirmerMotDePasse" placeholder="••••••••">
+            </div>
+            <div id="msgChangerMdp" style="font-size:13px;display:none;"></div>
+            <button class="profil-btn-save" id="btnChangerMdp">
+              <i class="fa-solid fa-lock"></i> Changer le mot de passe
+            </button>
           </div>
-          <div class="profil-field">
-            <p class="profil-label">CONFIRMER LE MOT DE PASSE</p>
-            <input type="password" class="profil-input" id="confirmerMotDePasse" placeholder="••••••••">
-          </div>
-          <div id="msgChangerMdp" style="font-size:13px;display:none;"></div>
-          <button class="profil-btn-save" id="btnChangerMdp">
-            <i class="fa-solid fa-lock"></i> Changer le mot de passe
-          </button>
         </div>
       </div>
-    </div>
 
       <!-- TAB CANDIDATURES -->
       <div class="profil-tab-content" id="tab-candidatures">
@@ -250,6 +254,44 @@ document.addEventListener("DOMContentLoaded", () => {
               <span>Concours</span>
               <span>Statut</span>
             </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mes documents -->
+      <div class="profil-tab-content" id="tab-documents">
+        <div class="profil-card" style="max-width:560px;">
+          <div class="profil-card-title">
+            <i class="fa-solid fa-file-upload" style="color:#9ca3af"></i>
+            <span> Mes documents </span>
+          </div>
+          <div class="profil-divider"></div>
+          <div class="profil-fields">
+            <div class="profil-field">
+              <p class="profil-label">Pièce d'identité</p>
+              <input
+                type="file"
+                id="piece_identite"
+                class="form-control"
+                accept=".pdf,.jpg,.jpeg,.png">
+              <small id="pieceIdentiteName" style="color:#9ca3af;font-size:12px;margin-top:4px;"></small>
+            </div>
+            <div class="profil-field">
+              <p class="profil-label">Certificat de nationalité</p>
+              <input
+                type="file"
+                id="certificat_nationalite"
+                class="form-control"
+                accept=".pdf,.jpg,.jpeg,.png">
+              <small id="certificatName" class="text-muted"></small>
+            </div>
+            <button
+              type="button"
+              id="btn-upload-documents"
+              class="profil-btn-save">
+              <i class="fas fa-upload"></i>
+              Enregistrer les documents
+            </button>
           </div>
         </div>
       </div>
@@ -282,4 +324,5 @@ document.addEventListener("DOMContentLoaded", () => {
   <?php include("../views/modal_profil.php"); ?>
 
 </body>
+
 </html>

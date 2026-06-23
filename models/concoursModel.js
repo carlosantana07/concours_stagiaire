@@ -5,7 +5,7 @@ export default class ConcoursModel {
 
     static async getConcours(page = 1, categorie = "") {
 
-        let url = `${API}/getallconcours?page=${page}`;
+        let url = `${API}/getallconcours/?page=${page}`;
 
         if (categorie) {
             url += `&categorie=${categorie}`;
@@ -13,6 +13,8 @@ export default class ConcoursModel {
 
         const res = await fetch(url);
         const data = await res.json();
+
+        console.log("DATA", data);
 
         return { ok: res.ok, data };
     }
@@ -29,7 +31,7 @@ export default class ConcoursModel {
 
         const res = await fetch(`${API}/detail/${id}`);
         const data = await res.json();
-
+        console.log("DATA", data);
         return { ok: res.ok, data };
     }
 }

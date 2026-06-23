@@ -137,12 +137,11 @@ nav a:hover {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1), 0px 10px 15px rgba(0, 0, 0, 0.1);
-  border: none;
+  border: 1px solid #fff;
   cursor: pointer;
 }
 
-.btn-secondary {
+ .btn-secondary {
   background: #FFFFFF;
   color: #03572A;
   padding: 0 24px;
@@ -154,7 +153,7 @@ nav a:hover {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-}
+} 
 
 .guest-button {
   display: flex;
@@ -258,7 +257,7 @@ nav a:hover {
   left: 50%;
   transform: translateX(-50%);
   z-index: 20;
-  width: 90%;
+  width: 80%;
   max-width: 1300px;
   height: auto;
   min-height: 100px;
@@ -1232,7 +1231,7 @@ footer h3 {
   margin-top: 8px;
 }
 
-.btn-primary {
+/* .btn-primary {
   background: #03572A;
   color: #ffffff;
   padding: 12px 40px;
@@ -1247,7 +1246,7 @@ footer h3 {
   border: none;
   cursor: pointer;
   font-family: 'Inter', sans-serif;
-}
+} */
 
 .btn-primary:hover {
   background: #024d25;
@@ -1518,7 +1517,7 @@ footer h3 {
 .contact-container textarea {
   width: 100%;
   padding: 12px;
-  border: 1px solid #188f10;
+  border: 1px solid #03572A;
   border-radius: 10px;
   /* Bordures arrondies comme sur l'image */
   box-sizing: border-box;
@@ -1537,7 +1536,7 @@ footer h3 {
   display: block;
   width: 100%;
   padding: 15px;
-  background-color: #0a6d03;
+  background-color: #03572A;
   /* Ajusté selon l'image */
   color: white;
   border: none;

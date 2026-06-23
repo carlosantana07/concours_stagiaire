@@ -11,7 +11,7 @@
 
 </head>
 
-<body>
+<body style="padding-top: 80px;">
 
     <?php include("header.php"); ?>
 

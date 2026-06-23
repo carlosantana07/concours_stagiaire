@@ -88,7 +88,22 @@
         </div>
     </main>
     <?php include('footer.php'); ?>
-    <script src="../assets/js/script.js"></script>
+    <script>
+        document.querySelectorAll(".help-accordion-item").forEach(item => {
+
+            item.querySelector(".help-question").addEventListener("click", () => {
+
+                // fermer les autres (mode pro)
+                document.querySelectorAll(".help-accordion-item").forEach(i => {
+                    if (i !== item) i.classList.remove("active");
+                });
+
+                // toggle
+                item.classList.toggle("active");
+            });
+
+        });
+    </script>
 </body>
 
 </html>

@@ -39,32 +39,31 @@ export default class ConcoursController {
     }
 
     //LOAD CONCOURS
-    
+
 
     static async loadAllConcours() {
 
-        let page = 1;
-        let allConcours = [];
+        const res = await ConcoursModel.getConcours();
 
-        while (true) {
-
-            const res = await ConcoursModel.getConcours(page);
-
-            if (!res.ok) break;
-
-            const { data, totalPages } = res.data;
-
-            // EXTRAIRE les concours
-            data.forEach(concours => {
-                allConcours.push(concours);
-            });
-
-            if (page >= totalPages) break;
-
-            page++;
+        if (!res.ok) {
+            console.error("Erreur chargement concours");
+            return;
         }
 
-        this.allConcours = allConcours;
+        const concoursList = res.data.data;
+        console.log(concoursList);
+        if (!Array.isArray(concoursList)) {
+            console.error("Format invalide :", concoursList);
+            return;
+        }
+
+        this.allConcours = [];
+
+        concoursList.forEach(c => {
+            this.allConcours.push(c);
+        });
+
+        //console.log("Concours chargés :", this.allConcours);
     }
 
     static async loadConcours(page = 1) {
@@ -122,70 +121,23 @@ export default class ConcoursController {
         });
     }
 
-    // static renderConcours(categories) {
-
-    //     this.container.innerHTML = "";
-    //     let hasConcours = false;
-    //     categories.forEach(categorie => {
-
-    //         const concoursList = categorie.concours || [];
-
-    //         concoursList.forEach(concours => {
-    //             hasConcours = true;
-
-    //             const card = document.createElement("div");
-    //             card.className = "concours-card";
-
-    //             card.innerHTML = `
-    //             <h2>${concours.nom}</h2>
-
-    //             <div class="concours-footer">
-    //                 <div class="infos">
-    //                     <span>
-    //                         <i class="fa-solid fa-calendar-days"></i>
-    //                         ${this.formatDate(concours.date_debut)}
-    //                     </span>
-
-    //                     <span>
-    //                         <i class="fa-solid fa-users"></i>
-    //                         ${concours.nombre_postes || 0} postes
-    //                     </span>
-    //                 </div>
-
-    //                 <a href="detail_concours.php?id=${concours.id_concours}" class="btn-primary">
-    //                     Voir détails
-    //                 </a>
-    //             </div>
-    //         `;
-
-    //             this.container.appendChild(card);
-    //         });
-    //     });
-
-
-    //     // MESSAGE UNIQUEMENT SI FILTRE + VIDE
-    //     if (this.isFiltering && !hasConcours) {
-
-    //         this.container.innerHTML = `
-    //         <div class="empty-card">
-    //             <i class="fa-solid fa-triangle-exclamation empty-icon"></i>
-    //             <p>Aucun concours disponible dans cette catégorie</p>
-    //         </div>
-    //     `;
-    //     }
-    // }
-
+    
     static renderConcours(concoursList) {
 
         this.container.innerHTML = "";
 
         concoursList.forEach(concours => {
             // hasConcours = true;
+            // console.log("CONCOURS =", concours);
+            // console.log(
+            //     `detail_concours.php?id=${concours.id_concours}`
+            // );
 
             const card = document.createElement("div");
             card.className = "concours-card";
 
             card.innerHTML = `
+
                 <h2>${concours.nom}</h2>
 
                 <div class="concours-footer">
@@ -204,16 +156,6 @@ export default class ConcoursController {
         });
 
 
-        // MESSAGE UNIQUEMENT SI FILTRE + VIDE
-        // if (this.isFiltering && !hasConcours) {
-
-        //     this.container.innerHTML = `
-        //     <div class="empty-card">
-        //         <i class="fa-solid fa-triangle-exclamation empty-icon"></i>
-        //         <p>Aucun concours disponible dans cette catégorie</p>
-        //     </div>
-        // `;
-        // }
     }
 
     // PAGINATION
@@ -275,7 +217,7 @@ export default class ConcoursController {
 
         const urlParams = new URLSearchParams(window.location.search);
         const concoursId = urlParams.get("id");
-
+        console.log("DETAIL CONCOURS", concoursId);
         if (!concoursId) return;
 
         const res = await ConcoursModel.getDetail(concoursId);
