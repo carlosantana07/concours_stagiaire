@@ -13,9 +13,8 @@
 
     <!-- ===== HEADER ===== -->
     <?php include("header.php") ?>
-    <h1 style="margin: 40px; font-family: Arial, sans-serif;"><strong>Liste des concours session 2026</strong></h1>
-    <section class="concours-page" style="background:#F9FAFB; display:flex; gap:20px; padding:20px;">
-        
+    <h1 style="margin: 40px; font-family: Arial, sans-serif; color:#2563EB"><strong>Liste des concours session 2026</strong></h1>
+<section class="concours-page" style="background:#F9FAFB; display:flex; gap:20px; padding:20px;">
 
         <!-- COLONNE GAUCHE (DYNAMIQUE) -->
         <div class="concours-list">

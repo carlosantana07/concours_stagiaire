@@ -8,7 +8,7 @@
       </div>
 
       <p class="footer-desc">
-        Le portail officiel d'accès aux concours de la Fonction Publique du Burkina Faso.
+        Le portail officiel d'accès aux concours de la Fonction Publique de la Republique du Mali.
       </p>
     </div>
 
@@ -72,6 +72,6 @@
   </div>
 
   <div class="footer-bottom">
-    © 2026 E-CONCOURS - Tous droits réservés | Gouvernement du Burkina Faso
+    © 2026 E-CONCOURS - Tous droits réservés | Gouvernement de la Republique du Mali
   </div>
 </footer>

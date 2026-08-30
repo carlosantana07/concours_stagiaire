@@ -16,9 +16,9 @@
 
   <!-- ===== FLAG BAR ===== -->
   <div class="flag-bar">
-    <div class="red"></div>
     <div class="yellow"></div>
-    <div class="green"></div>
+    <div class="yellow"></div>
+    <div class="yellow"></div>
   </div>
 
   <!-- ===== HERO ===== -->
@@ -33,7 +33,7 @@
     <p class="description">
       Inscrivez-vous, consultez les concours disponibles et <br>
       postulez facilement en ligne pour rejoindre la Fonction <br>
-      Publique du Burkina Faso.
+      Publique de la Republique du Mali.
     </p>
 
     <div class="nav-buttons">
