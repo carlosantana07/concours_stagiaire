@@ -8,7 +8,7 @@
       </div>
 
       <p class="footer-desc">
-        Le portail officiel d'accès aux concours de la Fonction Publique du Burkina Faso.
+        Le portail officiel d'accès aux concours de la Fonction Publique du Mali.
       </p>
     </div>
 
@@ -31,7 +31,7 @@
           <i class="fa-solid fa-envelope"></i>
           <div>
             <strong>Email</strong>
-            <p>econcours@mfp.gov.bf</p>
+            <p>econcours@mfp.gov.ml</p>
           </div>
         </div>
 
@@ -72,6 +72,6 @@
   </div>
 
   <div class="footer-bottom">
-    © 2026 E-CONCOURS - Tous droits réservés | Gouvernement du Burkina Faso
+    © 2026 E-CONCOURS - Tous droits réservés | Gouvernement du Mali
   </div>
 </footer>
