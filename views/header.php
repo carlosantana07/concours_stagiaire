@@ -1,6 +1,6 @@
 <header>
     <div class="logo">
-        <img src="../assets/image/armoiries-1.png" alt="logo" height="40">
+        <img src="../assets/image/armoirie.jpg" alt="logo" height="40">
         E-CONCOURS
     </div>
     <div class="burger" id="burger">
