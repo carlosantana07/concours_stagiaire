@@ -20,6 +20,12 @@ export default class ConcoursController {
     // LOAD CATEGORIES
 
     static async loadCategories() {
+        const token = localStorage.getItem("token");
+
+        if (!token) {
+            window.location.href = "connexion.php";
+            return;
+        }
         const empty = document.createElement("p");
         const res = await ConcoursModel.getCategories();
 
@@ -42,6 +48,12 @@ export default class ConcoursController {
 
 
     static async loadAllConcours() {
+        const token = localStorage.getItem("token");
+
+        if (!token) {
+            window.location.href = "connexion.php";
+            return;
+        }
 
         const res = await ConcoursModel.getConcours();
 
@@ -50,10 +62,21 @@ export default class ConcoursController {
             return;
         }
 
-        const concoursList = res.data.data;
-        console.log(concoursList);
+        // const concoursList = res.data.data;
+        // // console.log(concoursList);
+        // if (!Array.isArray(concoursList)) {
+        //     console.error("Format invalide :", concoursList);
+        //     return;
+        // }
+
+        const raw = res.data.data;
+
+        const concoursList = Array.isArray(raw)
+            ? raw
+            : raw?.data || [];
+
         if (!Array.isArray(concoursList)) {
-            console.error("Format invalide :", concoursList);
+            console.error("Format API invalide :", res);
             return;
         }
 
@@ -67,6 +90,12 @@ export default class ConcoursController {
     }
 
     static async loadConcours(page = 1) {
+        const token = localStorage.getItem("token");
+
+        if (!token) {
+            window.location.href = "connexion.php";
+            return;
+        }
 
         const limit = 10;
 
@@ -121,7 +150,7 @@ export default class ConcoursController {
         });
     }
 
-    
+
     static renderConcours(concoursList) {
 
         this.container.innerHTML = "";
@@ -214,6 +243,12 @@ export default class ConcoursController {
 
 
     static async initDetail() {
+        const token = localStorage.getItem("token");
+
+        if (!token) {
+            window.location.href = "connexion.php";
+            return;
+        }
 
         const urlParams = new URLSearchParams(window.location.search);
         const concoursId = urlParams.get("id");
@@ -251,7 +286,7 @@ export default class ConcoursController {
 
         // STATUT
         document.getElementById("statut").innerText =
-            c.statut || "Ouvert";
+            c.statut_concours || "Ouvert";
 
         // TYPES
         const typeEl = document.getElementById("type");

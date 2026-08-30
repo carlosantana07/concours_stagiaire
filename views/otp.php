@@ -37,6 +37,7 @@
                 <p id="formMessage" class="form-message"></p>
 
                 <button type="submit" class="otp-btn-primary">Vérifier</button>
+                <p id="otpMessage" class="form-message"></p>
                 <div class="otp-resend">
                     <a id="resendBtn" class="btn-secondary">Renvoyer le code</a>
                     <p id="resendTimer" class="timer-text"></p>

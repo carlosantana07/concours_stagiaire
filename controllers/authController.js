@@ -149,48 +149,6 @@ export default class AuthController {
 
     }
 
-    // static initResetPassword() {
-
-    //     const form = document.getElementById("resetForm");
-
-    //     const token = sessionStorage.getItem("reset_token");
-
-    //     if (!token) {
-    //         alert("Session expirée");
-    //         window.location.href = "mdp_oublie.php";
-    //         return;
-    //     }
-
-    //     form.addEventListener("submit", async (e) => {
-    //         e.preventDefault();
-
-    //         const data = {
-    //             otp: form.otp.value,
-    //             mot_de_passe: form.mot_de_passe.value
-    //         };
-
-    //         try {
-
-    //             const res = await AuthModel.resetPassword(data, token);
-
-    //             if (!res.ok) {
-    //                 alert(res.data.error);
-    //                 return;
-    //             }
-
-    //             alert("Mot de passe réinitialisé avec succès");
-
-    //             // nettoyage
-    //             sessionStorage.removeItem("reset_token");
-
-    //             window.location.href = "connexion.php";
-
-    //         } catch (err) {
-    //             console.log(err);
-    //             alert("Erreur serveur");
-    //         }
-    //     });
-    // }
 
     static initResetPassword() {
 
@@ -301,81 +259,6 @@ export default class AuthController {
 
     }
 
-
-    // static initRegister() {
-
-    //     const form = document.getElementById("registerForm");
-
-    //     form.addEventListener("submit", async (e) => {
-    //         e.preventDefault();
-
-    //         const formData = new FormData(form);
-    //         const data = Object.fromEntries(formData.entries());
-
-    //         console.log("DATA ENVOYÉE :", data);
-
-    //         // ===== VALIDATIONS =====
-    //         if (!data.sexe) {
-    //             alert("Veuillez sélectionner votre sexe");
-    //             return;
-    //         }
-
-    //         if (!data.numero_cnib) {
-    //             alert("Le CNIB est requis");
-    //             return;
-    //         }
-
-    //         if (!data.mot_de_passe || data.mot_de_passe.length < 8) {
-    //             alert("Mot de passe trop court (min 8 caractères)");
-    //             return;
-    //         }
-
-    //         if (data.mot_de_passe !== data.mot_de_passe_confirm) {
-    //             alert("Les mots de passe ne correspondent pas");
-    //             return;
-    //         }
-
-    //         try {
-
-    //             const res = await AuthModel.register(data);
-
-    //             console.log("REPONSE API :", res.data);
-
-    //             if (!res.ok) {
-    //                 alert(res.data.error || "Erreur inscription");
-    //                 return;
-    //             }
-
-    //             alert(res.data.message);
-
-    //             sessionStorage.setItem("email", data.email);
-
-    //             // stock token OTP
-    //             sessionStorage.setItem("otp_token", res.data.candidat.token);
-
-    //             // redirection OTP
-    //             //window.location.href = "otp.php";
-    //             // AFFICHER LE LOADER
-    //             const loader = document.getElementById("pageLoader");
-
-    //             loader.classList.remove("hidden");
-
-    //             // REDIRECTION AVEC ANIMATION
-    //             setTimeout(() => {
-
-    //                 window.location.href = "otp.php";
-
-
-    //             }, 1200);
-
-    //         } catch (err) {
-    //             console.log(err);
-    //             alert("Erreur serveur");
-    //         }
-
-    //     });
-
-    // }
 
     static initRegister() {
 
@@ -559,80 +442,6 @@ export default class AuthController {
         });
 
     }
-
-    // static initOtp() {
-
-    //     const inputs = document.querySelectorAll(".otp-input");
-    //     const form = document.getElementById("otpForm");
-
-    //     const token = sessionStorage.getItem("otp_token");
-
-    //     if (!token) {
-    //         alert("Session expirée");
-    //         window.location.href = "inscription.php";
-    //         return;
-    //     }
-
-    //     // =========================
-    //     // INPUT LOGIC
-    //     // =========================
-    //     inputs.forEach((input, index) => {
-
-    //         input.addEventListener("input", () => {
-
-    //             input.value = input.value.replace(/[^0-9]/g, "");
-
-    //             if (input.value && index < inputs.length - 1) {
-    //                 inputs[index + 1].focus();
-    //             }
-
-    //             this.checkOTP(inputs, form);
-    //         });
-
-    //         input.addEventListener("keydown", (e) => {
-    //             if (e.key === "Backspace" && !input.value && index > 0) {
-    //                 inputs[index - 1].focus();
-    //             }
-    //         });
-
-    //     });
-
-    //     // =========================
-    //     // SUBMIT
-    //     // =========================
-    //     form.addEventListener("submit", async (e) => {
-    //         e.preventDefault();
-
-    //         let otp = "";
-    //         inputs.forEach(i => otp += i.value);
-
-    //         const data = { otp };
-
-    //         try {
-
-    //             const res = await AuthModel.verifyOtp(data, token);
-
-    //             console.log("OTP RESPONSE:", res.data);
-
-    //             if (!res.ok) {
-    //                 alert(res.data.error || "Code OTP invalide");
-    //                 return;
-    //             }
-
-    //             alert("Compte activé");
-
-    //             sessionStorage.removeItem("otp_token");
-
-    //             window.location.href = "connexion.php";
-
-    //         } catch (err) {
-    //             console.log(err);
-    //             alert("Erreur serveur");
-    //         }
-
-    //     });
-
-    // }
 
     static initOtp() {
 
@@ -844,6 +653,7 @@ export default class AuthController {
     static initResendOtp() {
         const btn = document.getElementById("resendBtn");
         const timerText = document.getElementById("resendTimer");
+        const messageEl = document.getElementById("otpMessage");
 
         let timeLeft = 30;
         btn.disabled = true;
@@ -876,65 +686,35 @@ export default class AuthController {
                 console.log("RESEND OTP:", res.data);
 
                 if (!res.ok) {
-                    alert(res.data.error || "Erreur renvoi OTP");
+                    //alert(res.data.error || "Erreur renvoi OTP");
+                    messageEl.style.display = "block";
+                    messageEl.style.color = "red";
+                    messageEl.textContent =
+                        res.data.erreurs?.join("\n") ||
+                        "Erreur renvoi OTP";
                     btn.disabled = false;
                     return;
                 }
 
-                alert("Code OTP renvoyé");
+                messageEl.style.display = "block";
+                messageEl.style.color = "green";
+                messageEl.textContent = ("Code OTP renvoyé");
 
                 timeLeft = 30;
                 startTimer();
 
             } catch (err) {
                 console.log(err);
-                alert("Erreur serveur");
+                messageEl.style.display = "block";
+                messageEl.style.color = "red";
+                messageEl.textContent =
+                    res.data.erreurs?.join("\n") ||
+                    "Erreur serveur";
                 btn.disabled = false;
             }
         });
     }
 
-    // static initContact() {
-
-    //     const form = document.getElementById("contactForm");
-
-    //     form.addEventListener("submit", async (e) => {
-    //         e.preventDefault();
-
-    //         const data = {
-    //             nom: form.nom.value,
-    //             email: form.email.value,
-    //             message: form.message.value
-    //         };
-
-    //         // validation simple
-    //         if (!data.nom || !data.message) {
-    //             alert("Nom et message obligatoires");
-    //             return;
-    //         }
-
-    //         try {
-
-    //             const res = await AuthModel.contact(data);
-
-    //             console.log("CONTACT:", res.data);
-
-    //             if (!res.ok) {
-    //                 alert(res.data.error || "Erreur envoi message");
-    //                 return;
-    //             }
-
-    //             alert("Message envoyé avec succès");
-
-    //             form.reset();
-
-    //         } catch (err) {
-    //             console.log(err);
-    //             alert("Erreur serveur");
-    //         }
-
-    //     });
-    // }
 
     static initContact() {
 

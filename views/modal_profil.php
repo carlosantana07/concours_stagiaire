@@ -1,6 +1,5 @@
 <!-- MODAL -->
 <div id="modalProfil" class="modal hidden" style="padding-top: 80px;">
-
     <div class="modal-content large">
 
         <div class="modal-header" style="color: black; display: flex; justify-content: center; align-items: center;">
@@ -12,13 +11,13 @@
 
             <h4>Informations personnelles</h4>
 
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <input name="nom" placeholder="Nom" class="input">
             </div>
 
             <div class="form-group">
                 <input name="prenom" placeholder="Prénom" class="input">
-            </div>
+            </div> 
 
             <div class="form-group">
                 <input name="date_naissance" placeholder="Date de naissance" class="input">
@@ -26,7 +25,7 @@
 
             <div class="form-group">
                 <input name="lieu_naissance" placeholder="Lieu de naissance" class="input">
-            </div>
+            </div>-->
 
             <div class="form-group">
                 <input name="telephone" placeholder="Téléphone" class="input">
@@ -50,29 +49,34 @@
                 <input name="matricule" placeholder="Matricule" class="input">
             </div>
 
-            <p id="profilMessage" class="form-message"></p>
 
+            <!-- <p style="align-self: center; width: 100%; text-align: center;" id="profilMessage" class="form-message"></p> -->
+            <div class="form-group">
+                <p id="profilMessage" class="form-message"></p>
+            </div>
             <button type="submit" class="btn-primary full">Enregistrer</button>
+
 
         </form>
 
     </div>
+
 </div>
 
 <div id="modalCandidatures" class="modal hidden">
 
-  <div class="modal-content large">
+    <div class="modal-content large">
 
-    <div class="modal-header">
-      <h4 style="color: #035629;">Mes candidatures</h4>
-      <span class="close-candidatures">&times;</span>
+        <div class="modal-header">
+            <h4 style="color: #035629;">Mes candidatures</h4>
+            <span class="close-candidatures">&times;</span>
+        </div>
+
+        <div id="candidaturesModalContainer" class="candidatures-scroll" style="color: black;">
+            <!-- contenu dynamique -->
+        </div>
+
+        <div id="loading" class="loading hidden">Chargement...</div>
+
     </div>
-
-    <div id="candidaturesModalContainer" class="candidatures-scroll" style="color: black;">
-      <!-- contenu dynamique -->
-    </div>
-
-    <div id="loading" class="loading hidden">Chargement...</div>
-
-  </div>
 </div>

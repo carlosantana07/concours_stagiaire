@@ -1,4 +1,5 @@
 import CandidatModel from "../models/CandidatModel.js";
+import PaymentConfirmModel from "../models/PaymentConfirmModel.js";
 
 export default class CandidatController {
 
@@ -95,20 +96,110 @@ export default class CandidatController {
 
         container.innerHTML = `
             <div class="profil-cand-row header">
-                <span>Concours</span>
-                <span>Statut</span>
+                <span class="text-center">Concours</span>
+                <span class="text-center">Statut</span>
+                <span class="text-center">Actions</span>
             </div>
         `;
-
         data.forEach(cand => {
             container.innerHTML += `
-                <div class="profil-cand-row">
-                    <span>${cand.concours?.nom || "-"}</span>
-                    <span class="status ${cand.statut_inscription === "VALIDEE" ? "paid" : "unpaid"}">
-                        ${cand.statut_inscription === "VALIDEE" ? "Payé" : "En attente"}
-                    </span>
-                </div>
-            `;
+        <div class="profil-cand-row">
+            <span class="text-center">${cand.concours?.nom || "-"}</span>
+            <span class="text-center status ${cand.statut_inscription === "VALIDEE" ? "paid" : "unpaid"
+                }">
+                ${cand.statut_inscription === "VALIDEE" ? "Payé" : "En attente"}
+            </span>
+            <span class="text-center">
+                
+
+                ${cand.statut_inscription === "VALIDEE"
+
+                    ?
+
+                    ` <button
+                class="btn btn-primary btn-sm btn-download-receipt"
+                data-id="${cand.id_inscription}">
+                <i class="fa-solid fa-download"></i>
+                Télécharger reçu
+            </button>`
+                    :
+
+                    `<button 
+                        class="btn btn-secondary btn-sm btn-payment"
+                        data-id="${cand.id_inscription}"
+                        data-concours="${cand.concours.id_concours}"
+                        style="background: #eda618; color: white; border: none;">
+                        <i class="fa-solid fa-credit-card"></i>
+                        Finaliser paiement
+                    </button>`
+                }
+
+            </span>
+        </div>
+    `;
+        });
+
+        document.addEventListener("click", e => {
+
+            const btn = e.target.closest(".btn-payment");
+
+            if (!btn) return;
+
+
+            localStorage.setItem(
+                "id_inscription",
+                btn.dataset.id
+            );
+
+
+            window.location.href =
+                "paiement.php?id=" + btn.dataset.concours;
+
+        });
+    }
+
+    static bindEvents() {
+
+        const container = document.getElementById("candidaturesContainer");
+        const messageEl = document.getElementById("paymentMessage");
+
+        if (!container) return;
+
+        container.addEventListener("click", async (e) => {
+
+            const btn = e.target.closest(".btn-download-receipt");
+            if (!btn) return;
+
+            messageEl.style.display = "none";
+            messageEl.textContent = "";
+
+            try {
+                const id_inscription = btn.dataset.id;
+
+                if (!id_inscription) {
+                    messageEl.style.display = "block";
+                    messageEl.textContent = "Inscription introuvable";
+                    return;
+                }
+
+                const blob = await PaymentConfirmModel.getRecepisse(id_inscription);
+                const url = window.URL.createObjectURL(blob);
+
+                const a = document.createElement("a");
+                a.href = url;
+                a.download = "recepisse.pdf";
+
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
+
+                window.URL.revokeObjectURL(url);
+
+            } catch (err) {
+                console.log(err);
+                messageEl.style.display = "block";
+                messageEl.textContent = "Erreur lors du téléchargement du reçu";
+            }
         });
     }
 
@@ -123,22 +214,32 @@ export default class CandidatController {
             const data = Object.fromEntries(new FormData(form).entries());
 
             const res = await CandidatModel.updateProfil(data, token);
-            
+
             const messageEl = document.getElementById("profilMessage");
 
-            messageEl.style.display = "none";
             messageEl.textContent = "";
+            messageEl.classList.remove("success", "error");
+            messageEl.style.display = "block";
 
             if (!res.ok) {
-                messageEl.style.display = "block";
+                messageEl.classList.add("error");
                 messageEl.textContent = res.data.error || "Erreur mise à jour profil";
                 return;
             }
 
-            messageEl.style.display = "block";
+            messageEl.classList.add("success");
             messageEl.textContent = "Profil mis à jour avec succès";
-            document.getElementById("modalProfil").classList.add("hidden");
-            this.loadProfil();
+
+            // fermeture après affichage
+            setTimeout(() => {
+                document.getElementById("modalProfil").classList.add("hidden");
+
+                // reset propre
+                messageEl.textContent = "";
+                messageEl.style.display = "none";
+                messageEl.classList.remove("success", "error");
+            }, 1500);
+            //this.loadProfil();
         });
     }
 
@@ -172,10 +273,10 @@ export default class CandidatController {
         const c = this.currentUser;
         const formatDate = new Date(c.date_naissance).toLocaleDateString('fr-FR');
 
-        document.querySelector("[name='nom']").value = c.nom || "";
-        document.querySelector("[name='prenom']").value = c.prenom || "";
-        document.querySelector("[name='date_naissance']").value = formatDate || "";
-        document.querySelector("[name='lieu_naissance']").value = c.lieu_naissance || "";
+        // document.querySelector("[name='nom']").value = c.nom || "";
+        // document.querySelector("[name='prenom']").value = c.prenom || "";
+        // document.querySelector("[name='date_naissance']").value = c.date_naissance || "";
+        // document.querySelector("[name='lieu_naissance']").value = c.lieu_naissance || "";
         document.querySelector("[name='telephone']").value = c.telephone || "";
         document.querySelector("[name='email']").value = c.email || "";
         document.querySelector("[name='emploi']").value = c.emploi || "";
@@ -233,6 +334,7 @@ export default class CandidatController {
                 <div class="profil-cand-row header">
                     <span>Concours</span>
                     <span>Statut</span>
+                    <span>Action</span>
                 </div>
             `;
 
@@ -294,6 +396,32 @@ export default class CandidatController {
                     <span class="status ${cand.statut_inscription === "VALIDEE" ? "paid" : "unpaid"}">
                         ${cand.statut_inscription === "VALIDEE" ? "Payé" : "En attente"}
                     </span>
+                    <span class="text-center">
+                
+
+                ${cand.statut_inscription === "VALIDEE"
+
+                        ?
+
+                        ` <button
+                class="btn btn-primary btn-sm btn-download-receipt"
+                data-id="${cand.id_inscription}">
+                <i class="fa-solid fa-download"></i>
+                Télécharger reçu
+            </button>`
+                        :
+
+                        `<button 
+                        class="btn btn-secondary btn-sm btn-payment"
+                        data-id="${cand.id_inscription}"
+                        data-concours="${cand.concours.id_concours}"
+                        style="background: #eda618; color: white; border: none;">
+                        <i class="fa-solid fa-credit-card"></i>
+                        Finaliser paiement
+                    </button>`
+                    }
+
+            </span>
                 `;
 
                 container.appendChild(row);
@@ -301,6 +429,7 @@ export default class CandidatController {
 
             this.currentPage++;
             this.hasMore = this.currentPage <= result.pageTot;
+
 
         } catch (err) {
             // console.error(err);
@@ -314,6 +443,73 @@ export default class CandidatController {
                 this.loadMoreCandidatures();
             }
         }, 0);
+    }
+
+    static bindModalEvents() {
+
+        const container = document.getElementById("candidaturesModalContainer");
+
+        if (!container) return;
+
+
+        container.addEventListener("click", async (e) => {
+
+
+            const btnDownload = e.target.closest(".btn-download-receipt");
+
+            if (!btnDownload) return;
+
+
+            const id_inscription = btnDownload.dataset.id;
+
+
+            try {
+
+                const blob =
+                    await PaymentConfirmModel.getRecepisse(id_inscription);
+
+
+                const url = window.URL.createObjectURL(blob);
+
+
+                const a = document.createElement("a");
+
+                a.href = url;
+                a.download = "recepisse.pdf";
+
+
+                document.body.appendChild(a);
+
+                a.click();
+
+                a.remove();
+
+
+                window.URL.revokeObjectURL(url);
+
+
+            } catch (err) {
+
+                console.error(err);
+
+                Swal.fire(
+                    "Erreur",
+                    "Impossible de télécharger le reçu.",
+                    "error"
+                );
+            }
+
+
+            const btnPayment = e.target.closest(".btn-payment");
+
+            if (btnPayment) {
+                localStorage.setItem("id_inscription", btnPayment.dataset.id);
+
+                window.location.href =
+                    `paiement.php?id=${btnPayment.dataset.concours}`;
+            }
+        });
+
     }
 
     static async loadResultats() {

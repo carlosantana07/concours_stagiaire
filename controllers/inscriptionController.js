@@ -30,10 +30,6 @@ export default class InscriptionController {
 
         const concours = res.data.data;
 
-        // if (!data.id_centre || isNaN(data.id_centre)) {
-        //     alert("Veuillez sélectionner un centre valide");
-        //     return;
-        // }
 
         // TITRE
         this.nomConcours.innerText = concours.nom || "Concours";
@@ -55,51 +51,6 @@ export default class InscriptionController {
         });
     }
 
-    // EVENTS
-    // static bindEvents() {
-
-    //     this.form.addEventListener("submit", async (e) => {
-    //         e.preventDefault();
-
-    //         const formData = new FormData(this.form);
-    //         const data = Object.fromEntries(formData.entries());
-
-    //         // ICI (IMPORTANT)
-    //         data.id_centre = Number(data.centre);
-    //         delete data.centre;
-
-    //         data.id_concours = Number(this.concoursId);
-
-    //         console.log("DATA ENVOYÉE :", data);
-
-    //         const res = await InscriptionModel.inscrire(data);
-
-    //         if (!res.ok) {
-    //             alert(res.data.error);
-    //             return;
-    //         }
-
-    //         console.log("REPONSE COMPLETE:", res.data);
-
-    //         const idInscription = res.data.data.id_inscription;
-
-    //         localStorage.setItem("id_inscription", idInscription);
-
-    //         // AFFICHER LE LOADER
-    //         const loader = document.getElementById("pageLoader");
-
-    //         loader.classList.remove("hidden");
-
-    //         // REDIRECTION AVEC ANIMATION
-    //         setTimeout(() => {
-
-    //             window.location.href =
-    //                 "paiement.php?id=" + this.concoursId;
-
-    //         }, 1200);
-
-    //     });
-    // }
 
     static bindEvents() {
 

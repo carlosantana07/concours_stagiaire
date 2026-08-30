@@ -126,8 +126,6 @@
         </div>
       </div>
 
-      <p id="profilMessage" class="form-message"></p>
-
       <!-- TAB INFORMATIONS -->
       <div class="profil-tab-content active" id="tab-informations">
         <div class="profil-two-col">
@@ -244,6 +242,7 @@
               <span>Mes candidatures</span>
             </div>
             <p id="candidaturesMessage" class="form-message"></p>
+            <div id="paymentMessage" class="alert alert-danger" style="display:none;"></div>
             <a class="profil-voir-tout" id="btnVoirCandidatures">
               Voir toutes <i class="fa-solid fa-chevron-right"></i>
             </a>
@@ -269,6 +268,21 @@
           <div class="profil-fields">
             <div class="profil-field">
               <p class="profil-label">Pièce d'identité</p>
+
+
+
+              <select name="type_piece" id="type_piece" class="form-control">
+                <option value="">Sélectionner le type de pièce</option>
+                <option value="carte_identite">Carte d'identité</option>
+                <option value="passeport">Passeport</option>
+              </select>
+
+            </div>
+
+            <div class="profil-field">
+              <!-- <p class="profil-label">Pièce d'identité</p> -->
+
+
               <input
                 type="file"
                 id="piece_identite"
@@ -317,7 +331,9 @@
       CandidatController.initModal();
       CandidatController.initUpdateForm();
       CandidatController.initCandidaturesModal();
+      CandidatController.bindEvents();
       CandidatController.loadMoreCandidatures();
+      CandidatController.bindModalEvents();
     });
   </script>
 

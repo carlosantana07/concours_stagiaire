@@ -879,11 +879,11 @@ footer h3 {
   margin: 0;
 }
 
-.form-group {
+/* .form-group {
   display: flex;
   flex-direction: column;
   gap: 8px;
-}
+} */
 
 .form-group label {
   font-size: 14px;
@@ -1832,17 +1832,22 @@ footer h3 {
 
 .profil-cand-row {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   padding: 12px 0;
   border-bottom: 1px solid #f9fafb;
   font-size: 14px;
   color: #374151;
-  letter-spacing: -0.5px;
+  /* letter-spacing: -0.5px; */
 }
 
 .profil-cand-row:last-child {
   border-bottom: none;
+}
+
+.profil-cand-row span {
+    flex: 1;
+    text-align: center;
 }
 
 .profil-cand-row.header {
@@ -2060,7 +2065,7 @@ footer h3 {
 
   .profil-cand-row {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
   }
 }
 
@@ -3376,7 +3381,8 @@ body {
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  height: 80vh;
+  height: auto;
+  max-height: 90vh;
   background: white;
   padding: 30px;
   border-radius: 12px;
@@ -3478,6 +3484,7 @@ body {
   display: block;
 }
 
+
 /* .candidatures-scroll {
     flex: 1;
     overflow-y: auto;
@@ -3514,6 +3521,8 @@ button:disabled {
 }
 
 .loader-svg img {
+  display: block;
+  align-items: center;
   fill: none;
   stroke: #16A34A;
   stroke-width: 8;
@@ -4480,4 +4489,21 @@ body {
   background: #DCFCE7;
   color: #15803D;
   border: 1px solid #86EFAC;
+}
+
+/* #profilMessage {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    margin: 15px 0;
+    text-align: center;
+    background: #DCFCE7;
+    border: 1px solid #86EFAC;
+    color: #15803D;
+} */
+#profilMessage {
+    display: block !important;
+    width: 100% !important;
+    text-align: center !important;
+    margin: 15px 0 !important;
 }

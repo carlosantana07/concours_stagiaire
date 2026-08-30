@@ -39,9 +39,11 @@ export default class PaymentController {
 
 
         this.concoursId = new URLSearchParams(window.location.search).get("id");
+        console.log("ID concours =", this.concoursId);
 
         this.form = document.querySelector(".payment-form");
         this.inputs = document.querySelectorAll(".otp-input");
+
 
         await this.loadConcoursInfo();
 
