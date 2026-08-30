@@ -8,7 +8,11 @@
       </div>
 
       <p class="footer-desc">
+<<<<<<< HEAD
         Le portail officiel d'accès aux concours de la Fonction Publique du Mali.
+=======
+        Le portail officiel d'accès aux concours de la Fonction Publique de la Republique du Mali.
+>>>>>>> d82a0c98c5513effea6d86150257469d228f6b01
       </p>
     </div>
 
@@ -72,6 +76,10 @@
   </div>
 
   <div class="footer-bottom">
+<<<<<<< HEAD
     © 2026 E-CONCOURS - Tous droits réservés | Gouvernement du Mali
+=======
+    © 2026 E-CONCOURS - Tous droits réservés | Gouvernement de la Republique du Mali
+>>>>>>> d82a0c98c5513effea6d86150257469d228f6b01
   </div>
 </footer>
