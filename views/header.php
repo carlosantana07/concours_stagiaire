@@ -1,149 +1,379 @@
-<header>
+<header class="site-header">
+
+    <!-- LOGO -->
     <div class="logo">
-        <img src="../assets/image/armoirie.jpg" alt="logo" height="40">
-        E-CONCOURS
+        <img
+            src="../assets/image/armoirie.jpg"
+            alt="Armoiries du Mali"
+        >
+
+        <span>E-CONCOURS</span>
     </div>
-    <div class="burger" id="burger">
+
+
+    <!-- BURGER MOBILE -->
+    <button
+        class="burger"
+        id="burger"
+        type="button"
+        aria-label="Ouvrir le menu"
+    >
         <i class="fa fa-bars"></i>
-    </div>
+    </button>
+
+
+    <!-- MENU -->
     <div class="menu" id="menu">
+
         <nav>
-            <a href="accueil.php">Accueil</a>
-            <a href="liste_concours.php">Concours</a>
-            <!-- <a href="">Ministères</a> -->
-            <a href="contact.php">Contactez-nous</a>
-            <a href="aide.php">Aide</a>
+
+            <a href="accueil.php">
+                <i class="fa-solid fa-house"></i>
+                <span>Accueil</span>
+            </a>
+
+            <a href="liste_concours.php">
+                <i class="fa-solid fa-clipboard-list"></i>
+                <span>Concours</span>
+            </a>
+
+            <a href="contact.php">
+                <i class="fa-solid fa-comments"></i>
+                <span>Contactez-nous</span>
+            </a>
+
+            <a href="aide.php">
+                <i class="fa-solid fa-circle-question"></i>
+                <span>Aide</span>
+            </a>
+
         </nav>
 
-        <!-- utilisateur NON connecté -->
-        <div id="guest-buttons" class="guest-button">
-            <a class="btn-primary" href="inscription.php">Créer un compte</a>
-            <a class="btn-secondary" href="connexion.php">Se connecter</a>
+
+        <!-- ==========================================
+             UTILISATEUR NON CONNECTÉ
+        =========================================== -->
+        <div
+            id="guest-buttons"
+            class="guest-button"
+        >
+
+            <a
+                class="btn-primary header-btn"
+                href="inscription.php"
+            >
+                Créer un compte
+            </a>
+
+            <a
+                class="btn-secondary header-btn"
+                href="connexion.php"
+            >
+                Se connecter
+            </a>
+
         </div>
 
-        <!-- utilisateur connecté -->
-        <div class="account-wrapper" id="account-wrapper" style="display:none;">
-            <button class="btn-secondary" onclick="toggleMenu()">
-                Mon compte <i class="fa fa-chevron-down"></i>
+
+        <!-- ==========================================
+             UTILISATEUR CONNECTÉ
+        =========================================== -->
+        <div
+            class="account-wrapper"
+            id="account-wrapper"
+            style="display:none;"
+        >
+
+            <button
+                class="btn-secondary account-button"
+                type="button"
+                onclick="toggleMenu()"
+            >
+                <i class="fa-solid fa-user"></i>
+
+                <span>Mon compte</span>
+
+                <i class="fa fa-chevron-down"></i>
             </button>
 
-            <div class="account-menu" id="accountMenu">
-                <a href="profil.php" id="profilLink"><i class="fa fa-user"></i> Mon profil</a>
-                <a href="resultat.php"><i class="fa fa-chart-bar"></i> Mes résultats</a>
-                <a href="#" style="color: red;" onclick="logout()"><i class="fa fa-sign-out"></i> Se déconnecter</a>
+
+            <div
+                class="account-menu"
+                id="accountMenu"
+            >
+
+                <a
+                    href="profil.php"
+                    id="profilLink"
+                >
+                    <i class="fa fa-user"></i>
+                    Mon profil
+                </a>
+
+                <a href="resultat.php">
+                    <i class="fa fa-chart-bar"></i>
+                    Mes résultats
+                </a>
+
+                <a
+                    href="#"
+                    class="logout-link"
+                    onclick="logout()"
+                >
+                    <i class="fa fa-sign-out"></i>
+                    Se déconnecter
+                </a>
+
             </div>
+
         </div>
 
     </div>
 
+
+    <!-- ==========================================
+         LOADER
+    =========================================== -->
+    <div
+        id="pageLoader"
+        class="page-loader hidden"
+    >
+
+        <img
+            src="../assets/image/bf_loader_v3.svg"
+            alt="Chargement"
+        >
+
     </div>
 
-    <div id="pageLoader" class="page-loader hidden">
+</header>
 
-        <svg class="loader-svg" viewBox="0 0 100 100">
-            <img src="../assets/image/bf_loader_v3.svg" alt="">
-        </svg>
-    </div>
 
-    <script>
-        function toggleMenu() {
-            const menu = document.getElementById("accountMenu");
-            menu.style.display = menu.style.display === "block" ? "none" : "block";
+<script>
+
+    /* =====================================================
+       MENU COMPTE
+    ===================================================== */
+
+    function toggleMenu() {
+
+        const menu =
+            document.getElementById("accountMenu");
+
+        menu.style.display =
+            menu.style.display === "block"
+                ? "none"
+                : "block";
+    }
+
+
+    /* Fermer le menu en cliquant dehors */
+
+    document.addEventListener("click", function(e) {
+
+        const wrapper =
+            document.getElementById("account-wrapper");
+
+        const accountMenu =
+            document.getElementById("accountMenu");
+
+        if (
+            wrapper &&
+            accountMenu &&
+            !wrapper.contains(e.target)
+        ) {
+
+            accountMenu.style.display = "none";
         }
 
-        // fermer menu si clic dehors
-        document.addEventListener("click", function(e) {
-            const wrapper = document.getElementById("account-wrapper");
+    });
 
-            if (wrapper && !wrapper.contains(e.target)) {
-                document.getElementById("accountMenu").style.display = "none";
-            }
-        });
 
-        // logout
-        function logout() {
-            localStorage.removeItem("token");
-            // alert("Déconnecté");
+    /* =====================================================
+       DÉCONNEXION
+    ===================================================== */
 
-            window.location.href = "accueil.php";
-        }
+    function logout() {
 
-        // gestion affichage login / guest
-        window.addEventListener("DOMContentLoaded", () => {
-            const token = localStorage.getItem("token");
+        localStorage.removeItem("token");
 
-            const guest = document.getElementById("guest-buttons");
-            const account = document.getElementById("account-wrapper");
+        window.location.href =
+            "accueil.php";
+    }
+
+
+    /* =====================================================
+       COMPTE CONNECTÉ / NON CONNECTÉ
+    ===================================================== */
+
+    window.addEventListener(
+        "DOMContentLoaded",
+        () => {
+
+            const token =
+                localStorage.getItem("token");
+
+            const guest =
+                document.getElementById(
+                    "guest-buttons"
+                );
+
+            const account =
+                document.getElementById(
+                    "account-wrapper"
+                );
 
             if (token) {
-                guest.style.display = "none";
-                account.style.display = "inline-flex";
+
+                guest.style.display =
+                    "none";
+
+                account.style.display =
+                    "flex";
+
             } else {
-                guest.style.display = "inline-flex";
-                account.style.display = "none";
+
+                guest.style.display =
+                    "flex";
+
+                account.style.display =
+                    "none";
             }
-        });
 
-        window.addEventListener("DOMContentLoaded", () => {
+        }
+    );
 
-            const links = document.querySelectorAll("nav a");
+
+    /* =====================================================
+       LIEN ACTIF
+    ===================================================== */
+
+    window.addEventListener(
+        "DOMContentLoaded",
+        () => {
+
+            const links =
+                document.querySelectorAll(
+                    "nav a"
+                );
 
             const routes = {
-                "detail_concours.php": "liste_concours.php",
-                "inscription_concours.php": "liste_concours.php",
-                "resultat.php": "liste_concours.php"
+
+                "detail_concours.php":
+                    "liste_concours.php",
+
+                "inscription_concours.php":
+                    "liste_concours.php",
+
+                "resultat.php":
+                    "liste_concours.php"
 
             };
 
-            let page = window.location.pathname.split("/").pop().split("?")[0];
+            let page =
+                window.location.pathname
+                    .split("/")
+                    .pop()
+                    .split("?")[0];
 
-            page = routes[page] || page;
+            page =
+                routes[page] || page;
 
             links.forEach(link => {
 
-                const linkPage = link.getAttribute("href");
+                const linkPage =
+                    link.getAttribute("href");
 
                 if (linkPage === page) {
+
                     link.classList.add("active");
                 }
 
             });
-        });
 
-        document.addEventListener("DOMContentLoaded", () => {
+        }
+    );
 
-            const profilLink = document.getElementById("profilLink");
-            const loader = document.getElementById("pageLoader");
+
+    /* =====================================================
+       LOADER PROFIL
+    ===================================================== */
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        () => {
+
+            const profilLink =
+                document.getElementById(
+                    "profilLink"
+                );
+
+            const loader =
+                document.getElementById(
+                    "pageLoader"
+                );
 
             if (profilLink) {
 
-                profilLink.addEventListener("click", (e) => {
+                profilLink.addEventListener(
+                    "click",
+                    (e) => {
 
-                    e.preventDefault();
+                        e.preventDefault();
 
-                    loader.classList.remove("hidden");
+                        loader.classList.remove(
+                            "hidden"
+                        );
 
-                    setTimeout(() => {
-                        window.location.href = "profil.php";
-                    }, 1200);
+                        setTimeout(() => {
 
-                });
+                            window.location.href =
+                                "profil.php";
+
+                        }, 1200);
+
+                    }
+                );
+
             }
-        });
+
+        }
+    );
 
 
-        document.addEventListener("DOMContentLoaded", () => {
+    /* =====================================================
+       MENU BURGER
+    ===================================================== */
 
-            const burger = document.getElementById("burger");
-            const menu = document.getElementById("menu");
+    document.addEventListener(
+        "DOMContentLoaded",
+        () => {
 
-            burger.addEventListener("click", () => {
-                menu.classList.toggle("active");
-            });
+            const burger =
+                document.getElementById("burger");
 
-        });
+            const menu =
+                document.getElementById("menu");
 
+            if (burger && menu) {
 
-    </script>
-    <script src="../assets/js/script.js"></script>
-</header>
+                burger.addEventListener(
+                    "click",
+                    () => {
+
+                        menu.classList.toggle(
+                            "active"
+                        );
+
+                    }
+                );
+
+            }
+
+        }
+    );
+
+</script>
+
+<script src="../assets/js/script.js"></script>
+

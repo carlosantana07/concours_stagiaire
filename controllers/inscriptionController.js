@@ -20,8 +20,14 @@ export default class InscriptionController {
 
     // LOAD CONCOURS + CENTRES
     static async loadConcours() {
+        const token = localStorage.getItem("token");
 
-        const res = await InscriptionModel.getConcoursDetail(this.concoursId);
+        if (!token) {
+            window.location.href = "connexion.php";
+            return;
+        }
+
+        const res = await InscriptionModel.getConcoursDetail(this.concoursId, token);
 
         if (!res.ok) {
             console.log("Erreur chargement concours");

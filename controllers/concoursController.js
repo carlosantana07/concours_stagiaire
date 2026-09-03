@@ -27,7 +27,7 @@ export default class ConcoursController {
             return;
         }
         const empty = document.createElement("p");
-        const res = await ConcoursModel.getCategories();
+        const res = await ConcoursModel.getCategories(token);
 
         if (!res.ok) return;
 
@@ -55,19 +55,13 @@ export default class ConcoursController {
             return;
         }
 
-        const res = await ConcoursModel.getConcours();
+        const res = await ConcoursModel.getConcours(1, "", token);
 
         if (!res.ok) {
-            console.error("Erreur chargement concours");
+            console.error("Erreur chargement concours :", res.data);
+            this.allConcours = [];
             return;
         }
-
-        // const concoursList = res.data.data;
-        // // console.log(concoursList);
-        // if (!Array.isArray(concoursList)) {
-        //     console.error("Format invalide :", concoursList);
-        //     return;
-        // }
 
         const raw = res.data.data;
 
@@ -77,16 +71,13 @@ export default class ConcoursController {
 
         if (!Array.isArray(concoursList)) {
             console.error("Format API invalide :", res);
+            this.allConcours = [];
             return;
         }
 
-        this.allConcours = [];
+        this.allConcours = concoursList;
 
-        concoursList.forEach(c => {
-            this.allConcours.push(c);
-        });
-
-        //console.log("Concours chargés :", this.allConcours);
+        console.log("Concours chargés :", this.allConcours);
     }
 
     static async loadConcours(page = 1) {
@@ -255,7 +246,7 @@ export default class ConcoursController {
         console.log("DETAIL CONCOURS", concoursId);
         if (!concoursId) return;
 
-        const res = await ConcoursModel.getDetail(concoursId);
+        const res = await ConcoursModel.getDetail(concoursId, token);
 
         if (!res.ok) {
             console.log("Erreur chargement concours");

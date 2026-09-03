@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 
-<body style="background: #fff;">
+<body class="resultat-page">
 
     <!-- ===== HEADER ===== -->
     <?php include("header.php") ?>

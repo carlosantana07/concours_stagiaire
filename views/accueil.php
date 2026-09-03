@@ -4,125 +4,354 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>E-Concours</title>
+
+  <title>E-CONCOURS - Portail officiel des concours</title>
+
   <link rel="stylesheet" href="../assets/css/style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 
-<body style="padding-top: 0;">
+<body class="home-page">
 
-  <!-- ===== HEADER ===== -->
+  <!-- =====================================================
+         HEADER
+    ====================================================== -->
   <?php include("header.php") ?>
 
-  <!-- ===== FLAG BAR ===== -->
+
+  <!-- =====================================================
+         BARRE COULEURS
+    ====================================================== -->
   <div class="flag-bar">
     <div class="yellow"></div>
     <div class="yellow"></div>
     <div class="yellow"></div>
   </div>
 
-  <!-- ===== HERO ===== -->
 
-  <section class="hero">
-    <h1 class="title" style="color: #fff;">Bienvenue sur <span style="color:#FCD116;">E-CONCOURS</span></h1>
+  <!-- =====================================================
+         HERO
+    ====================================================== -->
+  <main>
 
-    <p class="subtitle" style="color: #fff;">
-      Le portail officiel d'accès aux concours de la Fonction Publique
-    </p>
+    <section class="hero">
 
-    <p class="description">
-      Inscrivez-vous, consultez les concours disponibles et <br>
-      postulez facilement en ligne pour rejoindre la Fonction <br>
-      Publique de la Republique du Mali.
-    </p>
+      <div class="hero-overlay"></div>
 
-    <div class="nav-buttons">
-      <a href="liste_concours.php" class="btn-primary"><i class="fa-solid fa-magnifying-glass"></i> Voir les concours</a>
-      <a href="inscription.php" id="btnInscription" class="btn-secondary"><i class="fa-solid fa-user-plus"></i> Créer un compte</a>
-    </div>
+      <div class="hero-content">
+
+        <span class="hero-badge">
+          <i class="fa-solid fa-building-columns"></i>
+          Portail officiel
+        </span>
+
+        <h1 class="hero-title">
+          Bienvenue sur <span>E-CONCOURS</span>
+        </h1>
+
+        <p class="hero-subtitle">
+          Le portail officiel d'accès aux concours
+          de la Fonction Publique
+        </p>
+
+        <p class="hero-description">
+          Inscrivez-vous, consultez les concours disponibles
+          et postulez facilement en ligne pour rejoindre
+          la Fonction Publique de la République du Mali.
+        </p>
 
 
-    <!-- CARTE DANS LE HERO -->
-    <div class="cards-container">
-      <div class="stats-card">
-        <div class="icon icon-red"> <i class="fa-solid fa-chart-line"></i> </div>
-        <div class="stats-text">
-          <h3>Nombre de visiteurs</h3>
-          <p>10000</p>
+        <!-- BOUTONS -->
+        <div class="hero-actions">
+
+          <!-- Toujours visible -->
+          <a href="liste_concours.php"
+            class="btn-primary hero-btn">
+
+            <i class="fa-solid fa-magnifying-glass"></i>
+
+            <span>Voir les concours</span>
+
+          </a>
+
+
+          <!-- Non connecté -->
+          <a href="inscription.php" id="btnInscription" class="btn-secondary"> 
+            <i class="fa-solid fa-user-plus"></i> 
+            <span>Créer un compte</span> 
+          </a>
+
+
+          <!-- Connecté -->
+          <a href="resultat.php"
+            id="btnResultat"
+            class="btn-secondary"
+            style="display: none;">
+
+            <i class="fa-solid fa-chart-bar"></i>
+
+            <span>Mes résultats</span>
+
+          </a>
+
         </div>
+
       </div>
-    </div>
 
-  </section>
 
-  <!-- ===== COMMENT S'INSCRIRE ===== -->
-  <section style="text-align:center; padding:40px 0; color:#111827; background:#F9FAFB;">
-    <h2 style="font-size:32px; margin-bottom:10px;">Comment s'inscrire ?</h2>
-    <div style="width:80px; height:4px; background:#009E49; margin:10px auto;"></div>
+      <!-- =================================================
+                 STATISTIQUE
+            ================================================== -->
+      <!-- <div class="hero-stats">
 
-    <div class="cards-container" style="justify-content: center;">
-      <div class="card">
-        <div class="icon icon-green"> <i class="fa-solid fa-user-plus"> </i></div>
-        <div class="text">
-          <h3 style="font-weight:bold; font-size:22px; text-align: left;">Créer un compte</h3>
-          <p style="font-size:16px; font-weight:400; color:#4B5563; text-align: left;">
-            Inscrivez-vous sur la plateforme avec vos informations personnelles.
+                <div class="stat-card">
+
+                    <div class="stat-icon">
+                        <i class="fa-solid fa-users"></i>
+                    </div>
+
+                    <div class="stat-content">
+
+                        <span class="stat-label">
+                            Nombre de visiteurs
+                        </span>
+
+                        <strong class="stat-value">
+                            10 000
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div> -->
+
+    </section>
+
+
+    <!-- =====================================================
+             COMMENT S'INSCRIRE
+        ====================================================== -->
+    <section class="registration-section">
+
+      <div class="section-header">
+
+        <span class="section-eyebrow">
+          <i class="fa-solid fa-circle-info"></i>
+          Comment ça fonctionne ?
+        </span>
+
+        <h2>
+          Comment s'inscrire ?
+        </h2>
+
+        <p>
+          Suivez ces quelques étapes pour déposer
+          votre candidature en ligne.
+        </p>
+
+      </div>
+
+
+      <div class="steps-container">
+
+        <!-- ÉTAPE 1 -->
+        <article class="step-card">
+
+          <div class="step-number">
+            01
+          </div>
+
+          <div class="step-icon">
+            <i class="fa-solid fa-user-plus"></i>
+          </div>
+
+          <div class="step-content">
+
+            <h3>
+              Créer un compte
+            </h3>
+
+            <p>
+              Inscrivez-vous sur la plateforme
+              avec vos informations personnelles.
+            </p>
+
+          </div>
+
+        </article>
+
+
+        <!-- ÉTAPE 2 -->
+        <article class="step-card">
+
+          <div class="step-number">
+            02
+          </div>
+
+          <div class="step-icon">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </div>
+
+          <div class="step-content">
+
+            <h3>
+              Rechercher un concours
+            </h3>
+
+            <p>
+              Consultez les concours disponibles
+              et choisissez celui qui vous correspond.
+            </p>
+
+          </div>
+
+        </article>
+
+
+        <!-- ÉTAPE 3 -->
+        <article class="step-card">
+
+          <div class="step-number">
+            03
+          </div>
+
+          <div class="step-icon">
+            <i class="fa-solid fa-file-arrow-up"></i>
+          </div>
+
+          <div class="step-content">
+
+            <h3>
+              Soumettre votre dossier
+            </h3>
+
+            <p>
+              Téléchargez vos documents et
+              validez votre candidature en ligne.
+            </p>
+
+          </div>
+
+        </article>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+             ASSISTANCE
+        ====================================================== -->
+    <section class="support-section">
+
+      <div class="support-card">
+
+        <div class="support-icon">
+          <i class="fa-solid fa-headset"></i>
+        </div>
+
+
+        <div class="support-content">
+
+          <span class="section-eyebrow">
+            <i class="fa-solid fa-circle-question"></i>
+            Assistance
+          </span>
+
+          <h2>
+            Besoin d'aide ?
+          </h2>
+
+          <p>
+            Notre équipe d'assistance est disponible
+            pour vous accompagner dans vos démarches
+            et répondre à vos questions.
           </p>
+
+          <div class="support-hours">
+
+            <span>
+              <i class="fa-regular fa-clock"></i>
+              Disponible 7j/7
+            </span>
+
+            <span>
+              <i class="fa-solid fa-calendar-days"></i>
+              De 8h à 20h
+            </span>
+
+          </div>
+
+          <button class="btn-support">
+
+            <i class="fa-solid fa-phone"></i>
+
+            <span>
+              Contacter l'assistance
+            </span>
+
+          </button>
+
         </div>
+
       </div>
 
-      <div class="card">
-        <div class="icon icon-green"> <i class="fa-solid fa-magnifying-glass"> </i></div>
-        <div class="text">
-          <h3 style="font-weight:bold; font-size:22px; text-align: left;">Rechercher un concours</h3>
-          <p style="font-size:16px; font-weight:400; color:#4B5563; text-align: left;">
-            Parcourez les concours disponibles et choisissez celui qui vous correspond.
-          </p>
-        </div>
-      </div>
+    </section>
 
-      <div class="card">
-        <div class="icon icon-green"> <i class="fa-solid fa-file-arrow-up"> </i></div>
-        <div class="text">
-          <h3 style="font-weight:bold; font-size:22px; text-align: left;">Soumettre votre dossier</h3>
-          <p style="font-size:16px; font-weight:400; color:#4B5563; text-align: left;">
-            Téléchargez vos documents et validez votre inscription.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
+  </main>
 
-  <!-- ===== AIDE ===== -->
-  <section class="cards-contain">
-    <div class="card" style="width:800px; height: 420px; align-items: center; justify-content: center; text-align:center; background: #F9FAFB;">
-      <div class="icon icon-red"> <i class="fa-solid fa-headset"></i> </div>
-      <h2 style="color:#111827;">Besoin d'aide ?</h2>
-      <p style="color:#4B5563;">
-        L'équipe d'assistance est disponible 7j/7 de 8h à 20h pour vous accompagner.
-      </p>
-      <button class="btn-primary" style="display:flex; align-items: center; background:#D62828; margin-top:20px;gap: 12px; width: 400px;">
-        <i class="fa-solid fa-phone fa-2x"></i> Contacter l'assistance
-      </button>
-    </div>
-  </section>
 
-  <!-- ===== FOOTER ===== -->
-
+  <!-- =====================================================
+         FOOTER
+    ====================================================== -->
   <?php include("footer.php") ?>
 
+
+  <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
   <script>
     document.addEventListener("DOMContentLoaded", () => {
 
       const token = localStorage.getItem("token");
-      const btnInscription = document.getElementById("btnInscription");
 
-      if (token && btnInscription) {
-        btnInscription.style.display = "none";
+      const btnConnexion =
+        document.getElementById("btnInscription");
+
+      const btnResultat =
+        document.getElementById("btnResultat");
+
+
+      if (token) {
+
+        // Utilisateur connecté
+        if (btnConnexion) {
+          btnConnexion.style.display = "none";
+        }
+
+        if (btnResultat) {
+          btnResultat.style.display = "inline-flex";
+        }
+
+      } else {
+
+        // Utilisateur non connecté
+        if (btnConnexion) {
+          btnConnexion.style.display = "inline-flex";
+        }
+
+        if (btnResultat) {
+          btnResultat.style.display = "none";
+        }
+
       }
 
     });
   </script>
+
 </body>
 
 </html>

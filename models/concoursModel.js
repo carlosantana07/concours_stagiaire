@@ -42,7 +42,7 @@ export default class ConcoursModel {
         return { ok: res.ok, data };
     }
 
-    static async getDetail(id,token) {
+    static async getDetail(id, token) {
 
         const options = {
             method: "GET",

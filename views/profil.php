@@ -84,7 +84,7 @@
   });
 </script>
 
-<body>
+<body class="profil-body">
 
   <?php include("header.php") ?>
 
@@ -132,7 +132,7 @@
 
           <div class="profil-card">
             <div class="profil-card-title">
-              <i class="fa-solid fa-user" style="color:#9ca3af"></i>
+              <i class="fa-solid fa-user"></i>
               <span>Identité</span>
             </div>
             <div class="profil-divider"></div>
@@ -252,6 +252,7 @@
             <div class="profil-cand-row header">
               <span>Concours</span>
               <span>Statut</span>
+              <span>Actions</span>
             </div>
           </div>
         </div>

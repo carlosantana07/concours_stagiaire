@@ -33,12 +33,38 @@ export default class AuthController {
                 const res = await AuthModel.login(data);
 
                 // LOGIN INCORRECT
+                // if (!res.ok) {
+
+                //     errorEl.style.display = "block";
+
+                //     errorEl.textContent =
+                //         res.data.error;
+
+                //     return;
+                // }
+
                 if (!res.ok) {
 
                     errorEl.style.display = "block";
 
-                    errorEl.textContent =
+                    if (res.data.erreurs && res.data.erreurs.length > 0) {
+
+                        errorEl.textContent =
+                            res.data.erreurs[0];
+
+                    } 
+                    
+                    else if (res.data.error) {
+
+                        errorEl.textContent =
                         res.data.error;
+                    } 
+                    
+                    else {
+
+                        errorEl.textContent =
+                            "Erreur de connexion";
+                    }
 
                     return;
                 }
@@ -194,6 +220,19 @@ export default class AuthController {
                 otp: form.otp.value,
                 mot_de_passe: form.mot_de_passe.value
             };
+
+            if (data.mot_de_passe.length < 8) {
+
+                messageEl.style.display = "block";
+
+                messageEl.className =
+                    "form-message error";
+
+                messageEl.textContent =
+                    "Le mot de passe doit contenir au moins 8 caractères.";
+
+                return;
+            }
 
             try {
 

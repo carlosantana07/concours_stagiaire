@@ -128,7 +128,10 @@ export default class PaymentConfirmController {
                 console.log(err);
 
                 messageEl.style.display = "block";
+
                 messageEl.textContent =
+                    err?.error ||
+                    err?.message ||
                     "Erreur lors du téléchargement du reçu";
             }
         });

@@ -3,9 +3,15 @@ const API_URL = "http://localhost:4000/api";
 
 export default class InscriptionModel {
 
-    static async getConcoursDetail(id) {
+    static async getConcoursDetail(id, token) {
 
-        const res = await fetch(`${API_URL}/concours/detail/${id}`);
+        const res = await fetch(`${API_URL}/concours/detail/${id}`, {
+            method: "GET",
+            headers: {
+                "Authorization": "Bearer " + token
+            }
+    });
+
         const data = await res.json();
 
         return { ok: res.ok, data };

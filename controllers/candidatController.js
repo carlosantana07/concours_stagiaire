@@ -404,7 +404,7 @@ export default class CandidatController {
                         ?
 
                         ` <button
-                class="btn btn-primary btn-sm btn-download-receipt"
+                class="btn-download-receipt"
                 data-id="${cand.id_inscription}">
                 <i class="fa-solid fa-download"></i>
                 Télécharger reçu
@@ -412,7 +412,7 @@ export default class CandidatController {
                         :
 
                         `<button 
-                        class="btn btn-secondary btn-sm btn-payment"
+                        class="btn-payment"
                         data-id="${cand.id_inscription}"
                         data-concours="${cand.concours.id_concours}"
                         style="background: #eda618; color: white; border: none;">

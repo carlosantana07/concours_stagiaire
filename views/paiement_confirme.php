@@ -4,70 +4,138 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Paiement confirmé</title>
+
+    <title>E-CONCOURS - Paiement confirmé</title>
 
     <link rel="stylesheet" href="../assets/css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 
-<body style="padding-top: 80px;">
+<body class="payment-confirm-page">
 
     <?php include("header.php"); ?>
 
-    <div class="success-container">
+    <main class="payment-confirm-main">
 
-        <div class="success-card">
+        <div class="payment-confirm-container">
 
-            <div class="icon-success">
-                <i class="fa-solid fa-circle-check"></i>
-            </div>
+            <section class="payment-confirm-card">
 
-            <div class="title">Paiement réussi</div>
-
-            <p class="subtitle">
-                Votre inscription a été validée avec succès.
-            </p>
-
-            <div class="summary-box">
-
-                <h3 id="concoursNom">Chargement...</h3>
-
-                <div class="summary-item">
-                    <span>Montant payé</span>
-                    <strong id="montant">-</strong>
+                <div class="payment-confirm-icon">
+                    <i class="fa-solid fa-circle-check"></i>
                 </div>
 
-                <div class="summary-item">
-                    <span>Date</span>
-                    <strong id="datePaiement">-</strong>
+                <span class="payment-confirm-eyebrow">
+                    Confirmation de paiement
+                </span>
+
+                <h1 class="payment-confirm-title">
+                    Paiement réussi
+                </h1>
+
+                <p class="payment-confirm-subtitle">
+                    Votre inscription a été validée avec succès.
+                </p>
+
+                <div class="payment-confirm-summary">
+
+                    <div class="payment-confirm-summary-header">
+                        <div class="payment-confirm-summary-icon">
+                            <i class="fa-solid fa-receipt"></i>
+                        </div>
+
+                        <div>
+                            <span>
+                                Récapitulatif
+                            </span>
+
+                            <strong id="concoursNom">
+                                Chargement...
+                            </strong>
+                        </div>
+                    </div>
+
+                    <div class="payment-confirm-summary-content">
+
+                        <div class="payment-confirm-item">
+                            <span>
+                                Montant payé
+                            </span>
+
+                            <strong id="montant">
+                                -
+                            </strong>
+                        </div>
+
+                        <div class="payment-confirm-item">
+                            <span>
+                                Date
+                            </span>
+
+                            <strong id="datePaiement">
+                                -
+                            </strong>
+                        </div>
+
+                    </div>
+
                 </div>
 
-            </div>
+                <p id="paymentMessage"
+                   class="payment-confirm-message">
+                </p>
 
-            <p id="paymentMessage" class="form-message"></p>
+                <div class="payment-confirm-actions">
 
-            <div class="btn-group">
+                    <button
+                        id="downloadReceipt"
+                        class="payment-confirm-download"
+                        type="button">
 
-                <button id="downloadReceipt" class="btn-download">
-                    <i class="fa-solid fa-download"></i>
-                    Télécharger reçu
-                </button>
+                        <i class="fa-solid fa-download"></i>
 
-                <a href="liste_concours.php" class="btn-primary">
-                    Voir concours
-                </a>
+                        <span>
+                            Télécharger le reçu
+                        </span>
 
-            </div>
+                    </button>
+
+                    <a
+                        href="liste_concours.php"
+                        class="payment-confirm-concours">
+
+                        <span>
+                            Voir les concours
+                        </span>
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </a>
+
+                </div>
+
+                <div class="payment-confirm-security">
+
+                    <i class="fa-solid fa-shield-halved"></i>
+
+                    <span>
+                        Votre paiement a été traité de manière sécurisée.
+                    </span>
+
+                </div>
+
+            </section>
 
         </div>
 
-    </div>
+    </main>
 
     <?php include("footer.php"); ?>
 
     <script type="module">
-        import PaymentConfirmController from "../controllers/PaymentConfirmController.js";
+        import PaymentConfirmController
+            from "../controllers/PaymentConfirmController.js";
 
         PaymentConfirmController.init();
     </script>
