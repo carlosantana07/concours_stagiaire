@@ -1,4 +1,4 @@
-import PaymentModel from "../models/PaymentModel.js";
+import PaymentModel from "../models/paymentModel.js";
 
 export default class PaymentController {
 
@@ -52,8 +52,14 @@ export default class PaymentController {
 
     // CHARGER INFOS CONCOURS
     static async loadConcoursInfo() {
+        const token = localStorage.getItem("token");
 
-        const res = await PaymentModel.getConcoursDetail(this.concoursId);
+        if (!token) {
+            window.location.href = "connexion.php";
+            return;
+        }
+
+        const res = await PaymentModel.getConcoursDetail(this.concoursId, token);
 
         if (!res.ok) {
             console.log(res.data);

@@ -1,4 +1,4 @@
-import ConcoursModel from "../models/ConcoursModel.js";
+import ConcoursModel from "../models/concoursModel.js";
 
 export default class ConcoursController {
 

@@ -1,5 +1,6 @@
-import CandidatModel from "../models/CandidatModel.js";
+import CandidatModel from "../models/candidatModel.js";
 import PaymentConfirmModel from "../models/PaymentConfirmModel.js";
+import DocumentModel from "../models/documentModel.js";
 
 export default class CandidatController {
 
@@ -318,37 +319,62 @@ export default class CandidatController {
         const closeBtn = document.querySelector(".close-candidatures");
         const container = document.getElementById("candidaturesModalContainer");
 
+        if (!modal || !btnVoir || !closeBtn || !container) {
+            console.error("Éléments du modal candidatures introuvables");
+            return;
+        }
+
         this.currentPage = 1;
         this.isLoading = false;
         this.hasMore = true;
 
-        btnVoir.addEventListener("click", async () => {
+        btnVoir.addEventListener("click", async (e) => {
+
+            e.preventDefault();
+
+            if (this.isLoading) {
+                return;
+            }
 
             modal.classList.remove("hidden");
             document.body.style.overflow = "hidden";
 
             this.currentPage = 1;
             this.hasMore = true;
+            this.isLoading = false;
 
             container.innerHTML = `
-                <div class="profil-cand-row header">
-                    <span>Concours</span>
-                    <span>Statut</span>
-                    <span>Action</span>
-                </div>
-            `;
+            <div class="profil-cand-row header">
+                <span>Concours</span>
+                <span>Statut</span>
+                <span>Action</span>
+            </div>
+        `;
 
             await this.loadMoreCandidatures();
+
+            if (this.hasMore && container.scrollHeight <= container.clientHeight) {
+                await this.loadMoreCandidatures();
+            }
         });
 
         closeBtn.addEventListener("click", () => {
+
             modal.classList.add("hidden");
-            document.body.style.overflow = "auto";
+            document.body.style.overflow = "";
+
+            this.isLoading = false;
         });
 
         container.addEventListener("scroll", () => {
+
+            if (this.isLoading || !this.hasMore) {
+                return;
+            }
+
             const bottom =
-                container.scrollTop + container.clientHeight >= container.scrollHeight - 5;
+                container.scrollTop + container.clientHeight >=
+                container.scrollHeight - 10;
 
             if (bottom) {
                 this.loadMoreCandidatures();
@@ -356,9 +382,12 @@ export default class CandidatController {
         });
     }
 
+    
     static async loadMoreCandidatures() {
 
-        if (this.isLoading || !this.hasMore) return;
+        if (this.isLoading || !this.hasMore) {
+            return;
+        }
 
         this.isLoading = true;
 
@@ -366,83 +395,125 @@ export default class CandidatController {
         const container = document.getElementById("candidaturesModalContainer");
         const loading = document.getElementById("loading");
 
-        loading.classList.remove("hidden");
+        if (!container) {
+            console.error("Container candidatures introuvable");
+            this.isLoading = false;
+            return;
+        }
+
+        if (loading) {
+            loading.classList.remove("hidden");
+            loading.textContent = "Chargement...";
+        }
 
         try {
 
             const res = await fetch(
                 `http://localhost:4000/api/candidat/mes-candidatures?page=${this.currentPage}`,
                 {
-                    headers: { Authorization: `Bearer ${token}` }
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
                 }
             );
 
             const result = await res.json();
-            const items = result.data || [];
+
+            console.log("STATUT API :", res.status);
+            console.log("REPONSE CANDIDATURES :", result);
+
+            const items = Array.isArray(result.data) ? result.data : [];
+
+            console.log("CANDIDATURES :", items);
 
             if (items.length === 0) {
                 this.hasMore = false;
-                loading.innerText = "Plus de candidatures";
+
+                if (loading) {
+                    loading.textContent = "Plus de candidatures";
+                }
+
+                this.isLoading = false;
                 return;
             }
 
             items.forEach(cand => {
 
+                console.log("CANDIDATURE :", cand);
+
                 const row = document.createElement("div");
                 row.className = "profil-cand-row";
 
+                const concoursNom = cand.concours?.nom || "-";
+
+                const statut = cand.statut_inscription || "";
+
+                const idInscription = cand.id_inscription || "";
+
+                const idConcours = cand.concours?.id_concours || "";
+
                 row.innerHTML = `
-                    <span>${cand.concours?.nom || "-"}</span>
-                    <span class="status ${cand.statut_inscription === "VALIDEE" ? "paid" : "unpaid"}">
-                        ${cand.statut_inscription === "VALIDEE" ? "Payé" : "En attente"}
-                    </span>
-                    <span class="text-center">
-                
+                <span>${concoursNom}</span>
 
-                ${cand.statut_inscription === "VALIDEE"
+                <span class="status ${statut === "VALIDEE" ? "paid" : "unpaid"}">
+                    ${statut === "VALIDEE" ? "Payé" : "En attente"}
+                </span>
 
+                <span class="text-center">
+                    ${statut === "VALIDEE"
                         ?
-
-                        ` <button
-                class="btn-download-receipt"
-                data-id="${cand.id_inscription}">
-                <i class="fa-solid fa-download"></i>
-                Télécharger reçu
-            </button>`
+                        `<button
+                                type="button"
+                                class="btn-download-receipt"
+                                data-id="${idInscription}">
+                                <i class="fa-solid fa-download"></i>
+                                Télécharger reçu
+                            </button>`
                         :
-
-                        `<button 
-                        class="btn-payment"
-                        data-id="${cand.id_inscription}"
-                        data-concours="${cand.concours.id_concours}"
-                        style="background: #eda618; color: white; border: none;">
-                        <i class="fa-solid fa-credit-card"></i>
-                        Finaliser paiement
-                    </button>`
+                        `<button
+                                type="button"
+                                class="btn-payment"
+                                data-id="${idInscription}"
+                                data-concours="${idConcours}">
+                                <i class="fa-solid fa-credit-card"></i>
+                                Finaliser paiement
+                            </button>`
                     }
-
-            </span>
-                `;
+                </span>
+            `;
 
                 container.appendChild(row);
             });
 
             this.currentPage++;
+
             this.hasMore = this.currentPage <= result.pageTot;
 
-
         } catch (err) {
-            // console.error(err);
+
+            console.error("ERREUR CANDIDATURES :", err);
+
+        } finally {
+
+            this.isLoading = false;
+
+            if (loading) {
+                loading.classList.add("hidden");
+            }
         }
 
-        this.isLoading = false;
-        loading.classList.add("hidden");
+        // setTimeout(() => {
 
-        setTimeout(() => {
-            if (container.scrollHeight <= container.clientHeight && this.hasMore) {
-                this.loadMoreCandidatures();
-            }
-        }, 0);
+        //     if (
+        //         container &&
+        //         container.scrollHeight <= container.clientHeight &&
+        //         this.hasMore &&
+        //         !this.isLoading
+        //     ) {
+        //         this.loadMoreCandidatures();
+        //     }
+
+        // }, 100);
     }
 
     static bindModalEvents() {
@@ -617,5 +688,120 @@ export default class CandidatController {
         });
 
         updateButtons();
+    }
+
+    static initDocuments() {
+
+        const btn = document.getElementById("btn-upload-documents");
+
+        if (!btn) {
+            return;
+        }
+
+        const typePiece = document.getElementById("type_piece");
+        const pieceIdentite = document.getElementById("piece_identite");
+        const pieceIdentiteName = document.getElementById("pieceIdentiteName");
+
+        pieceIdentite.addEventListener("change", () => {
+
+            const file = pieceIdentite.files[0];
+
+            if (file) {
+                pieceIdentiteName.textContent = file.name;
+            } else {
+                pieceIdentiteName.textContent = "";
+            }
+        });
+
+        btn.addEventListener("click", async () => {
+
+            const typeDocument = typePiece.value;
+            const file = pieceIdentite.files[0];
+
+            if (!typeDocument) {
+                Swal.fire({
+                    icon: "warning",
+                    title: "Type de document",
+                    text: "Veuillez sélectionner le type de pièce."
+                });
+
+                return;
+            }
+
+            if (!file) {
+                Swal.fire({
+                    icon: "warning",
+                    title: "Document manquant",
+                    text: "Veuillez sélectionner votre pièce d'identité."
+                });
+
+                return;
+            }
+
+            const token = localStorage.getItem("token");
+
+            if (!token) {
+                window.location.href = "connexion.php";
+                return;
+            }
+
+            btn.disabled = true;
+
+            const originalContent = btn.innerHTML;
+
+            btn.innerHTML = `
+            <i class="fas fa-spinner fa-spin"></i>
+            Upload en cours...
+        `;
+
+            try {
+
+                const res = await DocumentModel.uploadDocuments(
+                    token,
+                    typeDocument,
+                    file
+                );
+
+                console.log("UPLOAD :", res);
+
+                if (!res.ok) {
+
+                    Swal.fire({
+                        icon: "error",
+                        title: "Erreur",
+                        text: res.data?.error ||
+                            "Impossible d'envoyer le document."
+                    });
+
+                    return;
+                }
+
+                Swal.fire({
+                    icon: "success",
+                    title: "Document enregistré",
+                    text: res.data?.message ||
+                        "Votre document a été enregistré avec succès."
+                });
+
+                typePiece.value = "";
+                pieceIdentite.value = "";
+                pieceIdentiteName.textContent = "";
+
+            } catch (error) {
+
+                console.error("Erreur upload document :", error);
+
+                Swal.fire({
+                    icon: "error",
+                    title: "Erreur",
+                    text: "Une erreur est survenue lors de l'envoi du document."
+                });
+
+            } finally {
+
+                btn.disabled = false;
+                btn.innerHTML = originalContent;
+            }
+        });
     }
 }

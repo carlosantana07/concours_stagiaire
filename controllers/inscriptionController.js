@@ -1,4 +1,4 @@
-import InscriptionModel from "../models/InscriptionModel.js";
+import InscriptionModel from "../models/inscriptionModel.js";
 
 export default class InscriptionController {
 

@@ -35,9 +35,15 @@ export default class PaymentModel {
         return { ok: res.ok, data: result };
     }
 
-    static async getConcoursDetail(id) {
+    static async getConcoursDetail(id, token) {
 
-        const res = await fetch(`http://localhost:4000/api/concours/detail/${id}`);
+        const res = await fetch(`http://localhost:4000/api/concours/detail/${id}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + token
+            },
+        });
 
         const result = await res.json();
 

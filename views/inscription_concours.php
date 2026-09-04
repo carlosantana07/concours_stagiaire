@@ -235,7 +235,7 @@
                                 </p>
 
                                 <small>
-                                    PDF, JPG, PNG — taille maximale : 2 Mo
+                                    PDF, JPG, PNG - taille maximale : 2 Mo
                                 </small>
 
                                 <input

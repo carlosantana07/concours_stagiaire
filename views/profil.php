@@ -261,58 +261,86 @@
       <!-- Mes documents -->
       <div class="profil-tab-content" id="tab-documents">
         <div class="profil-card" style="max-width:560px;">
+
           <div class="profil-card-title">
             <i class="fa-solid fa-file-upload" style="color:#9ca3af"></i>
-            <span> Mes documents </span>
+            <span>Mes documents</span>
           </div>
+
           <div class="profil-divider"></div>
+
           <div class="profil-fields">
+
             <div class="profil-field">
               <p class="profil-label">Pièce d'identité</p>
 
+              <select
+                name="type_piece"
+                id="type_piece"
+                class="form-control">
 
+                <option value="">
+                  Sélectionner le type de pièce
+                </option>
 
-              <select name="type_piece" id="type_piece" class="form-control">
-                <option value="">Sélectionner le type de pièce</option>
-                <option value="carte_identite">Carte d'identité</option>
-                <option value="passeport">Passeport</option>
+                <option value="CNIB">
+                  Carte d'identité
+                </option>
+
+                <option value="PASSPORT">
+                  Passeport
+                </option>
+
               </select>
-
             </div>
 
             <div class="profil-field">
-              <!-- <p class="profil-label">Pièce d'identité</p> -->
-
 
               <input
                 type="file"
                 id="piece_identite"
                 class="form-control"
                 accept=".pdf,.jpg,.jpeg,.png">
-              <small id="pieceIdentiteName" style="color:#9ca3af;font-size:12px;margin-top:4px;"></small>
+
+              <small
+                id="pieceIdentiteName"
+                style="color:#9ca3af;font-size:12px;margin-top:4px;">
+              </small>
+
             </div>
+
+            <!--
             <div class="profil-field">
-              <p class="profil-label">Certificat de nationalité</p>
-              <input
-                type="file"
-                id="certificat_nationalite"
-                class="form-control"
-                accept=".pdf,.jpg,.jpeg,.png">
-              <small id="certificatName" class="text-muted"></small>
+                <p class="profil-label">Certificat de nationalité</p>
+
+                <input
+                    type="file"
+                    id="certificat_nationalite"
+                    class="form-control"
+                    accept=".pdf,.jpg,.jpeg,.png">
+
+                <small id="certificatName" class="text-muted"></small>
             </div>
+            -->
+
             <button
               type="button"
               id="btn-upload-documents"
               class="profil-btn-save">
+
               <i class="fas fa-upload"></i>
               Enregistrer les documents
+
             </button>
+
           </div>
         </div>
       </div>
 
     </div>
   </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
   <script>
     document.querySelectorAll(".profil-tab").forEach(tab => {
@@ -334,6 +362,7 @@
       CandidatController.initCandidaturesModal();
       CandidatController.bindEvents();
       CandidatController.loadMoreCandidatures();
+      CandidatController.initDocuments();
       CandidatController.bindModalEvents();
     });
   </script>

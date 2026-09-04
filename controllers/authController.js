@@ -1,4 +1,4 @@
-import AuthModel from "../models/AuthModel.js";
+import AuthModel from "../models/authModel.js";
 
 export default class AuthController {
 

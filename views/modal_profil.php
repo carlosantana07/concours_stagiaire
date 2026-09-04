@@ -67,8 +67,8 @@
 
     <div class="modal-content large">
 
-        <div class=">
-            <h4 style="color: #035629;">Mes candidatures</h4>
+        <div class="modal-header">
+            <h4>Mes candidatures</h4>
             <span class="close-candidatures">&times;</span>
         </div>
 
