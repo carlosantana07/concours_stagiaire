@@ -377,7 +377,7 @@
 
     <script type="module">
         import InscriptionController
-        from "../controllers/InscriptionController.js";
+        from "../controllers/inscriptionController.js";
 
         InscriptionController.init();
     </script>

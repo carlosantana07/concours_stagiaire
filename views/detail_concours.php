@@ -195,7 +195,7 @@
 
 
   <script type="module">
-    import ConcoursController from "../controllers/ConcoursController.js";
+    import ConcoursController from "../controllers/concoursController.js";
 
     ConcoursController.initDetail();
   </script>

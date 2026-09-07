@@ -258,7 +258,7 @@
 
 
     <script type="module">
-        import AuthController from "../controllers/AuthController.js";
+        import AuthController from "../controllers/authController.js";
 
         document.addEventListener("DOMContentLoaded", () => {
             AuthController.initLogin();

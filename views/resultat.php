@@ -40,7 +40,7 @@
     <!-- ===== FOOTER ===== -->
     <?php include("footer.php") ?>
     <script type="module">
-        import CandidatController from "../controllers/CandidatController.js";
+        import CandidatController from "../controllers/candidatController.js";
 
         document.addEventListener("DOMContentLoaded", () => {
             CandidatController.loadResultats();

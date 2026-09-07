@@ -52,7 +52,7 @@
 
     
     <script type="module">
-        import OtpController from "../controllers/AuthController.js";
+        import OtpController from "../controllers/authController.js";
 
         document.addEventListener("DOMContentLoaded", () => {
             OtpController.initOtp();

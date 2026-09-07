@@ -140,7 +140,7 @@
     <?php include('footer.php'); ?>
 
     <script type="module">
-        import AuthController from "../controllers/AuthController.js";
+        import AuthController from "../controllers/authController.js";
 
         AuthController.initContact();
     </script>

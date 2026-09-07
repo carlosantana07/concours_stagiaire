@@ -333,7 +333,7 @@
 
     <script type="module">
         import PaymentController
-        from "../controllers/PaymentController.js";
+        from "../controllers/paymentController.js";
 
         PaymentController.init();
     </script>
