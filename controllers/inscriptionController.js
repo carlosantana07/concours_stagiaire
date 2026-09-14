@@ -83,7 +83,26 @@ export default class InscriptionController {
 
             data.id_concours = Number(this.concoursId);
 
-            console.log("DATA ENVOYÉE :", data);
+            const diplome =
+                this.form.querySelector("input[name='diplome']");
+
+            if (!diplome || !diplome.files.length) {
+
+                messageEl.style.display = "block";
+                messageEl.style.color = "red";
+                messageEl.textContent =
+                    "Veuillez joindre le diplôme requis pour ce concours.";
+
+                return;
+            }
+
+            data.diplome = diplome.files[0];
+
+            console.log("DONNÉES ENVOYÉES :", {
+                id_concours: data.id_concours,
+                id_centre: data.id_centre,
+                diplome: data.diplome.name
+            });
 
             try {
 
@@ -141,4 +160,5 @@ export default class InscriptionController {
 
         });
     }
+
 }

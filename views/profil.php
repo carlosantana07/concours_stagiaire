@@ -262,7 +262,30 @@
       <div class="profil-tab-content" id="tab-documents">
         <div class="profil-card" style="max-width:560px;">
 
-          <div class="profil-card-title">
+
+          <div class="profil-field documents-section">
+            <div class="documents-section-header">
+              <div>
+                <p class="profil-label">Documents enregistrés</p>
+                <span class="documents-section-description">
+                  Consultez les documents que vous avez déjà transmis.
+                </span>
+              </div>
+
+              <div class="documents-count" id="documentsCount">
+                0
+              </div>
+            </div>
+
+            <div id="documents-list" class="documents-list">
+              <div class="documents-loading">
+                <i class="fas fa-spinner fa-spin"></i>
+                <span>Chargement de vos documents...</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="profil-card-title" style="margin-top: 50px;">
             <i class="fa-solid fa-file-upload" style="color:#9ca3af"></i>
             <span>Mes documents</span>
           </div>
@@ -272,7 +295,7 @@
           <div class="profil-fields">
 
             <div class="profil-field">
-              <p class="profil-label">Pièce d'identité</p>
+              <p class="profil-label">Document d'identité</p>
 
               <select
                 name="type_piece"
@@ -280,7 +303,7 @@
                 class="form-control">
 
                 <option value="">
-                  Sélectionner le type de pièce
+                  Sélectionner le type de document
                 </option>
 
                 <option value="CNIB">
@@ -309,19 +332,19 @@
 
             </div>
 
-            <!--
+
             <div class="profil-field">
-                <p class="profil-label">Certificat de nationalité</p>
+              <p class="profil-label">Certificat de nationalité</p>
 
-                <input
-                    type="file"
-                    id="certificat_nationalite"
-                    class="form-control"
-                    accept=".pdf,.jpg,.jpeg,.png">
+              <input
+                type="file"
+                id="certificat_nationalite"
+                class="form-control"
+                accept=".pdf,.jpg,.jpeg,.png">
 
-                <small id="certificatName" class="text-muted"></small>
+              <small id="certificatName" class="text-muted"></small>
             </div>
-            -->
+
 
             <button
               type="button"

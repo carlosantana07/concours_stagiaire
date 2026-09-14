@@ -282,7 +282,7 @@ export default class CandidatController {
         document.querySelector("[name='email']").value = c.email || "";
         document.querySelector("[name='emploi']").value = c.emploi || "";
         document.querySelector("[name='ministere']").value = c.ministere || "";
-        document.querySelector("[name='matricule']").value = c.matricule || "";
+        // document.querySelector("[name='matricule']").value = c.matricule || "";
     }
 
     static formatDate(date) {
@@ -382,7 +382,7 @@ export default class CandidatController {
         });
     }
 
-    
+
     static async loadMoreCandidatures() {
 
         if (this.isLoading || !this.hasMore) {
@@ -583,6 +583,7 @@ export default class CandidatController {
 
     }
 
+
     static async loadResultats() {
 
         const token = localStorage.getItem("token");
@@ -590,12 +591,22 @@ export default class CandidatController {
         const res = await CandidatModel.getResultats(token);
 
         if (!res.ok) {
-            document.getElementById("resultatsBody").innerHTML =
-                `<tr><td colspan="6">Erreur chargement</td></tr>`;
+
+            document.getElementById("resultatsBody").innerHTML = `
+            <tr>
+                <td colspan="6">
+                    Erreur chargement
+                </td>
+            </tr>
+        `;
+
             return;
         }
 
-        const data = res.data.data;
+        const data = res.data;
+
+        console.log("DATA UTILISÉ POUR LE RENDU :", data);
+        console.log("EST UN TABLEAU :", Array.isArray(data));
 
         if (!data || data.length === 0) {
 
@@ -603,21 +614,26 @@ export default class CandidatController {
             this.resultatsPage = 1;
 
             document.getElementById("resultatsBody").innerHTML = `
-                <div class="empty-card" style="text-align:center;display:flex;flex-direction:column;gap:10px;padding:20px;">
-                    <i class="fa-solid fa-triangle-exclamation empty-icon"></i>
-                    <p>Aucun résultat disponible</p>
-                </div>
-            `;
+            <tr>
+                <td colspan="6">
+                    <div class="empty-card" style="text-align:center;display:flex;flex-direction:column;gap:10px;padding:20px;">
+                        <i class="fa-solid fa-triangle-exclamation empty-icon"></i>
+                        <p>Aucun résultat disponible</p>
+                    </div>
+                </td>
+            </tr>
+        `;
+
             return;
         }
 
         this.allResultats = data;
         this.resultatsPage = 1;
+
         this.renderResultats();
     }
 
     static renderResultats() {
-
         const tbody = document.getElementById("resultatsBody");
         tbody.innerHTML = "";
 
@@ -626,36 +642,54 @@ export default class CandidatController {
 
         const pageData = this.allResultats.slice(start, end);
 
-        pageData.forEach(concoursBlock => {
+        pageData.forEach(resultat => {
+            const tr = document.createElement("tr");
 
-            const examens = concoursBlock.examens;
-            const rowspan = examens.length;
+            const noteCg = resultat.note_cg != null
+                ? Number(resultat.note_cg).toFixed(2)
+                : "-";
 
-            examens.forEach((exam, index) => {
+            const noteSp = resultat.note_sp != null
+                ? Number(resultat.note_sp).toFixed(2)
+                : "-";
 
-                const tr = document.createElement("tr");
+            const moyenne = resultat.moyenne != null
+                ? Number(resultat.moyenne).toFixed(2)
+                : "-";
 
-                let concoursCell = "";
+            tr.innerHTML = `
+            <td>
+                ${resultat.concours?.nom ?? "-"}
+            </td>
 
-                if (index === 0) {
-                    concoursCell = `
-                        <td rowspan="${rowspan}" class="nom-concours">
-                            ${concoursBlock.concours.nom}
-                        </td>
-                    `;
-                }
+            <td>
+                ${resultat.examen?.intitule ?? "-"}
+            </td>
+            
+            <td>
+                ${resultat.examen?.type_examen ?? "-"}
+            </td>
 
-                tr.innerHTML = `
-                    ${concoursCell}
-                    <td>${exam.intitule}</td>
-                    <td>${exam.type_examen}</td>
-                    <td>${exam.coefficient}</td>
-                    <td>${exam.note ?? "En attente"}</td>
-                    ${index === 0 ? `<td rowspan="${rowspan}">${exam.statut ?? "En attente"}</td>` : ""}
-                `;
+            <td>
+                ${noteCg}
+            </td>
 
-                tbody.appendChild(tr);
-            });
+            <td>
+                ${noteSp}
+            </td>
+
+            <td>
+                <strong>${moyenne}</strong>
+            </td>
+
+            <td>
+                <span class="resultat-statut ${resultat.statut === "REUSSI" ? "reussi" : ""}">
+                    ${resultat.statut ?? "En attente"}
+                </span>
+            </td>
+        `;
+
+            tbody.appendChild(tr);
         });
     }
 
@@ -702,6 +736,9 @@ export default class CandidatController {
         const pieceIdentite = document.getElementById("piece_identite");
         const pieceIdentiteName = document.getElementById("pieceIdentiteName");
 
+        const certificatNationalite = document.getElementById("certificat_nationalite");
+        const certificatName = document.getElementById("certificatName");
+
         pieceIdentite.addEventListener("change", () => {
 
             const file = pieceIdentite.files[0];
@@ -713,26 +750,38 @@ export default class CandidatController {
             }
         });
 
+        certificatNationalite.addEventListener("change", () => {
+
+            const file = certificatNationalite.files[0];
+
+            if (file) {
+                certificatName.textContent = file.name;
+            } else {
+                certificatName.textContent = "";
+            }
+        });
+
         btn.addEventListener("click", async () => {
 
             const typeDocument = typePiece.value;
-            const file = pieceIdentite.files[0];
+            const pieceFile = pieceIdentite.files[0];
+            const certificatFile = certificatNationalite.files[0];
 
-            if (!typeDocument) {
+            if (!typeDocument && !certificatFile) {
                 Swal.fire({
                     icon: "warning",
-                    title: "Type de document",
-                    text: "Veuillez sélectionner le type de pièce."
+                    title: "Document manquant",
+                    text: "Veuillez sélectionner un document à envoyer."
                 });
 
                 return;
             }
 
-            if (!file) {
+            if (typeDocument && !pieceFile) {
                 Swal.fire({
                     icon: "warning",
                     title: "Document manquant",
-                    text: "Veuillez sélectionner votre pièce d'identité."
+                    text: "Veuillez sélectionner le fichier correspondant à la pièce d'identité."
                 });
 
                 return;
@@ -756,51 +805,558 @@ export default class CandidatController {
 
             try {
 
-                const res = await DocumentModel.uploadDocuments(
-                    token,
-                    typeDocument,
-                    file
-                );
+                let documentsEnvoyes = 0;
 
-                console.log("UPLOAD :", res);
+                if (typeDocument && pieceFile) {
 
-                if (!res.ok) {
+                    const resPiece = await DocumentModel.uploadDocuments(
+                        token,
+                        typeDocument,
+                        pieceFile
+                    );
 
-                    Swal.fire({
-                        icon: "error",
-                        title: "Erreur",
-                        text: res.data?.error ||
-                            "Impossible d'envoyer le document."
-                    });
+                    console.log("UPLOAD PIECE :", resPiece);
 
-                    return;
+                    if (!resPiece.ok) {
+
+                        Swal.fire({
+                            icon: "error",
+                            title: "Erreur",
+                            text: resPiece.data?.error ||
+                                "Impossible d'envoyer la pièce d'identité."
+                        });
+
+                        return;
+                    }
+
+                    documentsEnvoyes++;
                 }
 
-                Swal.fire({
-                    icon: "success",
-                    title: "Document enregistré",
-                    text: res.data?.message ||
-                        "Votre document a été enregistré avec succès."
-                });
+                if (certificatFile) {
 
-                typePiece.value = "";
-                pieceIdentite.value = "";
-                pieceIdentiteName.textContent = "";
+                    const resCertificat = await DocumentModel.uploadDocuments(
+                        token,
+                        "NATIONALITE",
+                        certificatFile
+                    );
+
+                    console.log("UPLOAD CERTIFICAT :", resCertificat);
+
+                    if (!resCertificat.ok) {
+
+                        Swal.fire({
+                            icon: "error",
+                            title: "Erreur",
+                            text: resCertificat.data?.error ||
+                                "Impossible d'envoyer le certificat de nationalité."
+                        });
+
+                        return;
+                    }
+
+                    documentsEnvoyes++;
+                }
+
+                if (documentsEnvoyes > 0) {
+
+                    Swal.fire({
+                        icon: "success",
+                        title: "Documents enregistrés",
+                        text: "Vos documents ont été enregistrés avec succès."
+                    });
+
+                    typePiece.value = "";
+                    pieceIdentite.value = "";
+                    pieceIdentiteName.textContent = "";
+
+                    certificatNationalite.value = "";
+                    certificatName.textContent = "";
+                }
 
             } catch (error) {
 
-                console.error("Erreur upload document :", error);
+                console.error("Erreur upload documents :", error);
 
                 Swal.fire({
                     icon: "error",
                     title: "Erreur",
-                    text: "Une erreur est survenue lors de l'envoi du document."
+                    text: "Une erreur est survenue lors de l'envoi des documents."
                 });
 
             } finally {
 
                 btn.disabled = false;
                 btn.innerHTML = originalContent;
+            }
+        });
+
+        this.loadDocuments();
+        this.initDocumentModification();
+        this.initDocumentSuppression();
+    }
+
+    static async loadDocuments() {
+
+        const documentsList = document.getElementById("documents-list");
+        const documentsCount = document.getElementById("documentsCount");
+
+        if (!documentsList) {
+            return;
+        }
+
+        const token = localStorage.getItem("token");
+
+        if (!token) {
+            documentsList.innerHTML = `
+            <div class="documents-empty">
+                <div class="documents-empty-icon">
+                    <i class="fa-regular fa-folder-open"></i>
+                </div>
+
+                <div class="documents-empty-title">
+                    Connexion requise
+                </div>
+
+                <p class="documents-empty-text">
+                    Connectez-vous pour consulter vos documents.
+                </p>
+            </div>
+        `;
+
+            return;
+        }
+
+        documentsList.innerHTML = `
+        <div class="documents-loading">
+            <i class="fas fa-spinner fa-spin"></i>
+            <span>Chargement de vos documents...</span>
+        </div>
+    `;
+
+        try {
+
+            const res = await DocumentModel.getMesDocuments(token);
+
+            console.log("DOCUMENTS DU CANDIDAT :", res);
+
+            if (!res.ok) {
+
+                documentsList.innerHTML = `
+                <div class="documents-empty documents-error">
+                    <div class="documents-empty-icon">
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+                    </div>
+
+                    <div class="documents-empty-title">
+                        Impossible de charger les documents
+                    </div>
+
+                    <p class="documents-empty-text">
+                        Veuillez réessayer plus tard.
+                    </p>
+                </div>
+            `;
+
+                return;
+            }
+
+            let documents = res.data?.data || [];
+
+            if (typeof documents === "string") {
+
+                try {
+                    documents = JSON.parse(documents);
+                } catch (error) {
+
+                    console.error(
+                        "Erreur parsing documents :",
+                        error
+                    );
+
+                    documents = [];
+                }
+            }
+
+            if (!Array.isArray(documents)) {
+                documents = [];
+            }
+
+            if (documentsCount) {
+                documentsCount.textContent = documents.length;
+            }
+
+            if (documents.length === 0) {
+
+                documentsList.innerHTML = `
+                <div class="documents-empty">
+
+                    <div class="documents-empty-icon">
+                        <i class="fa-regular fa-folder-open"></i>
+                    </div>
+
+                    <div class="documents-empty-title">
+                        Aucun document enregistré
+                    </div>
+
+                    <p class="documents-empty-text">
+                        Les documents que vous transmettrez apparaîtront ici.
+                    </p>
+
+                </div>
+            `;
+
+                return;
+            }
+
+            documentsList.innerHTML = documents.map(document => {
+
+                let nomDocument = document.type_document;
+                let icone = "fa-file";
+
+                if (document.type_document === "CNIB") {
+                    nomDocument = "Carte d'identité (CNIB)";
+                    icone = "fa-id-card";
+                }
+
+                if (document.type_document === "NATIONALITE") {
+                    nomDocument = "Certificat de nationalité";
+                    icone = "fa-certificate";
+                }
+
+                if (document.type_document === "PASSPORT") {
+                    nomDocument = "Passeport";
+                    icone = "fa-passport";
+                }
+
+                return `
+                <div class="document-item">
+
+                    <div class="document-info">
+
+                        <div class="document-icon">
+                            <i class="fa-solid ${icone}"></i>
+                        </div>
+
+                        <div class="document-content">
+
+                            <div class="document-title">
+                                ${nomDocument}
+                            </div>
+
+                            <div class="document-status">
+                                <i class="fa-solid fa-circle"></i>
+                                Document enregistré
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                <div class="document-actions">
+
+                      <a
+                        href="${document.url}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="document-view">
+
+                        <i class="fa-solid fa-eye"></i>
+                        <span>Voir</span>
+
+                    </a>
+
+                    <button
+                        type="button"
+                        class="document-edit"
+                        data-blob-name="${document.fichier}"
+                        data-document-type="${nomDocument}">
+
+                        <i class="fa-solid fa-pen"></i>
+                        <span>Modifier</span>
+
+                    </button>
+
+                    <button
+                        type="button"
+                        class="document-delete"
+                        data-blob-name="${document.fichier}"
+                        data-document-type="${nomDocument}">
+
+                        <i class="fa-solid fa-trash"></i>
+                        <span>Supprimer</span>
+
+                    </button>
+
+                </div>
+
+                </div>
+            `;
+
+            }).join("");
+
+        } catch (error) {
+
+            console.error(
+                "Erreur récupération documents :",
+                error
+            );
+
+            documentsList.innerHTML = `
+            <div class="documents-empty documents-error">
+
+                <div class="documents-empty-icon">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                </div>
+
+                <div class="documents-empty-title">
+                    Une erreur est survenue
+                </div>
+
+                <p class="documents-empty-text">
+                    Impossible de charger vos documents.
+                </p>
+
+            </div>
+        `;
+        }
+    }
+
+    static initDocumentModification() {
+
+        const documentsList = document.getElementById("documents-list");
+
+        if (!documentsList) {
+            return;
+        }
+
+        documentsList.addEventListener("click", async (event) => {
+
+            const button = event.target.closest(".document-edit");
+
+            if (!button) {
+                return;
+            }
+
+            const blobName = button.dataset.blobName;
+            const documentType = button.dataset.documentType;
+
+            if (!blobName) {
+                Swal.fire({
+                    icon: "error",
+                    title: "Document introuvable",
+                    text: "Impossible d'identifier le document à modifier."
+                });
+
+                return;
+            }
+
+            const input = document.createElement("input");
+
+            input.type = "file";
+            input.accept = ".pdf,.jpg,.jpeg,.png";
+
+            input.addEventListener("change", async () => {
+
+                const file = input.files[0];
+
+                if (!file) {
+                    return;
+                }
+
+                const token = localStorage.getItem("token");
+
+                if (!token) {
+                    window.location.href = "connexion.php";
+                    return;
+                }
+
+                const confirmation = await Swal.fire({
+                    icon: "question",
+                    title: "Modifier le document ?",
+                    text: `Vous allez remplacer votre ${documentType}.`,
+                    showCancelButton: true,
+                    confirmButtonText: "Oui, remplacer",
+                    cancelButtonText: "Annuler"
+                });
+
+                if (!confirmation.isConfirmed) {
+                    return;
+                }
+
+                button.disabled = true;
+
+                const originalContent = button.innerHTML;
+
+                button.innerHTML = `
+                <i class="fas fa-spinner fa-spin"></i>
+                Modification...
+            `;
+
+                try {
+
+                    const res = await DocumentModel.updateDocument(
+                        token,
+                        blobName,
+                        file
+                    );
+
+                    console.log("MODIFICATION DOCUMENT :", res);
+
+                    if (!res.ok) {
+
+                        Swal.fire({
+                            icon: "error",
+                            title: "Erreur",
+                            text: res.data?.error ||
+                                "Impossible de modifier le document."
+                        });
+
+                        return;
+                    }
+
+                    await Swal.fire({
+                        icon: "success",
+                        title: "Document modifié",
+                        text: "Votre document a été remplacé avec succès.",
+                        timer: 1800,
+                        showConfirmButton: false
+                    });
+
+                    await this.loadDocuments();
+
+                } catch (error) {
+
+                    console.error(
+                        "Erreur modification document :",
+                        error
+                    );
+
+                    Swal.fire({
+                        icon: "error",
+                        title: "Erreur",
+                        text: "Une erreur est survenue lors de la modification du document."
+                    });
+
+                } finally {
+
+                    button.disabled = false;
+                    button.innerHTML = originalContent;
+
+                }
+            });
+
+            input.click();
+        });
+    }
+
+    static initDocumentSuppression() {
+
+        const documentsList = document.getElementById("documents-list");
+
+        if (!documentsList) {
+            return;
+        }
+
+        documentsList.addEventListener("click", async (event) => {
+
+            const button = event.target.closest(".document-delete");
+
+            if (!button) {
+                return;
+            }
+
+            const blobName = button.dataset.blobName;
+            const documentType = button.dataset.documentType;
+
+            if (!blobName) {
+
+                Swal.fire({
+                    icon: "error",
+                    title: "Document introuvable",
+                    text: "Impossible d'identifier le document à supprimer."
+                });
+
+                return;
+            }
+
+            const confirmation = await Swal.fire({
+                icon: "warning",
+                title: "Supprimer ce document ?",
+                text: `Vous êtes sur le point de supprimer votre ${documentType}. Cette action est irréversible.`,
+                showCancelButton: true,
+                confirmButtonText: "Oui, supprimer",
+                cancelButtonText: "Annuler",
+                reverseButtons: true
+            });
+
+            if (!confirmation.isConfirmed) {
+                return;
+            }
+
+            const token = localStorage.getItem("token");
+
+            if (!token) {
+                window.location.href = "connexion.php";
+                return;
+            }
+
+            button.disabled = true;
+
+            const originalContent = button.innerHTML;
+
+            button.innerHTML = `
+            <i class="fas fa-spinner fa-spin"></i>
+        `;
+
+            try {
+
+                const res = await DocumentModel.deleteDocument(
+                    token,
+                    blobName
+                );
+
+                console.log("SUPPRESSION DOCUMENT :", res);
+
+                if (!res.ok) {
+
+                    Swal.fire({
+                        icon: "error",
+                        title: "Suppression impossible",
+                        text: res.data?.error ||
+                            "Impossible de supprimer le document."
+                    });
+
+                    return;
+                }
+
+                await Swal.fire({
+                    icon: "success",
+                    title: "Document supprimé",
+                    text: "Le document a été supprimé avec succès.",
+                    timer: 1800,
+                    showConfirmButton: false
+                });
+
+                await this.loadDocuments();
+
+            } catch (error) {
+
+                console.error(
+                    "Erreur suppression document :",
+                    error
+                );
+
+                Swal.fire({
+                    icon: "error",
+                    title: "Erreur",
+                    text: "Une erreur est survenue lors de la suppression du document."
+                });
+
+            } finally {
+
+                button.disabled = false;
+                button.innerHTML = originalContent;
             }
         });
     }

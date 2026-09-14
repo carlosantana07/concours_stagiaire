@@ -23,14 +23,13 @@
                     <th>CONCOURS</th>
                     <th>EPREUVES</th>
                     <th>TYPE DE COMPOSITION</th>
-                    <th>COEFFICIENTS</th>
-                    <th>NOTES</th>
+                    <th>NOTE CULTURE GÉNÉRALE</th>
+                    <th>NOTE MATIÈRE SPÉCIFIQUE</th>
+                    <th>MOYENNE GÉNÉRALE</th>
                     <th>STATUT</th>
                 </tr>
             </thead>
-            <tbody id="resultatsBody">
-                
-            </tbody>
+            <tbody id="resultatsBody"></tbody>
         </table>
         <div class="pagination">
             <button class="btn-prev">← Précédent</button>

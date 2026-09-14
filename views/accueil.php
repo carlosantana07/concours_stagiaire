@@ -78,9 +78,9 @@
 
 
           <!-- Non connecté -->
-          <a href="inscription.php" id="btnInscription" class="btn-secondary"> 
+          <a href="connexion.php" id="btnInscription" class="btn-secondary"> 
             <i class="fa-solid fa-user-plus"></i> 
-            <span>Créer un compte</span> 
+            <span>Mes résultats</span> 
           </a>
 
 

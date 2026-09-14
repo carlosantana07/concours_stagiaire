@@ -240,7 +240,8 @@
 
                                 <input
                                     type="file"
-                                    name="diplome_file"
+                                    name="diplome"
+                                    id="diplome"
                                     accept=".pdf,.jpg,.jpeg,.png"
                                     hidden>
 

@@ -45,9 +45,9 @@
                 <input name="ministere" placeholder="Ministère" class="input">
             </div>
 
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <input name="matricule" placeholder="Matricule" class="input">
-            </div>
+            </div> -->
 
 
             <!-- <p style="align-self: center; width: 100%; text-align: center;" id="profilMessage" class="form-message"></p> -->
