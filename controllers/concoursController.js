@@ -77,7 +77,7 @@ export default class ConcoursController {
 
         this.allConcours = concoursList;
 
-        console.log("Concours chargés :", this.allConcours);
+      //  console.log("Concours chargés :", this.allConcours);
     }
 
     static async loadConcours(page = 1) {
@@ -133,7 +133,7 @@ export default class ConcoursController {
 
         this.select.addEventListener("change", () => {
 
-            console.log("CATEGORIE SELECTED:", this.select.value);
+          //  console.log("CATEGORIE SELECTED:", this.select.value);
 
             this.currentCategorie = this.select.value;
 
@@ -243,13 +243,19 @@ export default class ConcoursController {
 
         const urlParams = new URLSearchParams(window.location.search);
         const concoursId = urlParams.get("id");
-        console.log("DETAIL CONCOURS", concoursId);
+       // console.log("DETAIL CONCOURS", concoursId);
         if (!concoursId) return;
 
         const res = await ConcoursModel.getDetail(concoursId, token);
 
         if (!res.ok) {
-            console.log("Erreur chargement concours");
+             Swal.fire({
+                icon: "error",
+                title: "Erreur",
+                text: res.data?.error ||
+                    "Erreur chargement concours"
+            });
+
             return;
         }
 

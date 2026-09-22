@@ -17,7 +17,7 @@ function logoutUser() {
     localStorage.removeItem("token");
     localStorage.removeItem("lastActivity");
 
-    alert("Session expirée pour inactivité");
+    //alert("Session expirée pour inactivité");
 
     window.location.href = "accueil.php";
 }

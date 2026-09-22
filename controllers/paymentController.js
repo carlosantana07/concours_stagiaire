@@ -39,7 +39,7 @@ export default class PaymentController {
 
 
         this.concoursId = new URLSearchParams(window.location.search).get("id");
-        console.log("ID concours =", this.concoursId);
+       // console.log("ID concours =", this.concoursId);
 
         this.form = document.querySelector(".payment-form");
         this.inputs = document.querySelectorAll(".otp-input");
@@ -62,7 +62,7 @@ export default class PaymentController {
         const res = await PaymentModel.getConcoursDetail(this.concoursId, token);
 
         if (!res.ok) {
-            console.log(res.data);
+           // console.log(res.data);
             return;
         }
 
@@ -128,13 +128,13 @@ export default class PaymentController {
             id_concours: Number(id_concours)
         };
 
-        console.log("DATA PAIEMENT:", data);
+       // console.log("DATA PAIEMENT:", data);
 
         try {
 
             const res = await PaymentModel.initPayment(data, token);
 
-            console.log("PAIEMENT:", res.data);
+          //  console.log("PAIEMENT:", res.data);
 
             if (!res.ok) {
 
@@ -158,7 +158,7 @@ export default class PaymentController {
 
         } catch (err) {
 
-            console.log(err);
+           // console.log(err);
 
             messageEl.style.display = "block";
             messageEl.style.color = "red";

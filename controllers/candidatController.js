@@ -62,7 +62,7 @@ export default class CandidatController {
 
         } catch (err) {
 
-            // console.log(err);
+            //  console.log(err);
 
             const messageEl = document.getElementById("profilMessage");
 
@@ -197,7 +197,7 @@ export default class CandidatController {
                 window.URL.revokeObjectURL(url);
 
             } catch (err) {
-                console.log(err);
+                // console.log(err);
                 messageEl.style.display = "block";
                 messageEl.textContent = "Erreur lors du téléchargement du reçu";
             }
@@ -320,7 +320,7 @@ export default class CandidatController {
         const container = document.getElementById("candidaturesModalContainer");
 
         if (!modal || !btnVoir || !closeBtn || !container) {
-            console.error("Éléments du modal candidatures introuvables");
+           // console.error("Éléments du modal candidatures introuvables");
             return;
         }
 
@@ -396,7 +396,7 @@ export default class CandidatController {
         const loading = document.getElementById("loading");
 
         if (!container) {
-            console.error("Container candidatures introuvable");
+           // console.error("Container candidatures introuvable");
             this.isLoading = false;
             return;
         }
@@ -419,12 +419,12 @@ export default class CandidatController {
 
             const result = await res.json();
 
-            console.log("STATUT API :", res.status);
-            console.log("REPONSE CANDIDATURES :", result);
+            // console.log("STATUT API :", res.status);
+            // console.log("REPONSE CANDIDATURES :", result);
 
             const items = Array.isArray(result.data) ? result.data : [];
 
-            console.log("CANDIDATURES :", items);
+          //  console.log("CANDIDATURES :", items);
 
             if (items.length === 0) {
                 this.hasMore = false;
@@ -439,7 +439,7 @@ export default class CandidatController {
 
             items.forEach(cand => {
 
-                console.log("CANDIDATURE :", cand);
+              //  console.log("CANDIDATURE :", cand);
 
                 const row = document.createElement("div");
                 row.className = "profil-cand-row";
@@ -491,7 +491,7 @@ export default class CandidatController {
 
         } catch (err) {
 
-            console.error("ERREUR CANDIDATURES :", err);
+           // console.error("ERREUR CANDIDATURES :", err);
 
         } finally {
 
@@ -561,7 +561,7 @@ export default class CandidatController {
 
             } catch (err) {
 
-                console.error(err);
+              // console.error(err);
 
                 Swal.fire(
                     "Erreur",
@@ -605,8 +605,8 @@ export default class CandidatController {
 
         const data = res.data;
 
-        console.log("DATA UTILISÉ POUR LE RENDU :", data);
-        console.log("EST UN TABLEAU :", Array.isArray(data));
+        // console.log("DATA UTILISÉ POUR LE RENDU :", data);
+        // console.log("EST UN TABLEAU :", Array.isArray(data));
 
         if (!data || data.length === 0) {
 
@@ -815,7 +815,7 @@ export default class CandidatController {
                         pieceFile
                     );
 
-                    console.log("UPLOAD PIECE :", resPiece);
+                   // console.log("UPLOAD PIECE :", resPiece);
 
                     if (!resPiece.ok) {
 
@@ -840,7 +840,7 @@ export default class CandidatController {
                         certificatFile
                     );
 
-                    console.log("UPLOAD CERTIFICAT :", resCertificat);
+                  //  console.log("UPLOAD CERTIFICAT :", resCertificat);
 
                     if (!resCertificat.ok) {
 
@@ -937,7 +937,7 @@ export default class CandidatController {
 
             const res = await DocumentModel.getMesDocuments(token);
 
-            console.log("DOCUMENTS DU CANDIDAT :", res);
+           // console.log("DOCUMENTS DU CANDIDAT :", res);
 
             if (!res.ok) {
 
@@ -1201,7 +1201,7 @@ export default class CandidatController {
                         file
                     );
 
-                    console.log("MODIFICATION DOCUMENT :", res);
+                   // console.log("MODIFICATION DOCUMENT :", res);
 
                     if (!res.ok) {
 
@@ -1316,7 +1316,7 @@ export default class CandidatController {
                     blobName
                 );
 
-                console.log("SUPPRESSION DOCUMENT :", res);
+              //  console.log("SUPPRESSION DOCUMENT :", res);
 
                 if (!res.ok) {
 

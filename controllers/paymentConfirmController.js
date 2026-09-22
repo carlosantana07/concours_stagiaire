@@ -45,7 +45,7 @@ export default class PaymentConfirmController {
 
         } catch (err) {
 
-            console.log(err);
+           // console.log(err);
 
             messageEl.style.display = "block";
             messageEl.textContent =
@@ -60,7 +60,7 @@ export default class PaymentConfirmController {
         // console.log("ID:", concoursId);
 
         if (!res.ok) {
-            console.log(res.data);
+           // console.log(res.data);
             return;
         }
 
@@ -125,7 +125,7 @@ export default class PaymentConfirmController {
 
             } catch (err) {
 
-                console.log(err);
+              //  console.log(err);
 
                 messageEl.style.display = "block";
 

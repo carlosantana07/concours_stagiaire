@@ -28,15 +28,15 @@ export default class InscriptionModel {
             formData.append("files", data.diplome);
         }
 
-        console.log("FORMDATA ENVOYÉ :");
+       // console.log("FORMDATA ENVOYÉ :");
 
         for (const [key, value] of formData.entries()) {
-            console.log(
-                key,
-                value instanceof File
-                    ? `${value.name} (${value.type}, ${value.size} octets)`
-                    : value
-            );
+            // console.log(
+            //     key,
+            //     value instanceof File
+            //         ? `${value.name} (${value.type}, ${value.size} octets)`
+            //         : value
+            // );
         }
 
         const res = await fetch(`${API_URL}/inscription/s-inscrire`, {
@@ -49,7 +49,7 @@ export default class InscriptionModel {
 
         const result = await res.json();
 
-        console.log("REPONSE INSCRIPTION :", result);
+       // console.log("REPONSE INSCRIPTION :", result);
 
         return {
             ok: res.ok,

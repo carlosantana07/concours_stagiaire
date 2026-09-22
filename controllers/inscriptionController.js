@@ -30,7 +30,11 @@ export default class InscriptionController {
         const res = await InscriptionModel.getConcoursDetail(this.concoursId, token);
 
         if (!res.ok) {
-            console.log("Erreur chargement concours");
+            messageEl.style.display = "block";
+                messageEl.style.color = "red";
+                messageEl.textContent =
+                    "Erreur chargement concours";
+
             return;
         }
 
@@ -98,11 +102,11 @@ export default class InscriptionController {
 
             data.diplome = diplome.files[0];
 
-            console.log("DONNÉES ENVOYÉES :", {
-                id_concours: data.id_concours,
-                id_centre: data.id_centre,
-                diplome: data.diplome.name
-            });
+            // console.log("DONNÉES ENVOYÉES :", {
+            //     id_concours: data.id_concours,
+            //     id_centre: data.id_centre,
+            //     diplome: data.diplome.name
+            // });
 
             try {
 
@@ -119,7 +123,7 @@ export default class InscriptionController {
                     return;
                 }
 
-                console.log("REPONSE COMPLETE:", res.data);
+                // console.log("REPONSE COMPLETE:", res.data);
 
                 const idInscription =
                     res.data.data.id_inscription;
@@ -150,7 +154,7 @@ export default class InscriptionController {
 
             } catch (err) {
 
-                console.log(err);
+               // console.log(err);
 
                 messageEl.style.display = "block";
                 messageEl.style.color = "red";

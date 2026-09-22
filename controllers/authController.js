@@ -80,7 +80,7 @@ export default class AuthController {
 
             } catch (err) {
 
-                console.log(err);
+                err;
 
                 errorEl.style.display = "block";
 
@@ -159,7 +159,7 @@ export default class AuthController {
 
             } catch (err) {
 
-                console.log(err);
+                err;
 
                 messageEl.style.display = "block";
 
@@ -281,7 +281,7 @@ export default class AuthController {
 
             } catch (err) {
 
-                console.log(err);
+                err;
 
                 messageEl.style.display =
                     "block";
@@ -323,10 +323,10 @@ export default class AuthController {
                     formData.entries()
                 );
 
-            console.log(
-                "DATA ENVOYÉE :",
-                data
-            );
+            // console.log(
+            //     "DATA ENVOYÉE :",
+            //     data
+            // );
 
             // ===== VALIDATIONS =====
 
@@ -397,10 +397,10 @@ export default class AuthController {
                 const res =
                     await AuthModel.register(data);
 
-                console.log(
-                    "REPONSE API :",
-                    res.data
-                );
+                // console.log(
+                //     "REPONSE API :",
+                //     res.data
+                // );
 
                 // ===== ERREUR API =====
                 if (!res.ok) {
@@ -465,7 +465,8 @@ export default class AuthController {
 
             catch (err) {
 
-                console.log(err);
+                // console.log(err);
+                err;
 
                 messageEl.style.display =
                     "block";
@@ -616,10 +617,10 @@ export default class AuthController {
                         token
                     );
 
-                console.log(
-                    "OTP RESPONSE:",
-                    res.data
-                );
+                // console.log(
+                //     "OTP RESPONSE:",
+                //     res.data
+                // );
 
                 // ===== ERREUR =====
                 if (!res.ok) {
@@ -663,7 +664,8 @@ export default class AuthController {
 
             catch (err) {
 
-                console.log(err);
+                // console.log(err);
+                err;
 
                 messageEl.style.display =
                     "block";
@@ -722,7 +724,7 @@ export default class AuthController {
 
                 const res = await AuthModel.resendOtp(email);
 
-                console.log("RESEND OTP:", res.data);
+               // console.log("RESEND OTP:", res.data);
 
                 if (!res.ok) {
                     //alert(res.data.error || "Erreur renvoi OTP");
@@ -743,7 +745,7 @@ export default class AuthController {
                 startTimer();
 
             } catch (err) {
-                console.log(err);
+                //console.log(err);
                 messageEl.style.display = "block";
                 messageEl.style.color = "red";
                 messageEl.textContent =
@@ -791,7 +793,7 @@ export default class AuthController {
 
                 const res = await AuthModel.contact(data);
 
-                console.log("CONTACT:", res.data);
+                // console.log("CONTACT:", res.data);
 
                 if (!res.ok) {
 
@@ -811,7 +813,7 @@ export default class AuthController {
 
             } catch (err) {
 
-                console.log(err);
+                //console.log(err);
 
                 errorEl.style.display = "block";
                 errorEl.style.color = "red";

@@ -21,7 +21,7 @@ export default class ConcoursModel {
         const res = await fetch(url, options);
         const data = await res.json();
 
-        console.log("DATA", data);
+      //  console.log("DATA", data);
 
         return { ok: res.ok, data };
     }
@@ -54,7 +54,7 @@ export default class ConcoursModel {
         const res = await fetch(`${API}/detail/${id}`, options);
 
         const data = await res.json();
-        console.log("DATA", data);
+       // console.log("DATA", data);
         return { ok: res.ok, data };
     }
 }

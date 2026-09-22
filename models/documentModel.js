@@ -19,7 +19,7 @@ export default class DocumentModel {
 
         const data = await res.json();
 
-        console.log("Réponse upload document :", data);
+      //  console.log("Réponse upload document :", data);
 
         return {
             ok: res.ok,
@@ -38,7 +38,7 @@ export default class DocumentModel {
 
         const data = await res.json();
 
-        console.log("Mes documents :", data);
+       // console.log("Mes documents :", data);
 
         return {
             ok: res.ok,
@@ -65,7 +65,7 @@ export default class DocumentModel {
 
         const data = await res.json();
 
-        console.log("Réponse modification document :", data);
+       // console.log("Réponse modification document :", data);
 
         return {
             ok: res.ok,
@@ -87,7 +87,7 @@ export default class DocumentModel {
 
         const data = await res.json();
 
-        console.log("Réponse suppression document :", data);
+      //  console.log("Réponse suppression document :", data);
 
         return {
             ok: res.ok,

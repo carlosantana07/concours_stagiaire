@@ -5408,7 +5408,7 @@ body {
 }
 
 .profil-name {
-  margin: 0;
+  margin-top: -25px;
   color: #172033;
   font-size: 19px;
   font-weight: 700;
@@ -5924,7 +5924,6 @@ body {
     border-radius: 6px;
     font-size: 13px;
     font-weight: 500;
-    cursor: pointer;
     transition: all 0.2s ease;
     font-family: inherit;
 }
