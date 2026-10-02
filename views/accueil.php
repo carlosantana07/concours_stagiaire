@@ -25,9 +25,9 @@
          BARRE COULEURS
     ====================================================== -->
   <div class="flag-bar">
+    <div class="green"></div>
     <div class="yellow"></div>
-    <div class="yellow"></div>
-    <div class="yellow"></div>
+    <div class="red"></div>
   </div>
 
 

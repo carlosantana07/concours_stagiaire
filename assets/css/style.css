@@ -57,7 +57,7 @@ a {
 
   flex-shrink: 0;
 
-  color: #0756A3;
+  color: #14B53A;
 
   font-size: 20px;
   font-weight: 800;
@@ -143,7 +143,7 @@ a {
 
   margin-right: 7px;
 
-  color: #0756A3;
+  color: #14B53A;
 
   font-size: 14px;
 
@@ -159,12 +159,12 @@ a {
 
 .site-header nav a:hover,
 .site-header nav a.active {
-  color: #0756A3;
+  color: #14B53A;
 }
 
 .site-header nav a:hover i,
 .site-header nav a.active i {
-  color: #0756A3;
+  color: #14B53A;
 }
 
 
@@ -184,7 +184,7 @@ a {
 
   height: 3px;
 
-  background: #0756A3;
+  background: #14B53A;
 
   border-radius: 3px;
 
@@ -250,17 +250,17 @@ a {
 ============================================================ */
 
 .site-header .guest-button .btn-primary {
-  background: #0756A3;
+  background: #14B53A;
 
-  border: 1px solid #0756A3;
+  border: 1px solid #14B53A;
 
   color: #FFFFFF;
 }
 
 .site-header .guest-button .btn-primary:hover {
-  background: #06447F;
+  background: #0F8F2E;
 
-  border-color: #06447F;
+  border-color: #0F8F2E;
 }
 
 
@@ -271,17 +271,17 @@ a {
 .site-header .guest-button .btn-secondary {
   background: #FFFFFF;
 
-  border: 2px solid #0756A3;
+  border: 2px solid #14B53A;
 
-  color: #0756A3;
+  color: #14B53A;
 }
 
 .site-header .guest-button .btn-secondary:hover {
   background: #EAF3FB;
 
-  border-color: #0756A3;
+  border-color: #14B53A;
 
-  color: #06447F;
+  color: #0F8F2E;
 }
 
 
@@ -357,13 +357,13 @@ a {
 .site-header .account-menu a i {
   width: 18px;
 
-  color: #0756A3;
+  color: #14B53A;
 }
 
 .site-header .account-menu a:hover {
   background: #F5F7FA;
 
-  color: #0756A3;
+  color: #14B53A;
 }
 
 .site-header .account-menu a.logout-link {
@@ -394,7 +394,7 @@ a {
 
   background: #FFFFFF;
 
-  color: #0756A3;
+  color: #14B53A;
 
   font-size: 20px;
 
@@ -929,7 +929,7 @@ a {
 
   background: var(--primary-light, #EAF3FB);
 
-  color: var(--primary, #0756A3);
+  color: var(--primary, #14B53A);
 
   font-size: 24px;
 }
@@ -988,7 +988,7 @@ a {
 
   margin-bottom: 10px;
 
-  color: var(--primary, #0756A3);
+  color: var(--primary, #14B53A);
 
   font-size: 13px;
 
@@ -1116,9 +1116,9 @@ a {
 
   border-radius: 14px;
 
-  background: var(--primary-light, #EAF3FB);
+  color: var(--primary-light, #EAF3FB);
 
-  color: var(--primary, #0756A3);
+  background: var(--primary, #14B53A);
 
   font-size: 25px;
 }
@@ -1263,7 +1263,7 @@ a {
 
 
 .home-page .support-hours i {
-  color: var(--primary, #0756A3);
+  color: var(--primary, #14B53A);
 }
 
 
@@ -1325,9 +1325,9 @@ a {
 
   background: #FFFFFF;
 
-  color: #0756A3;
+  color: #14B53A;
 
-  border: 2px solid #0756A3;
+  border: 2px solid #14B53A;
 
   border-radius: 8px;
 
@@ -1348,21 +1348,21 @@ a {
 
 
 .home-page #btnInscription i {
-  color: #0756A3;
+  color: #14B53A;
 }
 
 
 .home-page #btnInscription:hover {
   background: #EAF3FB;
 
-  color: #06447F;
+  color: #0F8F2E;
 
-  border-color: #0756A3;
+  border-color: #0F8F2E;
 }
 
 
 .home-page #btnInscription:hover i {
-  color: #06447F;
+  color: #0F8F2E;
 }
 
 
@@ -1380,9 +1380,9 @@ a {
   padding: 0 17px;
 
   background: #FFFFFF;
-  color: #0756A3;
+  color: #14B53A;
 
-  border: 2px solid #0756A3;
+  border: 2px solid #14B53A;
   border-radius: 8px;
 
   font-size: 13px;
@@ -1398,17 +1398,17 @@ a {
 }
 
 .site-header .account-button i {
-  color: #0756A3;
+  color: #14B53A;
 }
 
 .site-header .account-button:hover {
   background: #EAF3FB;
-  color: #06447F;
-  border-color: #0756A3;
+  color: #0F8F2E;
+  border-color: #0F8F2E;
 }
 
 .site-header .account-button:hover i {
-  color: #06447F;
+  color: #0F8F2E;
 }
 
 
@@ -1427,9 +1427,9 @@ a {
   padding: 0 20px;
 
   background: #FFFFFF;
-  color: #0756A3;
+  color: #14B53A;
 
-  border: 2px solid #0756A3;
+  border: 2px solid #14B53A;
   border-radius: 8px;
 
   font-size: 14px;
@@ -1446,17 +1446,17 @@ a {
 }
 
 .home-page #btnResultat i {
-  color: #0756A3;
+  color: #14B53A;
 }
 
 .home-page #btnResultat:hover {
   background: #EAF3FB;
-  color: #06447F;
-  border-color: #0756A3;
+  color: #0F8F2E;
+  border-color: #0F8F2E;
 }
 
 .home-page #btnResultat:hover i {
-  color: #06447F;
+  color: #0F8F2E;
 }
 
 /* ============================================================
@@ -1890,7 +1890,7 @@ footer h3 {
 
   background: #EAF3FB;
 
-  color: #0756A3;
+  color: #14B53A;
 
   border-radius: 13px;
 
@@ -2080,7 +2080,7 @@ footer h3 {
 }
 
 .concours-page-body .infos span i {
-  color: #0756A3;
+  color: #14B53A;
 
   font-size: 13px;
 }
@@ -2123,9 +2123,9 @@ footer h3 {
 
   padding: 0 17px;
 
-  background: #0756A3;
+  background: #14B53A;
 
-  border: 1px solid #0756A3;
+  border: 1px solid #14B53A;
 
   border-radius: 7px;
 
@@ -2146,9 +2146,9 @@ footer h3 {
 }
 
 .concours-page-body .btn-detail:hover {
-  background: #06447F;
+  background: #0F8F2E;
 
-  border-color: #06447F;
+  border-color: #0F8F2E;
 
   transform: translateY(-1px);
 }
@@ -2213,7 +2213,7 @@ footer h3 {
 
   background: #EAF3FB;
 
-  color: #0756A3;
+  color: #14B53A;
 
   border-radius: 8px;
 
@@ -2295,7 +2295,7 @@ footer h3 {
 }
 
 .concours-page-body .filters select:focus {
-  border-color: #0756A3;
+  border-color: #14B53A;
 
   box-shadow:
     0 0 0 3px rgba(7, 86, 163, 0.10);
@@ -2355,9 +2355,9 @@ footer h3 {
 .concours-page-body .pagination a:hover {
   background: #EAF3FB;
 
-  border-color: #0756A3;
+  border-color: #14B53A;
 
-  color: #0756A3;
+  color: #14B53A;
 }
 
 
@@ -2589,7 +2589,7 @@ footer h3 {
   justify-content: center;
 
   background: #EAF3FB;
-  color: #0756A3;
+  color: #14B53A;
 
   border-radius: 14px;
 
@@ -2602,7 +2602,7 @@ footer h3 {
 
   margin-bottom: 5px;
 
-  color: #0756A3;
+  color: #14B53A;
 
   font-size: 12px;
   font-weight: 700;
@@ -2682,7 +2682,7 @@ footer h3 {
   justify-content: center;
 
   background: #EAF3FB;
-  color: #0756A3;
+  color: #14B53A;
 
   border-radius: 10px;
 
@@ -2791,7 +2791,7 @@ footer h3 {
 .inscription-concours-page .form-group input:focus,
 .inscription-concours-page .form-group select:focus,
 .inscription-concours-page .input:focus {
-  border-color: #0756A3;
+  border-color: #14B53A;
 
   box-shadow: 0 0 0 3px rgba(7, 86, 163, 0.09);
 
@@ -2816,7 +2816,7 @@ footer h3 {
 
   transform: translateY(-50%);
 
-  color: #0756A3;
+  color: #14B53A;
 
   font-size: 14px;
 
@@ -2848,7 +2848,7 @@ footer h3 {
   border: 1px solid #E2E7EE;
   border-radius: 9px;
 
-  color: #0756A3;
+  color: #14B53A;
 
   font-size: 14px;
   font-weight: 600;
@@ -2905,12 +2905,12 @@ footer h3 {
 .inscription-concours-page .upload-zone.drag-over {
   background: #F0F6FC;
 
-  border-color: #0756A3;
+  border-color: #14B53A;
 }
 
 
 .inscription-concours-page .upload-zone>i {
-  color: #0756A3;
+  color: #14B53A;
 
   font-size: 30px;
 
@@ -2928,7 +2928,7 @@ footer h3 {
 
 
 .inscription-concours-page .upload-zone p span {
-  color: #0756A3;
+  color: #14B53A;
 
   font-weight: 600;
 
@@ -3041,18 +3041,18 @@ footer h3 {
 /* SUIVANT */
 
 .inscription-concours-page .btn-next {
-  background: #0756A3;
+  background: #14B53A;
 
   color: #FFFFFF;
 
-  border: 1px solid #0756A3;
+  border: 1px solid #14B53A;
 }
 
 
 .inscription-concours-page .btn-next:hover {
-  background: #06447F;
+  background: #0F8F2E;
 
-  border-color: #06447F;
+  border-color: #0F8F2E;
 
   transform: translateY(-1px);
 }
@@ -3143,8 +3143,8 @@ footer h3 {
 
 :root {
 
-  --primary: #0756A3;
-  --primary-dark: #06447F;
+  --primary: #14B53A;
+  --primary-dark: #0F8F2E;
   --primary-light: #EAF3FB;
 
   --secondary: #D6A84F;
@@ -3237,9 +3237,9 @@ body {
 
   background:
     linear-gradient(145deg,
-      #064B8F 0%,
-      #0756A3 45%,
-      #0A68B8 100%);
+      #068f34 0%,
+      #14B53A 45%,
+      #06682c 100%);
 
 }
 
@@ -4204,7 +4204,7 @@ body {
 
   background: #EAF3FB;
 
-  color: #0756A3;
+  color: #14B53A;
 
   border-radius: 12px;
 
@@ -4279,7 +4279,7 @@ body {
 
   background: #EAF3FB;
 
-  color: #0756A3;
+  color: #14B53A;
 
   border-radius: 9px;
 
@@ -4392,7 +4392,7 @@ body {
 
 .register-page .form-group input:focus,
 .register-page .form-group select:focus {
-  border-color: #0756A3;
+  border-color: #14B53A;
 
   box-shadow:
     0 0 0 3px rgba(7, 86, 163, 0.10);
@@ -4444,7 +4444,7 @@ body {
 }
 
 .register-page .password-toggle:hover {
-  color: #0756A3;
+  color: #14B53A;
 }
 
 
@@ -4502,9 +4502,9 @@ body {
 
   padding: 0 25px;
 
-  background: #0756A3;
+  background: #14B53A;
 
-  border: 1px solid #0756A3;
+  border: 1px solid #14B53A;
 
   border-radius: 8px;
 
@@ -4525,7 +4525,7 @@ body {
 }
 
 .register-page .register-submit:hover {
-  background: #06447F;
+  background: #0F8F2E;
 
   box-shadow:
     0 8px 20px rgba(7, 86, 163, 0.24);
@@ -4671,7 +4671,7 @@ body {
   align-items: center;
   justify-content: center;
   background: #EAF3FB;
-  color: #0756A3;
+  color: #14B53A;
   border-radius: 14px;
   font-size: 22px;
 }
@@ -4679,7 +4679,7 @@ body {
 .help-page .help-eyebrow {
   display: block;
   margin-bottom: 6px;
-  color: #0756A3;
+  color: #14B53A;
   font-size: 11px;
   font-weight: 700;
   text-transform: uppercase;
@@ -4751,7 +4751,7 @@ body {
   align-items: center;
   justify-content: center;
   background: #EAF3FB;
-  color: #0756A3;
+  color: #14B53A;
   border-radius: 8px;
   font-size: 11px;
   transition:
@@ -4761,7 +4761,7 @@ body {
 
 .help-page .help-accordion-item.active .help-accordion-icon {
   transform: rotate(90deg);
-  background: #0756A3;
+  background: #14B53A;
   color: #FFFFFF;
 }
 
@@ -4809,7 +4809,7 @@ body {
   align-items: center;
   justify-content: center;
   background: #EAF3FB;
-  color: #0756A3;
+  color: #14B53A;
   border-radius: 9px;
   font-size: 16px;
 }
@@ -4841,8 +4841,8 @@ body {
   gap: 8px;
   flex-shrink: 0;
   padding: 0 15px;
-  background: #0756A3;
-  border: 1px solid #0756A3;
+  background: #14B53A;
+  border: 1px solid #14B53A;
   border-radius: 8px;
   color: #FFFFFF;
   font-size: 12px;
@@ -4855,8 +4855,8 @@ body {
 }
 
 .help-page .help-contact-button:hover {
-  background: #06447F;
-  border-color: #06447F;
+  background: #0F8F2E;
+  border-color: #0F8F2E;
   color: #FFFFFF;
   transform: translateY(-1px);
 }
@@ -5110,7 +5110,7 @@ body {
   align-items: center;
   justify-content: center;
   background: #EAF3FB;
-  color: #0756A3;
+  color: #14B53A;
   border-radius: 14px;
   font-size: 22px;
 }
@@ -5118,7 +5118,7 @@ body {
 .contact-page .contact-eyebrow {
   display: block;
   margin-bottom: 6px;
-  color: #0756A3;
+  color: #14B53A;
   font-size: 11px;
   font-weight: 700;
   text-transform: uppercase;
@@ -5173,7 +5173,7 @@ body {
 .contact-page .contact-textarea-wrapper>i {
   position: absolute;
   left: 14px;
-  color: #0756A3;
+  color: #14B53A;
   font-size: 14px;
   pointer-events: none;
 }
@@ -5218,7 +5218,7 @@ body {
 
 .contact-page .contact-input-wrapper input:focus,
 .contact-page .contact-textarea-wrapper textarea:focus {
-  border-color: #0756A3;
+  border-color: #14B53A;
   box-shadow: 0 0 0 3px rgba(7, 86, 163, 0.09);
   background: #FFFFFF;
 }
@@ -5248,8 +5248,8 @@ body {
   justify-content: center;
   gap: 9px;
   padding: 0 20px;
-  background: #0756A3;
-  border: 1px solid #0756A3;
+  background: #14B53A;
+  border: 1px solid #14B53A;
   border-radius: 9px;
   color: #FFFFFF;
   font-family: inherit;
@@ -5263,8 +5263,8 @@ body {
 }
 
 .contact-page .btn-submit:hover {
-  background: #06447F;
-  border-color: #06447F;
+  background: #0F8F2E;
+  border-color: #0F8F2E;
   transform: translateY(-1px);
 }
 
@@ -5360,8 +5360,8 @@ body {
 .profil-banner {
   height: 125px;
   background: linear-gradient(135deg,
-      #0756A3 0%,
-      #06447F 100%);
+      #14B53A 0%,
+      #0F8F2E 100%);
 }
 
 .profil-hero-body {
@@ -5395,7 +5395,7 @@ body {
 
   box-shadow: 0 4px 15px rgba(15, 35, 65, 0.16);
 
-  color: #0756A3;
+  color: #14B53A;
   font-size: 23px;
   font-weight: 700;
 }
@@ -5409,7 +5409,7 @@ body {
 
 .profil-name {
   margin-top: -25px;
-  color: #172033;
+  color: #fff;
   font-size: 19px;
   font-weight: 700;
   line-height: 1.3;
@@ -5452,13 +5452,13 @@ body {
 }
 
 .profil-btn-modifier i {
-  color: #0756A3;
+  color: #14B53A;
 }
 
 .profil-btn-modifier:hover {
   background: #EAF3FB;
   border-color: #BFD5E8;
-  color: #0756A3;
+  color: #14B53A;
 }
 
 
@@ -5521,20 +5521,20 @@ body {
 
 .profil-tab:hover {
   background: #F8FAFC;
-  color: #0756A3;
+  color: #14B53A;
 }
 
 .profil-tab:hover i {
-  color: #0756A3;
+  color: #14B53A;
 }
 
 .profil-tab.active {
-  color: #0756A3;
+  color: #14B53A;
   background: #F8FBFE;
 }
 
 .profil-tab.active i {
-  color: #0756A3;
+  color: #14B53A;
 }
 
 .profil-tab.active::after {
@@ -5544,7 +5544,7 @@ body {
   right: 18px;
   bottom: 0;
   height: 3px;
-  background: #0756A3;
+  background: #14B53A;
   border-radius: 3px 3px 0 0;
 }
 
@@ -5599,7 +5599,7 @@ body {
 }
 
 .profil-card-title i {
-  color: #0756A3 !important;
+  color: #14B53A !important;
   font-size: 15px;
 }
 
@@ -5690,7 +5690,7 @@ body {
 
 .profil-input:focus,
 .profil-body .form-control:focus {
-  border-color: #0756A3;
+  border-color: #14B53A;
   box-shadow: 0 0 0 3px rgba(7, 86, 163, 0.09);
 }
 
@@ -5714,8 +5714,8 @@ body {
   min-height: 42px;
   padding: 0 18px;
 
-  background: #0756A3;
-  border: 1px solid #0756A3;
+  background: #14B53A;
+  border: 1px solid #14B53A;
   border-radius: 8px;
 
   color: #FFFFFF;
@@ -5732,8 +5732,8 @@ body {
 }
 
 .profil-btn-save:hover {
-  background: #06447F;
-  border-color: #06447F;
+  background: #0F8F2E;
+  border-color: #0F8F2E;
 }
 
 .profil-btn-save:active {
@@ -6022,7 +6022,7 @@ body {
   align-items: center;
   gap: 6px;
 
-  color: #0756A3;
+  color: #14B53A;
   font-size: 12px;
   font-weight: 600;
 
@@ -6033,7 +6033,7 @@ body {
 }
 
 .profil-voir-tout:hover {
-  color: #06447F;
+  color: #0F8F2E;
 }
 
 .profil-voir-tout i {
@@ -6218,14 +6218,14 @@ body {
 
 /* Télécharger reçu */
 .profil-body #candidaturesModalContainer .btn-download-receipt {
-  background: #0756A3 !important;
-  border: 1px solid #0756A3 !important;
+  background: #14B53A !important;
+  border: 1px solid #14B53A !important;
   color: #FFFFFF !important;
 }
 
 .profil-body #candidaturesModalContainer .btn-download-receipt:hover {
-  background: #06447F !important;
-  border-color: #06447F !important;
+  background: #0F8F2E !important;
+  border-color: #0F8F2E !important;
 }
 
 /* Finaliser paiement */
@@ -6539,8 +6539,8 @@ body {
 
 /* Télécharger reçu */
 .profil-body #candidaturesContainer .btn-download-receipt {
-  background: #0756A3 !important;
-  border: 1px solid #0756A3 !important;
+  background: #14B53A !important;
+  border: 1px solid #14B53A !important;
   color: #FFFFFF !important;
 }
 
@@ -6636,14 +6636,14 @@ body {
 
 /* Télécharger reçu */
 .profil-body #candidaturesContainer .btn-download-receipt {
-  background: #0756A3 !important;
-  border: 1px solid #0756A3 !important;
+  background: #14B53A !important;
+  border: 1px solid #14B53A !important;
   color: #FFFFFF !important;
 }
 
 .profil-body #candidaturesContainer .btn-download-receipt:hover {
-  background: #06447F !important;
-  border-color: #06447F !important;
+  background: #0F8F2E !important;
+  border-color: #0F8F2E !important;
 }
 
 /* Finaliser paiement */
@@ -6750,7 +6750,7 @@ body {
   }
 
   .profil-body .profil-tab.active {
-    color: #0756A3;
+    color: #14B53A;
     background: #F8FBFE;
   }
 
@@ -6764,7 +6764,7 @@ body {
 
     height: 3px;
 
-    background: #0756A3;
+    background: #14B53A;
 
     border-radius: 3px 3px 0 0;
   }
@@ -6880,7 +6880,7 @@ body {
 
   background: #EAF3FB;
 
-  color: #0756A3;
+  color: #14B53A;
 
   border-radius: 13px;
 
@@ -6908,7 +6908,7 @@ body {
 .detail-page .detail-header h1 {
   margin: 0;
 
-  color: #0756A3;
+  color: #14B53A;
 
   text-align: left;
 
@@ -6949,7 +6949,7 @@ body {
 
   margin-bottom: 15px;
 
-  color: #0756A3;
+  color: #14B53A;
 
   font-size: 15px;
 }
@@ -6966,7 +6966,7 @@ body {
 
   background: #EAF3FB;
 
-  color: #0756A3;
+  color: #14B53A;
 
   border-radius: 8px;
 
@@ -7028,7 +7028,7 @@ body {
 
   background: #EAF3FB;
 
-  color: #0756A3;
+  color: #14B53A;
 
   border-radius: 8px;
 
@@ -7151,7 +7151,7 @@ body {
 
   border-radius: 7px;
 
-  color: #0756A3;
+  color: #14B53A;
 
   font-size: 12px;
   font-weight: 600;
@@ -7177,9 +7177,9 @@ body {
 
   flex-shrink: 0;
 
-  background: #0756A3;
+  background: #14B53A;
 
-  border: 1px solid #0756A3;
+  border: 1px solid #14B53A;
 
   border-radius: 8px;
 
@@ -7200,9 +7200,9 @@ body {
 }
 
 .detail-page .btn-next:hover {
-  background: #06447F;
+  background: #0F8F2E;
 
-  border-color: #06447F;
+  border-color: #0F8F2E;
 
   box-shadow:
     0 6px 16px rgba(7, 86, 163, 0.18);
@@ -7601,7 +7601,7 @@ body {
   justify-content: center;
 
   background: #EAF3FB;
-  color: #0756A3;
+  color: #14B53A;
 
   border-radius: 14px;
 
@@ -7614,7 +7614,7 @@ body {
 
   margin-bottom: 5px;
 
-  color: #0756A3;
+  color: #14B53A;
 
   font-size: 12px;
   font-weight: 700;
@@ -7699,7 +7699,7 @@ body {
   justify-content: center;
 
   background: #EAF3FB;
-  color: #0756A3;
+  color: #14B53A;
 
   border-radius: 10px;
 
@@ -7765,7 +7765,7 @@ body {
 
 
 .payment-page .payment-btn:hover {
-  border-color: #0756A3;
+  border-color: #14B53A;
 
   background: #F8FBFE;
 
@@ -7774,7 +7774,7 @@ body {
 
 
 .payment-page .payment-btn.active {
-  border: 2px solid #0756A3;
+  border: 2px solid #14B53A;
 
   background: #F8FBFE;
 
@@ -7837,7 +7837,7 @@ body {
 
   transform: translateY(-50%);
 
-  color: #0756A3;
+  color: #14B53A;
 
   font-size: 14px;
 
@@ -7872,7 +7872,7 @@ body {
 
 
 .payment-page .input-wrapper:focus {
-  border-color: #0756A3;
+  border-color: #14B53A;
 
   box-shadow: 0 0 0 3px rgba(7, 86, 163, 0.09);
 }
@@ -7980,7 +7980,7 @@ body {
 
 
 .payment-page .otp-input:focus {
-  border-color: #0756A3;
+  border-color: #14B53A;
 
   box-shadow: 0 0 0 3px rgba(7, 86, 163, 0.09);
 }
@@ -8017,9 +8017,9 @@ body {
 
   padding: 0 22px;
 
-  background: #0756A3;
+  background: #14B53A;
 
-  border: 1px solid #0756A3;
+  border: 1px solid #14B53A;
   border-radius: 9px;
 
   color: #FFFFFF;
@@ -8039,9 +8039,9 @@ body {
 
 
 .payment-page .btn-pay:hover {
-  background: #06447F;
+  background: #0F8F2E;
 
-  border-color: #06447F;
+  border-color: #0F8F2E;
 
   transform: translateY(-1px);
 }
@@ -8116,7 +8116,7 @@ body {
   justify-content: center;
 
   background: #EAF3FB;
-  color: #0756A3;
+  color: #14B53A;
 
   border-radius: 10px;
 
@@ -8185,7 +8185,7 @@ body {
 
 
 .payment-page .summary-value.concours-name {
-  color: #0756A3;
+  color: #14B53A;
 }
 
 
@@ -8207,7 +8207,7 @@ body {
 
 
 .payment-page .summary-total>strong {
-  color: #0756A3;
+  color: #14B53A;
 
   font-size: 22px;
   font-weight: 700;
@@ -8239,7 +8239,7 @@ body {
 
   margin-top: 2px;
 
-  color: #0756A3;
+  color: #14B53A;
 
   font-size: 14px;
 }
@@ -8510,13 +8510,13 @@ body {
 
 /* SUIVANT */
 .resultat-page .btn-suivant {
-  color: #0756A3;
-  border: 1px solid #0756A3;
+  color: #14B53A;
+  border: 1px solid #14B53A;
 }
 
 .resultat-page .btn-suivant:hover {
   background: #EAF3FB;
-  border-color: #06447F;
+  border-color: #0F8F2E;
 }
 
 /* =========================================
@@ -8555,8 +8555,8 @@ body {
 
 /* PAGE ACTIVE */
 .resultat-page .page-item.active {
-  color: #0756A3;
-  border-color: #0756A3;
+  color: #14B53A;
+  border-color: #14B53A;
   background: #EAF3FB;
 }
 
@@ -8775,7 +8775,7 @@ body {
 
 .otp-page-body .otp-input:focus {
   background: #FFFFFF;
-  border-color: #0756A3;
+  border-color: #14B53A;
   box-shadow: 0 0 0 3px rgba(7, 86, 163, 0.10);
 }
 
@@ -8797,10 +8797,10 @@ body {
 
   padding: 0 18px;
 
-  background: #0756A3;
+  background: #14B53A;
   color: #FFFFFF;
 
-  border: 1px solid #0756A3;
+  border: 1px solid #14B53A;
   border-radius: 8px;
 
   font-family: 'Inter', sans-serif;
@@ -8815,8 +8815,8 @@ body {
 }
 
 .otp-page-body .otp-btn-primary:hover {
-  background: #06447F;
-  border-color: #06447F;
+  background: #0F8F2E;
+  border-color: #0F8F2E;
 }
 
 /* RENVOI */
@@ -8839,9 +8839,9 @@ body {
   padding: 0 16px;
 
   background: #FFFFFF;
-  color: #0756A3;
+  color: #14B53A;
 
-  border: 1px solid #0756A3;
+  border: 1px solid #14B53A;
   border-radius: 8px;
 
   font-family: 'Inter', sans-serif;
@@ -8859,7 +8859,7 @@ body {
 
 .otp-page-body .otp-resend .btn-secondary:hover {
   background: #EAF3FB;
-  color: #06447F;
+  color: #0F8F2E;
 }
 
 /* COMPTEUR */
@@ -9060,7 +9060,7 @@ body {
 
   background: #EAF3FB;
 
-  color: #0756A3;
+  color: #14B53A;
 
   font-size: 21px;
 
@@ -9077,7 +9077,7 @@ body {
 
   margin-bottom: 6px;
 
-  color: #0756A3;
+  color: #14B53A;
 
   font-size: 10px;
 
@@ -9213,7 +9213,7 @@ body {
 
   background: #FFFFFF;
 
-  border-color: #0756A3;
+  border-color: #14B53A;
 
   box-shadow:
     0 0 0 4px rgba(7, 86, 163, 0.08);
@@ -9425,7 +9425,7 @@ body {
 
   border-radius: 10px;
 
-  background: #0756A3;
+  background: #14B53A;
 
   color: #FFFFFF;
 
@@ -9445,7 +9445,7 @@ body {
 
 .forgot-submit:hover {
 
-  background: #06447F;
+  background: #0F8F2E;
 
   transform: translateY(-1px);
 
@@ -9483,7 +9483,7 @@ body {
 
   gap: 7px;
 
-  color: #0756A3;
+  color: #14B53A;
 
   font-size: 12px;
 
@@ -9693,7 +9693,7 @@ body {
 
   background: #EAF3FB;
 
-  color: #0756A3;
+  color: #14B53A;
 
   font-size: 21px;
 
@@ -9710,7 +9710,7 @@ body {
 
   margin-bottom: 6px;
 
-  color: #0756A3;
+  color: #14B53A;
 
   font-size: 10px;
 
@@ -9844,7 +9844,7 @@ body {
 
   background: #FFFFFF;
 
-  border-color: #0756A3;
+  border-color: #14B53A;
 
   box-shadow:
     0 0 0 4px rgba(7, 86, 163, 0.08);
@@ -9940,7 +9940,7 @@ body {
 
   background: #EAF3FB;
 
-  color: #0756A3;
+  color: #14B53A;
 
 }
 
@@ -10020,7 +10020,7 @@ body {
 
   border-radius: 10px;
 
-  background: #0756A3;
+  background: #14B53A;
 
   color: #FFFFFF;
 
@@ -10040,7 +10040,7 @@ body {
 
 .reset-submit:hover {
 
-  background: #06447F;
+  background: #0F8F2E;
 
   transform: translateY(-1px);
 
@@ -10078,7 +10078,7 @@ body {
 
   gap: 7px;
 
-  color: #0756A3;
+  color: #14B53A;
 
   font-size: 12px;
 
@@ -10301,7 +10301,7 @@ body {
   align-items: center;
   justify-content: center;
   background: #EAF3FB;
-  color: #0756A3;
+  color: #14B53A;
   border-radius: 9px;
   font-size: 16px;
 }
@@ -10322,7 +10322,7 @@ body {
 }
 
 .payment-confirm-page .payment-confirm-summary-header strong {
-  color: #0756A3;
+  color: #14B53A;
   font-size: 15px;
   font-weight: 700;
   line-height: 1.4;
@@ -10403,14 +10403,14 @@ body {
 }
 
 .payment-confirm-page .payment-confirm-concours {
-  background: #0756A3;
-  border: 1px solid #0756A3;
+  background: #14B53A;
+  border: 1px solid #14B53A;
   color: #FFFFFF;
 }
 
 .payment-confirm-page .payment-confirm-concours:hover {
-  background: #06447F;
-  border-color: #06447F;
+  background: #0F8F2E;
+  border-color: #0F8F2E;
   transform: translateY(-1px);
 }
 

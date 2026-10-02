@@ -125,7 +125,7 @@
                     <div>
                         <!-- <span class="login-eyebrow">ESPACE CANDIDAT</span> -->
 
-                        <h1 style="color: #0357A8;">Bienvenue</h1>
+                        <h1 style="color: #0F8F2E;">Bienvenue</h1>
 
                         <p>
                             Connectez-vous à votre espace personnel

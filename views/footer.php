@@ -3,7 +3,7 @@
     
     <div class="footer-col">
       <div class="logo footer-logo">
-        <img src="../assets/image/armoirie.jpg" alt="logo" height="40">
+        <img src="../assets/image/Flag_of_Mali.svg" alt="logo" height="40">
         <span>E-CONCOURS</span>
       </div>
 

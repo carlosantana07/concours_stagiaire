@@ -135,7 +135,7 @@
 
     <script type="module">
         import PaymentConfirmController
-            from "../controllers/paymentConfirmController.js";
+            from "../controllers/PaymentConfirmController.js";
 
         PaymentConfirmController.init();
     </script>

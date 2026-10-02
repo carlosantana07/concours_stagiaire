@@ -3,7 +3,7 @@
     <!-- LOGO -->
     <div class="logo">
         <img
-            src="../assets/image/armoirie.jpg"
+            src="../assets/image/Flag_of_Mali.svg"
             alt="Armoiries du Mali"
         >
 
