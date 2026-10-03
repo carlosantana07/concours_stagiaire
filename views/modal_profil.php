@@ -80,3 +80,22 @@
 
     </div>
 </div>
+
+<script>
+    const modalCandidatures = document.getElementById("modalCandidatures");
+    const closeCandidatures = document.querySelector(".close-candidatures");
+
+    function fermerModalCandidatures() {
+        modalCandidatures.classList.add("hidden");
+    }
+
+    // Bouton ×
+    closeCandidatures.addEventListener("click", fermerModalCandidatures);
+
+    // Clic sur l'arrière-plan
+    modalCandidatures.addEventListener("click", function(e) {
+        if (e.target === modalCandidatures) {
+            fermerModalCandidatures();
+        }
+    });
+</script>
