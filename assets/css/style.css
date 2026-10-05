@@ -2033,6 +2033,30 @@ footer h3 {
   transform: translateY(-1px);
 }
 
+.concours-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.concours-title h2 {
+    margin: 0;
+}
+
+.concours-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.concours-status.inscrit {
+    color: #14B53A;
+}
+
 
 /* TITRE */
 

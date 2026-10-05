@@ -151,25 +151,22 @@ export default class ConcoursController {
             const card = document.createElement("div");
             card.className = "concours-card";
 
-            const bouton = concours.est_inscrit
+            const statutInscription = concours.est_inscrit
                 ? `
-                <span class="btn-primary disabled">
-                    <i class="fa-solid fa-check"></i>
+                <span class="concours-status inscrit">
+                    <i class="fa-solid fa-circle-check"></i>
                     Déjà inscrit
                 </span>
             `
-                : `
-                <a
-                    href="detail_concours.php?id=${concours.id_concours}"
-                    class="btn-primary"
-                >
-                    Voir détails
-                </a>
-            `;
+                : "";
 
             card.innerHTML = `
 
-            <h2>${concours.nom}</h2>
+            <div class="concours-title">
+                <h2>${concours.nom}</h2>
+
+                ${statutInscription}
+            </div>
 
             <div class="concours-footer">
 
@@ -185,7 +182,12 @@ export default class ConcoursController {
                     </span>
                 </div>
 
-                ${bouton}
+                <a
+                    href="detail_concours.php?id=${concours.id_concours}"
+                    class="btn-primary"
+                >
+                    Voir détails
+                </a>
 
             </div>
         `;

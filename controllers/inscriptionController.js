@@ -106,7 +106,7 @@ export default class InscriptionController {
                 this.form.querySelector("[name='niveau_etude']")?.value || "";
 
             data.annee_obtentation =
-                this.form.querySelector("[name='annee_obtentation']")?.value || "";
+                Number(this.form.querySelector("[name='annee_obtentation']")?.value || "");
 
             data.ref_diplome =
                 this.form.querySelector("[name='ref_diplome']")?.value || "";
