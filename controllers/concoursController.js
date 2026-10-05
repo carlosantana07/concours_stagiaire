@@ -145,7 +145,16 @@ export default class ConcoursController {
     static renderConcours(concoursList) {
 
         function encodeId(id) {
-            return btoa(String(id))
+            const secret = "E_CONCOURS_2026_X7K9";
+
+            const random = Math.random()
+                .toString(36)
+                .substring(2, 10)
+                .toUpperCase();
+
+            const data = `${secret}|${id}|${random}|ECO2026`;
+
+            return btoa(data)
                 .replace(/\+/g, "-")
                 .replace(/\//g, "_")
                 .replace(/=+$/, "");
@@ -189,12 +198,12 @@ export default class ConcoursController {
                     </span>
                 </div>
 
-            <a
-                href="detail_concours.php?id=${encodeId(concours.id_concours)}"
-                class="btn-primary">
-           
-                Voir détails
-            </a>
+           <a
+    href="detail_concours.php?id=${encodeId(concours.id_concours)}"
+    class="btn-primary"
+>
+    Voir détails
+</a>
 
             </div>
         `;
@@ -267,22 +276,52 @@ export default class ConcoursController {
         }
 
         function decodeId(encodedId) {
-            encodedId = encodedId
-                .replace(/-/g, "+")
-                .replace(/_/g, "/");
+            try {
+                let decoded = encodedId
+                    .replace(/-/g, "+")
+                    .replace(/_/g, "/");
 
-            while (encodedId.length % 4) {
-                encodedId += "=";
+                while (decoded.length % 4 !== 0) {
+                    decoded += "=";
+                }
+
+                const data = atob(decoded);
+
+                const parts = data.split("|");
+
+                if (parts.length !== 4) {
+                    return null;
+                }
+
+                const secret = parts[0];
+                const id = parts[1];
+
+                if (secret !== "E_CONCOURS_2026_X7K9") {
+                    return null;
+                }
+
+                if (!/^\d+$/.test(id)) {
+                    return null;
+                }
+
+                return id;
+
+            } catch (error) {
+                console.error("Erreur décodage :", error);
+                return null;
             }
-
-            return atob(encodedId);
         }
+        const params = new URLSearchParams(window.location.search);
 
-        const urlParams = new URLSearchParams(window.location.search);
-        const encodedId = urlParams.get("id");
+        const encodedId = params.get("id");
+
         const concoursId = decodeId(encodedId);
-        // console.log("DETAIL CONCOURS", concoursId);
-        if (!concoursId) return;
+
+        if (!concoursId) {
+            console.error("ID concours invalide");
+        } else {
+            console.log("ID concours :", concoursId);
+        }
 
         const res = await ConcoursModel.getDetail(concoursId, token);
 
@@ -301,6 +340,22 @@ export default class ConcoursController {
     }
 
     static renderDetail(c) {
+
+        function encodeId(id) {
+            const secret = "E_CONCOURS_2026_X7K9";
+
+            const random = Math.random()
+                .toString(36)
+                .substring(2, 10)
+                .toUpperCase();
+
+            const data = `${secret}|${id}|${random}|ECO2026`;
+
+            return btoa(data)
+                .replace(/\+/g, "-")
+                .replace(/\//g, "_")
+                .replace(/=+$/, "");
+        }
 
         // TITRE
         document.getElementById("titreConcours").innerText = c.nom || "";
@@ -353,8 +408,9 @@ export default class ConcoursController {
         }).join(" ");
 
         // BUTTON NEXT
+
         document.getElementById("btnNext").href =
-            "inscription_concours.php?id=" + c.id_concours;
+            "inscription_concours.php?id=" + encodeId(c.id_concours);
     }
 
 }

@@ -278,11 +278,12 @@ export default class CandidatController {
         // document.querySelector("[name='prenom']").value = c.prenom || "";
         // document.querySelector("[name='date_naissance']").value = c.date_naissance || "";
         // document.querySelector("[name='lieu_naissance']").value = c.lieu_naissance || "";
-        document.querySelector("[name='telephone']").value = c.telephone || "";
-        document.querySelector("[name='email']").value = c.email || "";
-        document.querySelector("[name='emploi']").value = c.emploi || "";
-        document.querySelector("[name='ministere']").value = c.ministere || "";
+        // document.querySelector("[name='telephone']").value = c.telephone || "";
+        // document.querySelector("[name='email']").value = c.email || "";
+        document.getElementById("emploi_modif").value = c.emploi || "";
+        document.getElementById("ministere_modif").value = c.ministere || "";
         // document.querySelector("[name='matricule']").value = c.matricule || "";
+        
     }
 
     static formatDate(date) {

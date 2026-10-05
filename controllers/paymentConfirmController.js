@@ -21,8 +21,77 @@ export default class PaymentConfirmController {
             return;
         }
 
-        const concoursId =
-            new URLSearchParams(window.location.search).get("id");
+        const params =
+            new URLSearchParams(window.location.search);
+
+        const encodedId =
+            params.get("id");
+
+        if (!encodedId) {
+
+            messageEl.style.display = "block";
+            messageEl.textContent =
+                "Concours invalide";
+
+            return;
+        }
+
+        let concoursId;
+
+        try {
+
+            let base64 = encodedId
+                .replace(/-/g, "+")
+                .replace(/_/g, "/");
+
+            while (base64.length % 4 !== 0) {
+                base64 += "=";
+            }
+
+            const decoded = atob(base64);
+
+            // Format :
+            // E_CONCOURS_2026_X7K9|15|RANDOM|ECO2026
+
+            const parts = decoded.split("|");
+
+            if (parts.length !== 4) {
+                throw new Error("Format ID invalide");
+            }
+
+            const secret = parts[0];
+            const id = parts[1];
+            const signature = parts[3];
+
+            if (secret !== "E_CONCOURS_2026_X7K9") {
+                throw new Error("Secret invalide");
+            }
+
+            if (signature !== "ECO2026") {
+                throw new Error("Signature invalide");
+            }
+
+            if (!/^\d+$/.test(id)) {
+                throw new Error("ID concours invalide");
+            }
+
+            concoursId = Number(id);
+
+            console.log("ID concours décodé :", concoursId);
+
+        } catch (error) {
+
+            console.error(
+                "Erreur décodage ID concours :",
+                error
+            );
+
+            messageEl.style.display = "block";
+            messageEl.textContent =
+                "Concours invalide";
+
+            return;
+        }
 
         this.id_inscription =
             localStorage.getItem("id_inscription");
@@ -45,7 +114,7 @@ export default class PaymentConfirmController {
 
         } catch (err) {
 
-           // console.log(err);
+            // console.log(err);
 
             messageEl.style.display = "block";
             messageEl.textContent =
@@ -60,7 +129,7 @@ export default class PaymentConfirmController {
         // console.log("ID:", concoursId);
 
         if (!res.ok) {
-           // console.log(res.data);
+            // console.log(res.data);
             return;
         }
 
@@ -125,7 +194,7 @@ export default class PaymentConfirmController {
 
             } catch (err) {
 
-              //  console.log(err);
+                //  console.log(err);
 
                 messageEl.style.display = "block";
 

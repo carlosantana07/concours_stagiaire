@@ -38,11 +38,11 @@
             <h4>Informations professionnelles</h4>
 
             <div class="form-group">
-                <input name="emploi" placeholder="Emploi" class="input">
+                <input id="emploi_modif" name="emploi" placeholder="Emploi" class="input">
             </div>
 
             <div class="form-group">
-                <input name="ministere" placeholder="Ministère" class="input">
+                <input id="ministere_modif" name="ministere" placeholder="Ministère" class="input">
             </div>
 
             <!-- <div class="form-group">

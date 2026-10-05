@@ -1,3 +1,53 @@
+<?php
+
+$encodedId = $_GET['id'] ?? '';
+
+if (empty($encodedId)) {
+    die("Concours invalide");
+}
+
+$base64 = strtr(
+    $encodedId,
+    '-_',
+    '+/'
+);
+
+$padding = strlen($base64) % 4;
+
+if ($padding !== 0) {
+    $base64 .= str_repeat('=', 4 - $padding);
+}
+
+$decoded = base64_decode($base64, true);
+
+if ($decoded === false) {
+    die("Concours invalide");
+}
+
+$parts = explode('|', $decoded);
+
+if (count($parts) !== 4) {
+    die("Concours invalide");
+}
+
+$secret = $parts[0];
+$id_Concours = $parts[1];
+$signature = $parts[3];
+
+if ($secret !== "E_CONCOURS_2026_X7K9") {
+    die("Concours invalide");
+}
+
+if ($signature !== "ECO2026") {
+    die("Concours invalide");
+}
+
+if (!ctype_digit($id_Concours)) {
+    die("Concours invalide");
+}
+
+$id_Concours = (int) $id_Concours;
+?>
 <!DOCTYPE html>
 <html lang="fr">
 

@@ -1,3 +1,59 @@
+<?php
+
+$encodedId = $_GET['id'] ?? '';
+
+if (empty($encodedId)) {
+    die("Concours invalide");
+}
+
+$base64 = strtr(
+    $encodedId,
+    '-_',
+    '+/'
+);
+
+$padding = strlen($base64) % 4;
+
+if ($padding !== 0) {
+    $base64 .= str_repeat('=', 4 - $padding);
+}
+
+$decoded = base64_decode($base64, true);
+
+if ($decoded === false) {
+    die("Concours invalide");
+}
+
+$parts = explode('|', $decoded);
+
+if (count($parts) !== 4) {
+    die("Concours invalide");
+}
+
+$secret = $parts[0];
+$idConcours = $parts[1];
+$signature = $parts[3];
+
+if ($secret !== "E_CONCOURS_2026_X7K9") {
+    die("Concours invalide");
+}
+
+if ($signature !== "ECO2026") {
+    die("Concours invalide");
+}
+
+if (!ctype_digit($idConcours)) {
+    die("Concours invalide");
+}
+
+$idConcours = (int) $idConcours;
+
+// ID numérique disponible pour la page
+// Exemple : 15
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -9,7 +65,7 @@
 
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 
 <body class="payment-confirm-page">
@@ -83,7 +139,7 @@
                 </div>
 
                 <p id="paymentMessage"
-                   class="payment-confirm-message">
+                    class="payment-confirm-message">
                 </p>
 
                 <div class="payment-confirm-actions">
@@ -135,7 +191,7 @@
 
     <script type="module">
         import PaymentConfirmController
-            from "../controllers/PaymentConfirmController.js";
+        from "../controllers/PaymentConfirmController.js";
 
         PaymentConfirmController.init();
     </script>

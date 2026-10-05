@@ -4,12 +4,57 @@ export default class InscriptionController {
 
     static async init() {
 
+        function decodeId(encodedId) {
+            try {
+                let base64 = encodedId
+                    .replace(/-/g, "+")
+                    .replace(/_/g, "/");
+
+                while (base64.length % 4 !== 0) {
+                    base64 += "=";
+                }
+
+                const decoded = atob(base64);
+
+                const parts = decoded.split("|");
+
+                if (parts.length !== 4) {
+                    return null;
+                }
+
+                const secret = parts[0];
+                const id = parts[1];
+                const signature = parts[3];
+
+                if (secret !== "E_CONCOURS_2026_X7K9") {
+                    return null;
+                }
+
+                if (signature !== "ECO2026") {
+                    return null;
+                }
+
+                if (!/^\d+$/.test(id)) {
+                    return null;
+                }
+
+                return Number(id);
+
+            } catch (error) {
+                console.error("Erreur décodage ID :", error);
+                return null;
+            }
+        }
+
         this.form = document.getElementById("formInscription");
         this.selectCentre = document.querySelector("select[name='centre']");
         this.nomConcours = document.getElementById("nomConcours");
 
         const urlParams = new URLSearchParams(window.location.search);
-        this.concoursId = urlParams.get("id");
+
+        const encodedId = urlParams.get("id");
+
+        this.concoursId = decodeId(encodedId);
 
         if (!this.concoursId) return;
 
@@ -63,6 +108,21 @@ export default class InscriptionController {
 
 
     static bindEvents() {
+        function encodeId(id) {
+            const secret = "E_CONCOURS_2026_X7K9";
+
+            const random = Math.random()
+                .toString(36)
+                .substring(2, 10)
+                .toUpperCase();
+
+            const data = `${secret}|${id}|${random}|ECO2026`;
+
+            return btoa(data)
+                .replace(/\+/g, "-")
+                .replace(/\//g, "_")
+                .replace(/=+$/, "");
+        }
 
         const messageEl =
             document.getElementById("inscriptionMessage");
@@ -166,7 +226,7 @@ export default class InscriptionController {
 
                     window.location.href =
                         "paiement.php?id=" +
-                        this.concoursId;
+                        encodeId(this.concoursId);
 
                 }, 1200);
 
