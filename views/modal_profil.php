@@ -68,7 +68,7 @@
     <div class="modal-content large">
 
         <div class="modal-header">
-            <h4>Mes candidatures</h4>
+            <h4>Modifier mon profil</h4>
             <span class="close-candidatures">&times;</span>
         </div>
 

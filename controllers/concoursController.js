@@ -77,7 +77,7 @@ export default class ConcoursController {
 
         this.allConcours = concoursList;
 
-      //  console.log("Concours chargés :", this.allConcours);
+        //  console.log("Concours chargés :", this.allConcours);
     }
 
     static async loadConcours(page = 1) {
@@ -133,7 +133,7 @@ export default class ConcoursController {
 
         this.select.addEventListener("change", () => {
 
-          //  console.log("CATEGORIE SELECTED:", this.select.value);
+            //  console.log("CATEGORIE SELECTED:", this.select.value);
 
             this.currentCategorie = this.select.value;
 
@@ -147,35 +147,51 @@ export default class ConcoursController {
         this.container.innerHTML = "";
 
         concoursList.forEach(concours => {
-            // hasConcours = true;
-            // console.log("CONCOURS =", concours);
-            // console.log(
-            //     `detail_concours.php?id=${concours.id_concours}`
-            // );
 
             const card = document.createElement("div");
             card.className = "concours-card";
 
+            const bouton = concours.est_inscrit
+                ? `
+                <span class="btn-primary disabled">
+                    <i class="fa-solid fa-check"></i>
+                    Déjà inscrit
+                </span>
+            `
+                : `
+                <a
+                    href="detail_concours.php?id=${concours.id_concours}"
+                    class="btn-primary"
+                >
+                    Voir détails
+                </a>
+            `;
+
             card.innerHTML = `
 
-                <h2>${concours.nom}</h2>
+            <h2>${concours.nom}</h2>
 
-                <div class="concours-footer">
-                   <div class="infos">
-                        <span><i class="fa-solid fa-calendar-days"></i> ${this.formatDate(concours.date_debut)}</span>
-                        <span><i class="fa-solid fa-users"></i> ${concours.nombre_postes || 0} postes</span>
-                    </div>
+            <div class="concours-footer">
 
-                    <a href="detail_concours.php?id=${concours.id_concours}" class="btn-primary">
-                        Voir détails
-                    </a>
+                <div class="infos">
+                    <span>
+                        <i class="fa-solid fa-calendar-days"></i>
+                        ${this.formatDate(concours.date_debut)}
+                    </span>
+
+                    <span>
+                        <i class="fa-solid fa-users"></i>
+                        ${concours.nombre_postes || 0} postes
+                    </span>
                 </div>
-            `;
+
+                ${bouton}
+
+            </div>
+        `;
 
             this.container.appendChild(card);
         });
-
-
     }
 
     // PAGINATION
@@ -243,13 +259,13 @@ export default class ConcoursController {
 
         const urlParams = new URLSearchParams(window.location.search);
         const concoursId = urlParams.get("id");
-       // console.log("DETAIL CONCOURS", concoursId);
+        // console.log("DETAIL CONCOURS", concoursId);
         if (!concoursId) return;
 
         const res = await ConcoursModel.getDetail(concoursId, token);
 
         if (!res.ok) {
-             Swal.fire({
+            Swal.fire({
                 icon: "error",
                 title: "Erreur",
                 text: res.data?.error ||

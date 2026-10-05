@@ -108,7 +108,7 @@
                         </p>
 
                         <div class="help-screenshot">
-                            <img src="../assets/image/aide/inscription_concours.png"
+                            <img src="../assets/image/aide/inscription_conc.png"
                                 alt="Inscription à un concours E-CONCOURS"
                                 class="help-screenshot-image">
 
@@ -144,7 +144,7 @@
                         </p>
 
                         <div class="help-screenshot">
-                            <img src="../assets/image/aide/mes_candidatures.png"
+                            <img src="../assets/image/aide/candidature.png"
                                 alt="Mes candidatures E-CONCOURS"
                                 class="help-screenshot-image">
 
@@ -218,7 +218,7 @@
                         </p>
 
                         <div class="help-screenshot">
-                            <img src="../assets/image/aide/orange_money.png"
+                            <img src="../assets/image/aide/orange.png"
                                 alt="Paiement Orange Money E-CONCOURS"
                                 class="help-screenshot-image">
 
@@ -256,7 +256,7 @@
                         </p>
 
                         <div class="help-screenshot">
-                            <img src="../assets/image/aide/moov_money.png"
+                            <img src="../assets/image/aide/Moov.png"
                                 alt="Paiement MobiCash E-CONCOURS"
                                 class="help-screenshot-image">
 
