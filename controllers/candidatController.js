@@ -320,7 +320,7 @@ export default class CandidatController {
         const container = document.getElementById("candidaturesModalContainer");
 
         if (!modal || !btnVoir || !closeBtn || !container) {
-           // console.error("Éléments du modal candidatures introuvables");
+            // console.error("Éléments du modal candidatures introuvables");
             return;
         }
 
@@ -396,7 +396,7 @@ export default class CandidatController {
         const loading = document.getElementById("loading");
 
         if (!container) {
-           // console.error("Container candidatures introuvable");
+            // console.error("Container candidatures introuvable");
             this.isLoading = false;
             return;
         }
@@ -424,7 +424,7 @@ export default class CandidatController {
 
             const items = Array.isArray(result.data) ? result.data : [];
 
-          //  console.log("CANDIDATURES :", items);
+            //  console.log("CANDIDATURES :", items);
 
             if (items.length === 0) {
                 this.hasMore = false;
@@ -439,7 +439,7 @@ export default class CandidatController {
 
             items.forEach(cand => {
 
-              //  console.log("CANDIDATURE :", cand);
+                //  console.log("CANDIDATURE :", cand);
 
                 const row = document.createElement("div");
                 row.className = "profil-cand-row";
@@ -491,7 +491,7 @@ export default class CandidatController {
 
         } catch (err) {
 
-           // console.error("ERREUR CANDIDATURES :", err);
+            // console.error("ERREUR CANDIDATURES :", err);
 
         } finally {
 
@@ -561,7 +561,7 @@ export default class CandidatController {
 
             } catch (err) {
 
-              // console.error(err);
+                // console.error(err);
 
                 Swal.fire(
                     "Erreur",
@@ -815,7 +815,7 @@ export default class CandidatController {
                         pieceFile
                     );
 
-                   // console.log("UPLOAD PIECE :", resPiece);
+                    // console.log("UPLOAD PIECE :", resPiece);
 
                     if (!resPiece.ok) {
 
@@ -840,7 +840,7 @@ export default class CandidatController {
                         certificatFile
                     );
 
-                  //  console.log("UPLOAD CERTIFICAT :", resCertificat);
+                    //  console.log("UPLOAD CERTIFICAT :", resCertificat);
 
                     if (!resCertificat.ok) {
 
@@ -899,6 +899,7 @@ export default class CandidatController {
 
         const documentsList = document.getElementById("documents-list");
         const documentsCount = document.getElementById("documentsCount");
+        const uploadSection = document.getElementById("documents-upload-section");
 
         if (!documentsList) {
             return;
@@ -937,7 +938,7 @@ export default class CandidatController {
 
             const res = await DocumentModel.getMesDocuments(token);
 
-           // console.log("DOCUMENTS DU CANDIDAT :", res);
+            // console.log("DOCUMENTS DU CANDIDAT :", res);
 
             if (!res.ok) {
 
@@ -983,6 +984,22 @@ export default class CandidatController {
 
             if (documentsCount) {
                 documentsCount.textContent = documents.length;
+            }
+
+            if (uploadSection) {
+                const hasCNIB = documents.some(
+                    document => document.type_document === "CNIB"
+                );
+
+                const hasNationalite = documents.some(
+                    document => document.type_document === "NATIONALITE"
+                );
+
+                const allDocumentsRegistered =
+                    hasCNIB && hasNationalite;
+
+                uploadSection.style.display =
+                    allDocumentsRegistered ? "none" : "block";
             }
 
             if (documents.length === 0) {
@@ -1201,7 +1218,7 @@ export default class CandidatController {
                         file
                     );
 
-                   // console.log("MODIFICATION DOCUMENT :", res);
+                    // console.log("MODIFICATION DOCUMENT :", res);
 
                     if (!res.ok) {
 
@@ -1316,7 +1333,7 @@ export default class CandidatController {
                     blobName
                 );
 
-              //  console.log("SUPPRESSION DOCUMENT :", res);
+                //  console.log("SUPPRESSION DOCUMENT :", res);
 
                 if (!res.ok) {
 

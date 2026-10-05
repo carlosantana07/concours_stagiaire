@@ -262,8 +262,8 @@
       <div class="profil-tab-content" id="tab-documents">
         <div class="profil-card" style="max-width:560px;">
 
-
           <div class="profil-field documents-section">
+
             <div class="documents-section-header">
               <div>
                 <p class="profil-label">Documents enregistrés</p>
@@ -283,80 +283,83 @@
                 <span>Chargement de vos documents...</span>
               </div>
             </div>
-          </div>
-
-          <div  id="documents-upload-section" class="profil-card-title" style="margin-top: 50px;">
-            <i class="fa-solid fa-file-upload" style="color:#9ca3af"></i>
-            <span>Mes documents</span>
-          </div>
-
-          <div class="profil-divider"></div>
-
-          <div class="profil-fields">
-
-            <div class="profil-field">
-              <p class="profil-label">Document d'identité</p>
-
-              <select
-                name="type_piece"
-                id="type_piece"
-                class="form-control">
-
-                <option value="">
-                  Sélectionner le type de document
-                </option>
-
-                <option value="CNIB">
-                  Carte d'identité
-                </option>
-
-                <option value="PASSPORT">
-                  Passeport
-                </option>
-
-              </select>
-            </div>
-
-            <div class="profil-field">
-
-              <input
-                type="file"
-                id="piece_identite"
-                class="form-control"
-                accept=".pdf,.jpg,.jpeg,.png">
-
-              <small
-                id="pieceIdentiteName"
-                style="color:#9ca3af;font-size:12px;margin-top:4px;">
-              </small>
-
-            </div>
-
-
-            <div class="profil-field">
-              <p class="profil-label">Certificat de nationalité</p>
-
-              <input
-                type="file"
-                id="certificat_nationalite"
-                class="form-control"
-                accept=".pdf,.jpg,.jpeg,.png">
-
-              <small id="certificatName" class="text-muted"></small>
-            </div>
-
-
-            <button
-              type="button"
-              id="btn-upload-documents"
-              class="profil-btn-save">
-
-              <i class="fas fa-upload"></i>
-              Enregistrer les documents
-
-            </button>
 
           </div>
+
+          <div id="documents-upload-section">
+
+            <div class="profil-card-title" style="margin-top: 50px;">
+              <i class="fa-solid fa-file-upload" style="color:#9ca3af"></i>
+              <span>Mes documents</span>
+            </div>
+
+            <div class="profil-divider"></div>
+
+            <div class="profil-fields">
+
+              <div class="profil-field">
+                <p class="profil-label">Document d'identité</p>
+
+                <select
+                  name="type_piece"
+                  id="type_piece"
+                  class="form-control">
+                  <option value="">
+                    Sélectionner le type de document
+                  </option>
+
+                  <option value="CNIB">
+                    Carte d'identité
+                  </option>
+
+                  <option value="PASSPORT">
+                    Passeport
+                  </option>
+                </select>
+              </div>
+
+              <div class="profil-field">
+                <input
+                  type="file"
+                  id="piece_identite"
+                  class="form-control"
+                  accept=".pdf,.jpg,.jpeg,.png">
+
+                <small
+                  id="pieceIdentiteName"
+                  style="color:#9ca3af;font-size:12px;margin-top:4px;"></small>
+              </div>
+
+              <div class="profil-field">
+
+                <p class="profil-label">
+                  Certificat de nationalité
+                </p>
+
+                <input
+                  type="file"
+                  id="certificat_nationalite"
+                  class="form-control"
+                  accept=".pdf,.jpg,.jpeg,.png">
+
+                <small
+                  id="certificatName"
+                  class="text-muted"></small>
+
+              </div>
+
+              <button
+                type="button"
+                id="btn-upload-documents"
+                class="profil-btn-save">
+                <i class="fas fa-upload"></i>
+                Enregistrer les documents
+              </button>
+
+            </div>
+
+          </div>
+
         </div>
       </div>
 

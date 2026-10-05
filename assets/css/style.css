@@ -5818,7 +5818,7 @@ body {
     justify-content: center;
     border-radius: 9px;
     background: #f3f4f6;
-    color: #125aeb;
+    color: #0F8F2E;
     font-size: 17px;
 }
 
@@ -5930,14 +5930,14 @@ body {
 
 .document-edit {
     background-color: #eaf3ff;
-    color: #0756a3;
+    color: #0F8F2E;
     border: 1px solid #c9e0f8;
 }
 
 .document-edit:hover {
-    background-color: #0756a3;
+    background-color: #0F8F2E;
     color: #fff;
-    border-color: #0756a3;
+    border-color: #0F8F2E ;
 }
 
 .document-delete {
