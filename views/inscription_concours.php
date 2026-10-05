@@ -174,7 +174,7 @@
                                 <input
                                     type="text"
                                     class="input"
-                                    name="reference_diplome"
+                                    name="ref_diplome"
                                     placeholder="Référence du diplôme">
 
                             </div>

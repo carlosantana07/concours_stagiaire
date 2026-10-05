@@ -2,14 +2,14 @@
 <div id="modalProfil" class="modal hidden" style="padding-top: 80px;">
     <div class="modal-content large">
 
-        <div class="modal-header" style="color: black; display: flex; justify-content: center; align-items: center;">
+        <div class="modal-header">
             <h4>Modifier mon profil</h4>
             <span class="close-btn">&times;</span>
         </div>
 
         <form id="formUpdateProfil" class="modal-form">
 
-            <h4>Informations personnelles</h4>
+            <!-- <h4>Informations personnelles</h4> -->
 
             <!-- <div class="form-group">
                 <input name="nom" placeholder="Nom" class="input">
@@ -27,13 +27,13 @@
                 <input name="lieu_naissance" placeholder="Lieu de naissance" class="input">
             </div>-->
 
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <input name="telephone" placeholder="Téléphone" class="input">
             </div>
 
             <div class="form-group">
                 <input name="email" placeholder="Email" class="input">
-            </div>
+            </div> -->
 
             <h4>Informations professionnelles</h4>
 
@@ -52,7 +52,7 @@
 
             <!-- <p style="align-self: center; width: 100%; text-align: center;" id="profilMessage" class="form-message"></p> -->
             <div class="form-group">
-                <p id="profilMessage" class="form-message"></p>
+                <p id="profilMessage" class="form-message" style="text-align: center;"></p>
             </div>
             <button type="submit" class="btn-primary full">Enregistrer</button>
 

@@ -285,7 +285,7 @@
             </div>
           </div>
 
-          <div class="profil-card-title" style="margin-top: 50px;">
+          <div  id="documents-upload-section" class="profil-card-title" style="margin-top: 50px;">
             <i class="fa-solid fa-file-upload" style="color:#9ca3af"></i>
             <span>Mes documents</span>
           </div>

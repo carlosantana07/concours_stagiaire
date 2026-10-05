@@ -11489,12 +11489,12 @@ button:disabled {
   border: 1px solid #60A5FA;
 }
 
-#profilMessage {
+/* #profilMessage {
   display: block !important;
   width: 100% !important;
   text-align: center !important;
   margin: 15px 0 !important;
-}
+} */
 
 /* ========PAGE RESULTATS========== */
 .type-composition {

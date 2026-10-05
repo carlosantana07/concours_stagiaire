@@ -31,9 +31,9 @@ export default class InscriptionController {
 
         if (!res.ok) {
             messageEl.style.display = "block";
-                messageEl.style.color = "red";
-                messageEl.textContent =
-                    "Erreur chargement concours";
+            messageEl.style.color = "red";
+            messageEl.textContent =
+                "Erreur chargement concours";
 
             return;
         }
@@ -102,6 +102,20 @@ export default class InscriptionController {
 
             data.diplome = diplome.files[0];
 
+            data.niveau_etude =
+                this.form.querySelector("[name='niveau_etude']")?.value || "";
+
+            data.annee_obtentation =
+                this.form.querySelector("[name='annee_obtentation']")?.value || "";
+
+            data.ref_diplome =
+                this.form.querySelector("[name='ref_diplome']")?.value || "";
+
+            data.etablissement =
+                this.form.querySelector("[name='etablissement']")?.value || "";
+
+
+
             // console.log("DONNÉES ENVOYÉES :", {
             //     id_concours: data.id_concours,
             //     id_centre: data.id_centre,
@@ -154,7 +168,7 @@ export default class InscriptionController {
 
             } catch (err) {
 
-               // console.log(err);
+                // console.log(err);
 
                 messageEl.style.display = "block";
                 messageEl.style.color = "red";
