@@ -119,7 +119,11 @@ export default class InscriptionController {
             // console.log("DONNÉES ENVOYÉES :", {
             //     id_concours: data.id_concours,
             //     id_centre: data.id_centre,
-            //     diplome: data.diplome.name
+            //     diplome: data.diplome.name,
+            //     etablissement: data.etablissement,
+            //     niveau_etude: data.niveau_etude,
+            //     annee_obtentation: data.annee_obtentation,
+            //     ref_diplome: data.ref_diplome
             // });
 
             try {

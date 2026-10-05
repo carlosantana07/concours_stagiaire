@@ -144,6 +144,13 @@ export default class ConcoursController {
 
     static renderConcours(concoursList) {
 
+        function encodeId(id) {
+            return btoa(String(id))
+                .replace(/\+/g, "-")
+                .replace(/\//g, "_")
+                .replace(/=+$/, "");
+        }
+
         this.container.innerHTML = "";
 
         concoursList.forEach(concours => {
@@ -182,12 +189,12 @@ export default class ConcoursController {
                     </span>
                 </div>
 
-                <a
-                    href="detail_concours.php?id=${concours.id_concours}"
-                    class="btn-primary"
-                >
-                    Voir détails
-                </a>
+            <a
+                href="detail_concours.php?id=${encodeId(concours.id_concours)}"
+                class="btn-primary">
+           
+                Voir détails
+            </a>
 
             </div>
         `;
@@ -259,8 +266,21 @@ export default class ConcoursController {
             return;
         }
 
+        function decodeId(encodedId) {
+            encodedId = encodedId
+                .replace(/-/g, "+")
+                .replace(/_/g, "/");
+
+            while (encodedId.length % 4) {
+                encodedId += "=";
+            }
+
+            return atob(encodedId);
+        }
+
         const urlParams = new URLSearchParams(window.location.search);
-        const concoursId = urlParams.get("id");
+        const encodedId = urlParams.get("id");
+        const concoursId = decodeId(encodedId);
         // console.log("DETAIL CONCOURS", concoursId);
         if (!concoursId) return;
 

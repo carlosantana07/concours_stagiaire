@@ -16,33 +16,17 @@ export default class InscriptionModel {
 
         return { ok: res.ok, data };
     }
-
     static async inscrire(data) {
 
         const formData = new FormData();
 
         formData.append("id_concours", data.id_concours);
         formData.append("id_centre", data.id_centre);
-        formData.append("diplome", data.diplome);
+        formData.append("diplome", data.diplome); // seul champ fichier
         formData.append("etablissement", data.etablissement);
         formData.append("niveau_etude", data.niveau_etude);
         formData.append("annee_obtentation", data.annee_obtentation);
         formData.append("ref_diplome", data.ref_diplome);
-        
-        if (data.diplome instanceof File) {
-            formData.append("files", data.diplome);
-        }
-
-       // console.log("FORMDATA ENVOYÉ :");
-
-        for (const [key, value] of formData.entries()) {
-            // console.log(
-            //     key,
-            //     value instanceof File
-            //         ? `${value.name} (${value.type}, ${value.size} octets)`
-            //         : value
-            // );
-        }
 
         const res = await fetch(`${API_URL}/inscription/s-inscrire`, {
             method: "POST",
@@ -53,8 +37,6 @@ export default class InscriptionModel {
         });
 
         const result = await res.json();
-
-       // console.log("REPONSE INSCRIPTION :", result);
 
         return {
             ok: res.ok,

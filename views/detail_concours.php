@@ -1,3 +1,26 @@
+<?php
+
+$idEncode = $_GET['id'] ?? '';
+
+if (empty($idEncode)) {
+  die("Concours invalide");
+}
+
+$idEncode = strtr($idEncode, '-_', '+/');
+
+$idEncode .= str_repeat(
+  '=',
+  (4 - strlen($idEncode) % 4) % 4
+);
+
+$idConcours = base64_decode($idEncode, true);
+
+if ($idConcours === false || !is_numeric($idConcours)) {
+  die("Concours invalide");
+}
+
+$idConcours = (int) $idConcours;
+?>
 <!DOCTYPE html>
 <html lang="fr">
 
