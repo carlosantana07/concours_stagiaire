@@ -317,11 +317,11 @@ export default class ConcoursController {
 
         const concoursId = decodeId(encodedId);
 
-        if (!concoursId) {
-            console.error("ID concours invalide");
-        } else {
-            console.log("ID concours :", concoursId);
-        }
+        // if (!concoursId) {
+        //     console.error("ID concours invalide");
+        // } else {
+        //     console.log("ID concours :", concoursId);
+        // }
 
         const res = await ConcoursModel.getDetail(concoursId, token);
 

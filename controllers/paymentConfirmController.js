@@ -77,7 +77,7 @@ export default class PaymentConfirmController {
 
             concoursId = Number(id);
 
-            console.log("ID concours décodé :", concoursId);
+            // console.log("ID concours décodé :", concoursId);
 
         } catch (error) {
 

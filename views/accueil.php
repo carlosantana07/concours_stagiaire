@@ -78,9 +78,9 @@
 
 
           <!-- Non connecté -->
-          <a href="connexion.php" id="btnInscription" class="btn-secondary"> 
-            <i class="fa-solid fa-user-plus"></i> 
-            <span>Mes résultats</span> 
+          <a href="connexion.php" id="btnInscription" class="btn-secondary">
+            <i class="fa-solid fa-user-plus"></i>
+            <span>Mes résultats</span>
           </a>
 
 
@@ -285,15 +285,13 @@
 
           </div>
 
-          <button class="btn-support">
-
+          <a href="tel:+223 92 48 28 40" class="btn-support">
             <i class="fa-solid fa-phone"></i>
 
             <span>
               Contacter l'assistance
             </span>
-
-          </button>
+          </a>
 
         </div>
 

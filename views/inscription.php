@@ -323,7 +323,7 @@
                                 <input
                                     type="text"
                                     name="telephone"
-                                    placeholder="+226 XX XX XX XX"
+                                    placeholder="+223 XX XX XX XX"
                                     required>
                             </div>
 

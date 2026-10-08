@@ -25,7 +25,7 @@ export default class PaymentController {
             hintText.textContent =
                 "Composez le code suivant sur votre numéro Orange Money pour recevoir un OTP par SMS";
 
-            codeText.textContent = "*144*4*6*800#";
+            codeText.textContent = "#144#*4*6*800#";
         });
 
         // Moov Money
@@ -35,7 +35,7 @@ export default class PaymentController {
             hintText.textContent =
                 "Composez le code suivant sur votre numéro Moov Money pour recevoir un OTP par SMS";
 
-            codeText.textContent = "*555*1*2*900#";
+            codeText.textContent = "#555#*1*2*900#";
         });
 
         // Récupération de l'ID encodé
@@ -89,7 +89,7 @@ export default class PaymentController {
 
             this.concoursId = Number(id);
 
-            console.log("ID concours décodé :", this.concoursId);
+            // console.log("ID concours décodé :", this.concoursId);
 
         } catch (error) {
 
@@ -223,8 +223,8 @@ export default class PaymentController {
             id_concours: id_concours
         };
 
-        console.log("DATA PAIEMENT :", data);
-        console.log("Type id_concours :", typeof data.id_concours);
+        // console.log("DATA PAIEMENT :", data);
+        // console.log("Type id_concours :", typeof data.id_concours);
 
         try {
 

@@ -174,7 +174,7 @@ $idConcours = (int) $idConcours;
 
                                 <input
                                     class="input-wrapper"
-                                    placeholder="+226 xx xx xx xx">
+                                    placeholder="+223 xx xx xx xx">
 
                             </div>
 
@@ -191,7 +191,7 @@ $idConcours = (int) $idConcours;
                             <p id="code-text"
                                 class="payment-code">
 
-                                *144*4*6*800#
+                            <!-- #144#*4*6*800# -->
 
                             </p>
 
