@@ -406,7 +406,7 @@
 
                 <input
                   type="file"
-                  id="arretee_habilitation"
+                  id="arrete_habilitation"
                   class="form-control"
                   accept=".pdf,.jpg,.jpeg,.png">
 

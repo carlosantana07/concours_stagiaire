@@ -749,7 +749,7 @@ export default class CandidatController {
         const lettreEquivalence = document.getElementById("equivalence");
         const lettreEquivalenceName = document.getElementById("lettreEquivalenceName");
 
-        const arreteHabilitation = document.getElementById("arretee_habilitation");
+        const arreteHabilitation = document.getElementById("arrete_habilitation");
         const arreteHabilitationName = document.getElementById("arreteHabilitationName");
 
         const certificatMedical = document.getElementById("medical");
@@ -1076,7 +1076,7 @@ export default class CandidatController {
                         text: "Vos documents ont été enregistrés avec succès."
                     });
 
-                    typePiece.value = "";
+                    // typePiece.value = "";
                     pieceIdentite.value = "";
                     pieceIdentiteName.textContent = "";
 
@@ -1198,8 +1198,8 @@ export default class CandidatController {
             }
 
             if (uploadSection) {
-                const hasCNIB = documents.some(
-                    document => document.type_document === "CNIB"
+                const hasIdentite = documents.some(
+                    document => document.type_document === "IDENTITE"
                 );
 
                 const hasNationalite = documents.some(
@@ -1211,7 +1211,7 @@ export default class CandidatController {
                 );
 
                 const hasNaissance = documents.some(
-                    document => document.type_document === "NAISSANCE"
+                    document => document.type_document === "ACTE"
                 );
 
                 const hasEquivalence = documents.some(
@@ -1227,7 +1227,7 @@ export default class CandidatController {
                 );
 
                 const allDocumentsRegistered =
-                    hasCNIB && hasNationalite && hasCandidature && hasNaissance && hasEquivalence && hasHabilitation && hasMedical;
+                    hasIdentite && hasNationalite && hasCandidature && hasNaissance && hasEquivalence && hasHabilitation && hasMedical;
 
                 uploadSection.style.display =
                     allDocumentsRegistered ? "none" : "block";
@@ -1261,8 +1261,8 @@ export default class CandidatController {
                 let nomDocument = document.type_document;
                 let icone = "fa-file";
 
-                if (document.type_document === "CNIB") {
-                    nomDocument = "Carte d'identité (CNIB)";
+                if (document.type_document === "IDENTITE") {
+                    nomDocument = "Carte d'identité (CNI)";
                     icone = "fa-id-card";
                 }
 
@@ -1281,7 +1281,7 @@ export default class CandidatController {
                     icone = "fa-file-lines";
                 }
 
-                if (document.type_document === "NAISSANCE") {
+                if (document.type_document === "ACTE") {
                     nomDocument = "Extrait de naissance";
                     icone = "fa-file-lines";
                 }
