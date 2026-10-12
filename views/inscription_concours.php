@@ -265,23 +265,19 @@ $id_Concours = (int) $id_Concours;
 
 
                         <!-- UPLOAD -->
-                        <div class="form-group">
 
+                        <div class="form-group">
                             <label>
                                 Copie du diplôme
                                 <span class="required">(obligatoire)</span>
                             </label>
 
-                            <div class="upload-zone"
-                                id="upload-diplome">
-
+                            <div class="upload-zone" id="upload-diplome">
                                 <i class="fa-solid fa-cloud-arrow-up"></i>
 
                                 <p>
                                     Glissez votre fichier ici ou
-                                    <span>
-                                        cliquez pour parcourir
-                                    </span>
+                                    <span>cliquez pour parcourir</span>
                                 </p>
 
                                 <small>
@@ -294,10 +290,25 @@ $id_Concours = (int) $id_Concours;
                                     id="diplome"
                                     accept=".pdf,.jpg,.jpeg,.png"
                                     hidden>
-
                             </div>
 
+                            <div id="diplome-preview" class="diplome-preview" style="display: none;">
+                                <div class="diplome-preview-header">
+                                    <span id="diplome-nom"></span>
+
+                                    <button
+                                        type="button"
+                                        id="supprimer-diplome"
+                                        class="btn-supprimer-diplome"
+                                        title="Supprimer le fichier">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                </div>
+
+                                <div id="diplome-apercu-contenu"></div>
+                            </div>
                         </div>
+
 
                     </div>
 
@@ -344,84 +355,119 @@ $id_Concours = (int) $id_Concours;
 
     <!-- UPLOAD -->
     <script>
-        document.querySelectorAll(".upload-zone").forEach(zone => {
+        document.addEventListener("DOMContentLoaded", function() {
+            const input = document.getElementById("diplome");
+            const zone = document.getElementById("upload-diplome");
+            const preview = document.getElementById("diplome-preview");
+            const nomFichier = document.getElementById("diplome-nom");
+            const contenuApercu = document.getElementById("diplome-apercu-contenu");
+            const boutonSupprimer = document.getElementById("supprimer-diplome");
 
-            const input = zone.querySelector("input[type='file']");
+            if (!input || !zone || !preview || !nomFichier || !contenuApercu || !boutonSupprimer) {
+                return;
+            }
 
-            zone.addEventListener("click", () => {
-                input.click();
-            });
+            let urlApercu = null;
 
-
-            input.addEventListener("change", (e) => {
-
-                const file = e.target.files[0];
-
-                if (file) {
-
-                    zone.classList.add("uploaded");
-
-                    zone.querySelector("p").innerHTML = `
-                        <i class="fa-solid fa-file"
-                           style="margin-right:6px;">
-                        </i>
-                        <strong>${file.name}</strong>
-                    `;
-
-                    const icon = zone.querySelector("i");
-
-                    if (icon) {
-                        icon.className = "fa-solid fa-circle-check";
-                    }
+            zone.addEventListener("click", function(event) {
+                if (event.target !== input) {
+                    input.click();
                 }
-
             });
 
+            input.addEventListener("change", function() {
+                afficherApercu(this.files[0]);
+            });
 
-            zone.addEventListener("dragover", (e) => {
-
-                e.preventDefault();
-
+            zone.addEventListener("dragover", function(event) {
+                event.preventDefault();
                 zone.classList.add("drag-over");
-
             });
 
-
-            zone.addEventListener("dragleave", () => {
-
+            zone.addEventListener("dragleave", function() {
                 zone.classList.remove("drag-over");
-
             });
 
-
-            zone.addEventListener("drop", (e) => {
-
-                e.preventDefault();
-
+            zone.addEventListener("drop", function(event) {
+                event.preventDefault();
                 zone.classList.remove("drag-over");
 
-                const file = e.dataTransfer.files[0];
+                const fichier = event.dataTransfer.files[0];
 
-                if (file) {
+                if (!fichier) return;
 
-                    zone.classList.add("uploaded");
-
-                    zone.querySelector("p").innerHTML = `
-                        <i class="fa-solid fa-file"
-                           style="margin-right:6px;">
-                        </i>
-                        <strong>${file.name}</strong>
-                    `;
-
-                    const icon = zone.querySelector("i");
-
-                    if (icon) {
-                        icon.className = "fa-solid fa-circle-check";
-                    }
+                try {
+                    const transfert = new DataTransfer();
+                    transfert.items.add(fichier);
+                    input.files = transfert.files;
+                } catch (error) {
+                    console.error("Impossible de sélectionner le fichier déposé :", error);
+                    alert("Impossible de sélectionner ce fichier. Veuillez utiliser le bouton de sélection.");
+                    return;
                 }
 
+                afficherApercu(fichier);
             });
 
+            function afficherApercu(fichier) {
+                nettoyerApercu();
+
+                if (!fichier) return;
+
+                const extension = fichier.name.split(".").pop().toLowerCase();
+                const extensionsAutorisees = ["pdf", "jpg", "jpeg", "png"];
+                const typesAutorises = ["application/pdf", "image/jpeg", "image/png"];
+
+                if (
+                    !extensionsAutorisees.includes(extension) ||
+                    !typesAutorises.includes(fichier.type)
+                ) {
+                    input.value = "";
+
+                    alert("Format invalide. Veuillez sélectionner un PDF, un JPG ou un PNG.");
+                    return;
+                }
+
+                if (fichier.size > 2 * 1024 * 1024) {
+                    input.value = "";
+
+                    alert("Le fichier dépasse la taille maximale autorisée de 2 Mo.");
+                    return;
+                }
+
+                nomFichier.textContent = fichier.name;
+                urlApercu = URL.createObjectURL(fichier);
+
+                if (fichier.type === "application/pdf") {
+                    const iframe = document.createElement("iframe");
+                    iframe.src = urlApercu;
+                    iframe.title = "Aperçu du diplôme";
+                    contenuApercu.appendChild(iframe);
+                } else {
+                    const image = document.createElement("img");
+                    image.src = urlApercu;
+                    image.alt = "Aperçu du diplôme";
+                    contenuApercu.appendChild(image);
+                }
+
+                preview.style.display = "block";
+            }
+
+            function nettoyerApercu() {
+                if (urlApercu) {
+                    URL.revokeObjectURL(urlApercu);
+                    urlApercu = null;
+                }
+
+                contenuApercu.replaceChildren();
+                preview.style.display = "none";
+                nomFichier.textContent = "";
+            }
+
+            boutonSupprimer.addEventListener("click", function() {
+                input.value = "";
+                nettoyerApercu();
+            });
         });
     </script>
 

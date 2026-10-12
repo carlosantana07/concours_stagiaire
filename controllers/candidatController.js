@@ -863,7 +863,7 @@ export default class CandidatController {
                 return;
             }
 
-            if (!ficheCandidatureFile && !certificatNaissanceFile && !lettreEquivalenceFile && !arreteHabilitationFile && !certificatMedicalFile) {
+            if (!ficheCandidatureFile && !certificatNaissanceFile && !arreteHabilitationFile && !certificatMedicalFile) {
                 Swal.fire({
                     icon: "warning",
                     title: "Document manquant",

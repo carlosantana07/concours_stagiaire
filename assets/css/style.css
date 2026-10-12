@@ -2978,6 +2978,65 @@ footer h3 {
   color: #16845B;
 }
 
+.diplome-preview {
+    margin-top: 15px;
+    padding: 15px;
+    border: 1px solid #dce3ed;
+    border-radius: 10px;
+    background: #f8fafc;
+}
+
+.diplome-preview-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 12px;
+    overflow-wrap: anywhere;
+    color: #0B1A38;
+    font-weight: 600;
+}
+
+.btn-supprimer-diplome {
+    flex-shrink: 0;
+    border: none;
+    background: #dc3545;
+    color: white;
+    border-radius: 6px;
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+.btn-supprimer-diplome:hover {
+    background: #bb2d3b;
+}
+
+#diplome-apercu-contenu img {
+    display: block;
+    max-width: 100%;
+    max-height: 450px;
+    margin: 0 auto;
+    object-fit: contain;
+    border-radius: 6px;
+}
+
+#diplome-apercu-contenu iframe {
+    display: block;
+    width: 100%;
+    height: 500px;
+    border: none;
+    border-radius: 6px;
+    background: white;
+}
+
+@media (max-width: 576px) {
+    #diplome-apercu-contenu iframe {
+        height: 350px;
+    }
+}
+
+
+
 
 /* =========================================================
    MESSAGE
