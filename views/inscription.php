@@ -243,7 +243,7 @@
                                 <div class="form-group">
                                     <label>Numéro NINA <span class="required">*</span></label>
 
-                                    <input type="text" name="numero_nina"
+                                    <input type="text" name="numero_cnib"
                                         placeholder="Numéro de votre NINA" required>
                                 </div>
 

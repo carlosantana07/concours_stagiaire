@@ -733,12 +733,27 @@ export default class CandidatController {
             return;
         }
 
-        const typePiece = document.getElementById("type_piece");
-        const pieceIdentite = document.getElementById("piece_identite");
+        // const typePiece = document.getElementById("type_piece");
+        const pieceIdentite = document.getElementById("identite");
         const pieceIdentiteName = document.getElementById("pieceIdentiteName");
 
-        const certificatNationalite = document.getElementById("certificat_nationalite");
+        const certificatNationalite = document.getElementById("nationalite");
         const certificatName = document.getElementById("certificatName");
+
+        const ficheCandidature = document.getElementById("fiche_candidature");
+        const ficheCandidatureName = document.getElementById("ficheCandidatureName");
+
+        const certificatNaissance = document.getElementById("acte");
+        const certificatNaissanceName = document.getElementById("naissanceName");
+
+        const lettreEquivalence = document.getElementById("equivalence");
+        const lettreEquivalenceName = document.getElementById("lettreEquivalenceName");
+
+        const arreteHabilitation = document.getElementById("arretee_habilitation");
+        const arreteHabilitationName = document.getElementById("arreteHabilitationName");
+
+        const certificatMedical = document.getElementById("medical");
+        const certificatMedicalName = document.getElementById("certificatMedicalName");
 
         pieceIdentite.addEventListener("change", () => {
 
@@ -762,13 +777,73 @@ export default class CandidatController {
             }
         });
 
+        ficheCandidature.addEventListener("change", () => {
+
+            const file = ficheCandidature.files[0];
+
+            if (file) {
+                ficheCandidatureName.textContent = file.name;
+            } else {
+                ficheCandidatureName.textContent = "";
+            }
+        });
+
+        certificatNaissance.addEventListener("change", () => {
+
+            const file = certificatNaissance.files[0];
+
+            if (file) {
+                certificatNaissanceName.textContent = file.name;
+            } else {
+                certificatNaissanceName.textContent = "";
+            }
+        });
+
+        lettreEquivalence.addEventListener("change", () => {
+
+            const file = lettreEquivalence.files[0];
+
+            if (file) {
+                lettreEquivalenceName.textContent = file.name;
+            } else {
+                lettreEquivalenceName.textContent = "";
+            }
+        });
+
+        arreteHabilitation.addEventListener("change", () => {
+
+            const file = arreteHabilitation.files[0];
+
+            if (file) {
+                arreteHabilitationName.textContent = file.name;
+            } else {
+                arreteHabilitationName.textContent = "";
+            }
+        });
+
+        certificatMedical.addEventListener("change", () => {
+
+            const file = certificatMedical.files[0];
+
+            if (file) {
+                certificatMedicalName.textContent = file.name;
+            } else {
+                certificatMedicalName.textContent = "";
+            }
+        });
+
         btn.addEventListener("click", async () => {
 
-            const typeDocument = typePiece.value;
+            // const typeDocument = typePiece.value;
             const pieceFile = pieceIdentite.files[0];
             const certificatFile = certificatNationalite.files[0];
+            const ficheCandidatureFile = ficheCandidature.files[0];
+            const certificatNaissanceFile = certificatNaissance.files[0];
+            const lettreEquivalenceFile = lettreEquivalence.files[0];
+            const arreteHabilitationFile = arreteHabilitation.files[0];
+            const certificatMedicalFile = certificatMedical.files[0];
 
-            if (!typeDocument && !certificatFile) {
+            if (!certificatFile) {
                 Swal.fire({
                     icon: "warning",
                     title: "Document manquant",
@@ -778,11 +853,21 @@ export default class CandidatController {
                 return;
             }
 
-            if (typeDocument && !pieceFile) {
+            if (!pieceFile) {
                 Swal.fire({
                     icon: "warning",
                     title: "Document manquant",
                     text: "Veuillez sélectionner le fichier correspondant à la pièce d'identité."
+                });
+
+                return;
+            }
+
+            if (!ficheCandidatureFile && !certificatNaissanceFile && !lettreEquivalenceFile && !arreteHabilitationFile && !certificatMedicalFile) {
+                Swal.fire({
+                    icon: "warning",
+                    title: "Document manquant",
+                    text: "Veuillez sélectionner au moins un document à envoyer."
                 });
 
                 return;
@@ -808,11 +893,11 @@ export default class CandidatController {
 
                 let documentsEnvoyes = 0;
 
-                if (typeDocument && pieceFile) {
+                if (pieceFile) {
 
                     const resPiece = await DocumentModel.uploadDocuments(
                         token,
-                        typeDocument,
+                        "IDENTITE",
                         pieceFile
                     );
 
@@ -850,6 +935,131 @@ export default class CandidatController {
                             title: "Erreur",
                             text: resCertificat.data?.error ||
                                 "Impossible d'envoyer le certificat de nationalité."
+                        });
+
+                        return;
+                    }
+
+                    documentsEnvoyes++;
+                }
+
+                if (ficheCandidatureFile) {
+
+                    const resFiche = await DocumentModel.uploadDocuments(
+                        token,
+                        "FICHE_CANDIDATURE",
+                        ficheCandidatureFile
+                    );
+
+                    // console.log("UPLOAD FICHE :", resFiche);
+
+                    if (!resFiche.ok) {
+
+                        Swal.fire({
+                            icon: "error",
+                            title: "Erreur",
+                            text: resFiche.data?.error ||
+                                "Impossible d'envoyer la fiche de candidature."
+                        });
+
+                        return;
+                    }
+
+                    documentsEnvoyes++;
+                }
+
+                if (certificatNaissanceFile) {
+
+                    const resCertificatNaissance = await DocumentModel.uploadDocuments(
+                        token,
+                        "NAISSANCE",
+                        certificatNaissanceFile
+                    );
+
+                    // console.log("UPLOAD CERTIFICAT NAISSANCE :", resCertificatNaissance);
+
+                    if (!resCertificatNaissance.ok) {
+
+                        Swal.fire({
+                            icon: "error",
+                            title: "Erreur",
+                            text: resCertificatNaissance.data?.error ||
+                                "Impossible d'envoyer le certificat d'acte de naissance."
+                        });
+
+                        return;
+                    }
+
+                    documentsEnvoyes++;
+                }
+
+                if (lettreEquivalenceFile) {
+
+                    const resLettreEquivalence = await DocumentModel.uploadDocuments(
+                        token,
+                        "EQUIVALENCE",
+                        lettreEquivalenceFile
+                    );
+
+                    // console.log("UPLOAD LETTRE EQUIVALENCE :", resLettreEquivalence);
+
+                    if (!resLettreEquivalence.ok) {
+
+                        Swal.fire({
+                            icon: "error",
+                            title: "Erreur",
+                            text: resLettreEquivalence.data?.error ||
+                                "Impossible d'envoyer la lettre d'équivalence."
+                        });
+
+                        return;
+                    }
+
+                    documentsEnvoyes++;
+                }
+
+                if (arreteHabilitationFile) {
+
+                    const resArreteHabilitation = await DocumentModel.uploadDocuments(
+                        token,
+                        "ARRETE_HABILITATION",
+                        arreteHabilitationFile
+                    );
+
+                    // console.log("UPLOAD ARRETE HABILITATION :", resArreteHabilitation);
+
+                    if (!resArreteHabilitation.ok) {
+
+                        Swal.fire({
+                            icon: "error",
+                            title: "Erreur",
+                            text: resArreteHabilitation.data?.error ||
+                                "Impossible d'envoyer l'arrêté d'habilitation."
+                        });
+
+                        return;
+                    }
+
+                    documentsEnvoyes++;
+                }
+
+                if (certificatMedicalFile) {
+
+                    const resCertificatMedical = await DocumentModel.uploadDocuments(
+                        token,
+                        "MEDICAL",
+                        certificatMedicalFile
+                    );
+
+                    // console.log("UPLOAD CERTIFICAT MEDICAL :", resCertificatMedical);
+
+                    if (!resCertificatMedical.ok) {
+
+                        Swal.fire({
+                            icon: "error",
+                            title: "Erreur",
+                            text: resCertificatMedical.data?.error ||
+                                "Impossible d'envoyer le certificat médical."
                         });
 
                         return;
@@ -996,8 +1206,28 @@ export default class CandidatController {
                     document => document.type_document === "NATIONALITE"
                 );
 
+                const hasCandidature = documents.some(
+                    document => document.type_document === "CANDIDATURE"
+                );
+
+                const hasNaissance = documents.some(
+                    document => document.type_document === "NAISSANCE"
+                );
+
+                const hasEquivalence = documents.some(
+                    document => document.type_document === "EQUIVALENCE"
+                );
+
+                const hasHabilitation = documents.some(
+                    document => document.type_document === "HABILITATION"
+                );
+
+                const hasMedical = documents.some(
+                    document => document.type_document === "MEDICAL"
+                );
+
                 const allDocumentsRegistered =
-                    hasCNIB && hasNationalite;
+                    hasCNIB && hasNationalite && hasCandidature && hasNaissance && hasEquivalence && hasHabilitation && hasMedical;
 
                 uploadSection.style.display =
                     allDocumentsRegistered ? "none" : "block";
@@ -1044,6 +1274,31 @@ export default class CandidatController {
                 if (document.type_document === "PASSPORT") {
                     nomDocument = "Passeport";
                     icone = "fa-passport";
+                }
+
+                if (document.type_document === "CANDIDATURE") {
+                    nomDocument = "Fiche de candidature";
+                    icone = "fa-file-lines";
+                }
+
+                if (document.type_document === "NAISSANCE") {
+                    nomDocument = "Extrait de naissance";
+                    icone = "fa-file-lines";
+                }
+
+                if (document.type_document === "EQUIVALENCE") {
+                    nomDocument = "Lettre d'équivalence";
+                    icone = "fa-file-lines";
+                }
+
+                if (document.type_document === "HABILITATION") {
+                    nomDocument = "Arrêté d'habilitation";
+                    icone = "fa-file-lines";
+                }
+
+                if (document.type_document === "MEDICAL") { 
+                    nomDocument = "Certificat médical";
+                    icone = "fa-file-medical";
                 }
 
                 return `

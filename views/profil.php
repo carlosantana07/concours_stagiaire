@@ -300,7 +300,7 @@
               <div class="profil-field">
                 <p class="profil-label">Document d'identité</p>
 
-                <select
+                <!-- <select
                   name="type_piece"
                   id="type_piece"
                   class="form-control">
@@ -308,20 +308,16 @@
                     Sélectionner le type de document
                   </option>
 
-                  <option value="CNIB">
+                  <option value="identite">
                     Carte d'identité
                   </option>
-
-                  <option value="PASSPORT">
-                    Passeport
-                  </option>
-                </select>
+                </select> -->
               </div>
 
               <div class="profil-field">
                 <input
                   type="file"
-                  id="piece_identite"
+                  id="identite"
                   class="form-control"
                   accept=".pdf,.jpg,.jpeg,.png">
 
@@ -338,12 +334,102 @@
 
                 <input
                   type="file"
-                  id="certificat_nationalite"
+                  id="nationalite"
                   class="form-control"
                   accept=".pdf,.jpg,.jpeg,.png">
 
                 <small
                   id="certificatName"
+                  class="text-muted"></small>
+
+              </div>
+
+              <div class="profil-field">
+
+                <p class="profil-label">
+                  Fiche de candidature
+                </p>
+
+                <input
+                  type="file"
+                  id="fiche_candidature"
+                  class="form-control"
+                  accept=".pdf,.jpg,.jpeg,.png">
+
+                <small
+                  id="ficheCandidatureName"
+                  class="text-muted"></small>
+
+              </div>
+
+               <div class="profil-field">
+
+                <p class="profil-label">
+                  Acte de naissance
+                </p>
+
+                <input
+                  type="file"
+                  id="acte"
+                  class="form-control"
+                  accept=".pdf,.jpg,.jpeg,.png">
+
+                <small
+                  id="naissanceName"
+                  class="text-muted"></small>
+
+              </div>
+
+              <div class="profil-field">
+
+                <p class="profil-label">
+                  Lettre d'equivalence (si nécessaire)
+                </p>
+
+                <input
+                  type="file"
+                  id="equivalence"
+                  class="form-control"
+                  accept=".pdf,.jpg,.jpeg,.png">
+
+                <small
+                  id="lettreEquivalenceName"
+                  class="text-muted"></small>
+
+              </div>
+
+              <div class="profil-field">
+
+                <p class="profil-label">
+                  Arrêté d'habilitation de programme
+                </p>
+
+                <input
+                  type="file"
+                  id="arretee_habilitation"
+                  class="form-control"
+                  accept=".pdf,.jpg,.jpeg,.png">
+
+                <small
+                  id="arreteHabilitationName"
+                  class="text-muted"></small>
+
+              </div>
+
+              <div class="profil-field">
+
+                <p class="profil-label">
+                  Certificat médical
+                </p>
+
+                <input
+                  type="file"
+                  id="medical"
+                  class="form-control"
+                  accept=".pdf,.jpg,.jpeg,.png">
+
+                <small
+                  id="certificatMedicalName"
                   class="text-muted"></small>
 
               </div>
