@@ -73,6 +73,22 @@ export default class CandidatController {
         await this.loadCandidatures();
     }
 
+    static encodeId(id) {
+        const secret = "E_CONCOURS_2026_X7K9";
+
+        const random = Math.random()
+            .toString(36)
+            .substring(2, 10)
+            .toUpperCase();
+
+        const data = `${secret}|${id}|${random}|ECO2026`;
+
+        return btoa(data)
+            .replace(/\+/g, "-")
+            .replace(/\//g, "_")
+            .replace(/=+$/, "");
+    }
+
     static async loadCandidatures() {
 
         const token = localStorage.getItem("token");
@@ -147,14 +163,12 @@ export default class CandidatController {
             if (!btn) return;
 
 
-            localStorage.setItem(
-                "id_inscription",
-                btn.dataset.id
-            );
+            localStorage.setItem("id_inscription", btn.dataset.id);
 
+            const idEncode = this.encodeId(btn.dataset.concours);
 
             window.location.href =
-                "paiement.php?id=" + btn.dataset.concours;
+                "paiement.php?id=" + encodeURIComponent(idEncode);
 
         });
     }
@@ -283,7 +297,7 @@ export default class CandidatController {
         document.getElementById("emploi_modif").value = c.emploi || "";
         document.getElementById("ministere_modif").value = c.ministere || "";
         // document.querySelector("[name='matricule']").value = c.matricule || "";
-        
+
     }
 
     static formatDate(date) {
@@ -1296,7 +1310,7 @@ export default class CandidatController {
                     icone = "fa-file-lines";
                 }
 
-                if (document.type_document === "MEDICAL") { 
+                if (document.type_document === "MEDICAL") {
                     nomDocument = "Certificat médical";
                     icone = "fa-file-medical";
                 }
