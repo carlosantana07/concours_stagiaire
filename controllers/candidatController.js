@@ -90,9 +90,7 @@ export default class CandidatController {
     }
 
     static async loadCandidatures() {
-
         const token = localStorage.getItem("token");
-
         const res = await CandidatModel.getMesInscriptions(token);
 
         const messageEl = document.getElementById("candidaturesMessage");
@@ -101,77 +99,122 @@ export default class CandidatController {
         messageEl.textContent = "";
 
         if (!res.ok) {
-
             messageEl.style.display = "block";
             messageEl.textContent =
                 res.data.error || "Erreur chargement candidatures";
-
             return;
         }
+
         const container = document.getElementById("candidaturesContainer");
         const data = res.data.data.slice(0, 5);
 
         container.innerHTML = `
-            <div class="profil-cand-row header">
-                <span class="text-center">Concours</span>
-                <span class="text-center">Statut</span>
-                <span class="text-center">Actions</span>
-            </div>
-        `;
+    <div class="profil-cand-row header">
+        <span class="text-center">Concours</span>
+        <span class="text-center">Statut candidature</span>
+        <span class="text-center">Paiement</span>
+        <span class="text-center">Actions</span>
+    </div>
+`;
+
         data.forEach(cand => {
+            const validee = cand.statut_inscription === "VALIDEE";
+            const paiementReussi = cand.statut_paiement === "REUSSI";
+            const motifs = Array.isArray(cand.motif)
+    ? cand.motif.map(m => m.contenu).filter(Boolean)
+    : [];
+
+const motifRejet = motifs.join(" ; ");
+
+const rejetee = cand.statut_inscription === "REJETEE";
+
             container.innerHTML += `
         <div class="profil-cand-row">
-            <span class="text-center">${cand.concours?.nom || "-"}</span>
-            <span class="text-center status ${cand.statut_inscription === "VALIDEE" ? "paid" : "unpaid"
-                }">
-                ${cand.statut_inscription === "VALIDEE" ? "Payé" : "En attente"}
-            </span>
             <span class="text-center">
-                
+                ${cand.concours?.nom || "-"}
+            </span>
 
-                ${cand.statut_inscription === "VALIDEE"
+           <span class="text-center">
+    <span class="status ${
+        cand.statut_inscription === "VALIDEE"
+            ? "paid"
+            : rejetee
+                ? "unpaid"
+                : "unpaid"
+    }">
+        ${
+            cand.statut_inscription === "VALIDEE"
+                ? "Validée"
+                : rejetee
+                    ? "Rejetée"
+                    : "En traitement"
+        }
+    </span>
 
+    ${
+        rejetee && motifRejet
+            ? `
+                <div class="motif-rejet">
+                    <strong>Motif du rejet :</strong>
+                    <p>${motifRejet}</p>
+                </div>
+            `
+            : ""
+    }
+</span>
+
+            <span class="text-center">
+                <span class="status ${paiementReussi ? "paid" : "unpaid"}">
+                    ${paiementReussi ? "Payé" : "En attente"}
+                </span>
+            </span>
+
+            <span class="text-center">
+                ${paiementReussi
                     ?
-
-                    ` <button
-                class="btn btn-primary btn-sm btn-download-receipt"
-                data-id="${cand.id_inscription}">
-                <i class="fa-solid fa-download"></i>
-                Télécharger reçu
-            </button>`
+                    `<button
+                        type="button"
+                        class="btn btn-primary btn-sm btn-download-receipt"
+                        data-id="${cand.id_inscription}">
+                        <i class="fa-solid fa-download"></i>
+                        Télécharger reçu
+                    </button>`
                     :
-
-                    `<button 
+                    `<button
+                        type="button"
                         class="btn btn-secondary btn-sm btn-payment"
                         data-id="${cand.id_inscription}"
-                        data-concours="${cand.concours.id_concours}"
-                        style="background: #eda618; color: white; border: none;">
+                        data-concours="${cand.concours?.id_concours || ""}"
+                        style="background:#eda618;color:white;border:none;">
                         <i class="fa-solid fa-credit-card"></i>
                         Finaliser paiement
                     </button>`
                 }
-
             </span>
         </div>
     `;
         });
 
-        document.addEventListener("click", e => {
+        if (!container.dataset.paymentListener) {
+            container.addEventListener("click", e => {
+                const btn = e.target.closest(".btn-payment");
 
-            const btn = e.target.closest(".btn-payment");
+                if (!btn) return;
 
-            if (!btn) return;
+                localStorage.setItem("id_inscription", btn.dataset.id);
+
+                const idEncode = this.encodeId(btn.dataset.concours);
+
+                window.location.href =
+                    "paiement.php?id=" + encodeURIComponent(idEncode);
+            });
+
+            container.dataset.paymentListener = "true";
+        }
 
 
-            localStorage.setItem("id_inscription", btn.dataset.id);
-
-            const idEncode = this.encodeId(btn.dataset.concours);
-
-            window.location.href =
-                "paiement.php?id=" + encodeURIComponent(idEncode);
-
-        });
     }
+
 
     static bindEvents() {
 
@@ -453,52 +496,58 @@ export default class CandidatController {
             }
 
             items.forEach(cand => {
-
-                //  console.log("CANDIDATURE :", cand);
-
                 const row = document.createElement("div");
                 row.className = "profil-cand-row";
 
                 const concoursNom = cand.concours?.nom || "-";
-
-                const statut = cand.statut_inscription || "";
-
+                const validee = cand.statut_inscription === "VALIDEE";
+                const paiementReussi = cand.statut_paiement === "REUSSI";
                 const idInscription = cand.id_inscription || "";
-
                 const idConcours = cand.concours?.id_concours || "";
 
                 row.innerHTML = `
-                <span>${concoursNom}</span>
+    <span class="text-center">${concoursNom}</span>
 
-                <span class="status ${statut === "VALIDEE" ? "paid" : "unpaid"}">
-                    ${statut === "VALIDEE" ? "Payé" : "En attente"}
-                </span>
+    <span class="text-center">
+        <span class="status ${validee ? "paid" : "unpaid"}">
+            ${validee ? "Validée" : "En traitement"}
+        </span>
+    </span>
 
-                <span class="text-center">
-                    ${statut === "VALIDEE"
+    <span class="text-center">
+        <span class="status ${paiementReussi ? "paid" : "unpaid"}">
+            ${paiementReussi ? "Payé" : "En attente"}
+        </span>
+    </span>
+
+    <span class="text-center">
+        ${paiementReussi
                         ?
                         `<button
-                                type="button"
-                                class="btn-download-receipt"
-                                data-id="${idInscription}">
-                                <i class="fa-solid fa-download"></i>
-                                Télécharger reçu
-                            </button>`
+                type="button"
+                class="btn-download-receipt"
+                data-id="${idInscription}">
+                <i class="fa-solid fa-download"></i>
+                Télécharger reçu
+            </button>`
                         :
                         `<button
-                                type="button"
-                                class="btn-payment"
-                                data-id="${idInscription}"
-                                data-concours="${idConcours}">
-                                <i class="fa-solid fa-credit-card"></i>
-                                Finaliser paiement
-                            </button>`
+                type="button"
+                class="btn-payment"
+                data-id="${idInscription}"
+                data-concours="${idConcours}">
+                <i class="fa-solid fa-credit-card"></i>
+                Finaliser paiement
+            </button>`
                     }
-                </span>
-            `;
+    </span>
+`;
 
                 container.appendChild(row);
+
+
             });
+
 
             this.currentPage++;
 

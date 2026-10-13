@@ -191,7 +191,7 @@ $idConcours = (int) $idConcours;
                             <p id="code-text"
                                 class="payment-code">
 
-                            <!-- #144#*4*6*800# -->
+                            <!-- #144#*4*6*1000# -->
 
                             </p>
 
@@ -258,7 +258,7 @@ $idConcours = (int) $idConcours;
                             <i class="fa-solid fa-lock"></i>
 
                             <span>
-                                Payer 800 FCFA
+                                Payer 1000 FCFA
                             </span>
 
                             <i class="fa-solid fa-arrow-right"></i>

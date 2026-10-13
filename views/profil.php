@@ -252,6 +252,7 @@
             <div class="profil-cand-row header">
               <span>Concours</span>
               <span>Statut</span>
+              <span>Paiement</span>
               <span>Actions</span>
             </div>
           </div>
