@@ -121,12 +121,12 @@ export default class CandidatController {
             const validee = cand.statut_inscription === "VALIDEE";
             const paiementReussi = cand.statut_paiement === "REUSSI";
             const motifs = Array.isArray(cand.motif)
-    ? cand.motif.map(m => m.contenu).filter(Boolean)
-    : [];
+                ? cand.motif.map(m => m.contenu).filter(Boolean)
+                : [];
 
-const motifRejet = motifs.join(" ; ");
+            const motifRejet = motifs.join(" ; ");
 
-const rejetee = cand.statut_inscription === "REJETEE";
+            const rejetee = cand.statut_inscription === "REJETEE";
 
             container.innerHTML += `
         <div class="profil-cand-row">
@@ -135,32 +135,29 @@ const rejetee = cand.statut_inscription === "REJETEE";
             </span>
 
            <span class="text-center">
-    <span class="status ${
-        cand.statut_inscription === "VALIDEE"
-            ? "paid"
-            : rejetee
-                ? "unpaid"
-                : "unpaid"
-    }">
-        ${
-            cand.statut_inscription === "VALIDEE"
-                ? "Validée"
-                : rejetee
-                    ? "Rejetée"
-                    : "En traitement"
-        }
+    <span class="status ${cand.statut_inscription === "VALIDEE"
+                    ? "paid"
+                    : rejetee
+                        ? "unpaid"
+                        : "unpaid"
+                }">
+        ${cand.statut_inscription === "VALIDEE"
+                    ? "Validée"
+                    : rejetee
+                        ? "Rejetée"
+                        : "En traitement"
+                }
     </span>
 
-    ${
-        rejetee && motifRejet
-            ? `
+    ${rejetee && motifRejet
+                    ? `
                 <div class="motif-rejet">
                     <strong>Motif du rejet :</strong>
                     <p>${motifRejet}</p>
                 </div>
             `
-            : ""
-    }
+                    : ""
+                }
 </span>
 
             <span class="text-center">
@@ -177,7 +174,7 @@ const rejetee = cand.statut_inscription === "REJETEE";
                         class="btn btn-primary btn-sm btn-download-receipt"
                         data-id="${cand.id_inscription}">
                         <i class="fa-solid fa-download"></i>
-                        Télécharger reçu
+                        Télécharger le récépissé
                     </button>`
                     :
                     `<button
@@ -442,31 +439,23 @@ const rejetee = cand.statut_inscription === "REJETEE";
 
 
     static async loadMoreCandidatures() {
-
-        if (this.isLoading || !this.hasMore) {
-            return;
-        }
-
-        this.isLoading = true;
+        if (this.isLoading || !this.hasMore) return;
 
         const token = localStorage.getItem("token");
         const container = document.getElementById("candidaturesModalContainer");
         const loading = document.getElementById("loading");
 
-        if (!container) {
-            // console.error("Container candidatures introuvable");
-            this.isLoading = false;
-            return;
-        }
+        if (!container) return;
+
+        this.isLoading = true;
 
         if (loading) {
-            loading.classList.remove("hidden");
             loading.textContent = "Chargement...";
+            loading.classList.remove("hidden");
         }
 
         try {
-
-            const res = await fetch(
+            const response = await fetch(
                 `http://localhost:4000/api/candidat/mes-candidatures?page=${this.currentPage}`,
                 {
                     headers: {
@@ -475,109 +464,163 @@ const rejetee = cand.statut_inscription === "REJETEE";
                 }
             );
 
-            const result = await res.json();
+            if (!response.ok) {
+                throw new Error("Impossible de charger les candidatures.");
+            }
 
-            // console.log("STATUT API :", res.status);
-            // console.log("REPONSE CANDIDATURES :", result);
+            const result = await response.json();
+            const candidatures = result.data || [];
 
-            const items = Array.isArray(result.data) ? result.data : [];
+            if (this.currentPage === 1) {
+                container.innerHTML = `
+                <div class="profil-cand-row header">
+                    <span>Concours</span>
+                    <span>Statut candidature</span>
+                    <span>Paiement</span>
+                    <span>Actions</span>
+                </div>
+                <div id="candidaturesModalRows"></div>
+            `;
+            }
 
-            //  console.log("CANDIDATURES :", items);
+            const rowsContainer = document.getElementById("candidaturesModalRows");
 
-            if (items.length === 0) {
+            if (!rowsContainer) return;
+
+            if (candidatures.length === 0) {
                 this.hasMore = false;
 
-                if (loading) {
-                    loading.textContent = "Plus de candidatures";
+                if (this.currentPage === 1) {
+                    rowsContainer.innerHTML = `
+                    <div class="candidatures-empty">
+                        Aucune candidature disponible.
+                    </div>
+                `;
                 }
 
-                this.isLoading = false;
                 return;
             }
 
-            items.forEach(cand => {
+            candidatures.forEach((cand) => {
                 const row = document.createElement("div");
                 row.className = "profil-cand-row";
 
-                const concoursNom = cand.concours?.nom || "-";
-                const validee = cand.statut_inscription === "VALIDEE";
+                const nomConcours = cand.concours?.nom_concours
+                    || cand.concours?.libelle
+                    || cand.concours?.titre
+                    || "Concours non renseigné";
+
+                let statutCandidature = "";
+                let classeStatut = "";
+
+                if (cand.statut_inscription === "VALIDEE") {
+                    statutCandidature = "Validée";
+                    classeStatut = "statut-validee";
+                } else if (cand.statut_inscription === "REJETEE") {
+                    statutCandidature = "Rejetée";
+                    classeStatut = "statut-rejetee";
+                } else {
+                    statutCandidature = "En attente";
+                    classeStatut = "statut-attente";
+                }
+
                 const paiementReussi = cand.statut_paiement === "REUSSI";
-                const idInscription = cand.id_inscription || "";
-                const idConcours = cand.concours?.id_concours || "";
+
+                const statutPaiement = paiementReussi
+                    ? `<span class="badge-paiement paiement-reussi">Payé</span>`
+                    : `<span class="badge-paiement paiement-attente">Non payé</span>`;
+
+                const motifs = Array.isArray(cand.motif)
+                    ? cand.motif.map(m => m.contenu).filter(Boolean)
+                    : [];
+
+                const motifRejet = motifs.join(" ; ");
+
+                const detailsRejet =
+                    cand.statut_inscription === "REJETEE" && motifRejet
+                        ? `
+                        <div class="motif-rejet">
+                            <strong>Motif du rejet :</strong>
+                            <p>${this.escapeHTML(motifRejet)}</p>
+                        </div>
+                    `
+                        : "";
+
+                let actions = "";
+
+                if (paiementReussi) {
+                    actions = `
+                    <button
+                        type="button"
+                        class="btn-download-receipt"
+                        data-id-inscription="${cand.id_inscription}">
+                        <i class="fa-solid fa-download"></i>
+                        Télécharger le récépissé
+                    </button>
+                `;
+                } else {
+                    actions = `
+                    <button
+                        type="button"
+                        class="btn-payment"
+                        data-id-inscription="${cand.id_inscription}">
+                        Payer
+                    </button>
+                `;
+                }
 
                 row.innerHTML = `
-    <span class="text-center">${concoursNom}</span>
+                <span class="col-concours">
+                    ${this.escapeHTML(nomConcours)}
+                </span>
 
-    <span class="text-center">
-        <span class="status ${validee ? "paid" : "unpaid"}">
-            ${validee ? "Validée" : "En traitement"}
-        </span>
-    </span>
+                <span class="col-statut">
+                    <span class="badge-statut ${classeStatut}">
+                        ${statutCandidature}
+                    </span>
+                    ${detailsRejet}
+                </span>
 
-    <span class="text-center">
-        <span class="status ${paiementReussi ? "paid" : "unpaid"}">
-            ${paiementReussi ? "Payé" : "En attente"}
-        </span>
-    </span>
+                <span class="col-paiement">
+                    ${statutPaiement}
+                </span>
 
-    <span class="text-center">
-        ${paiementReussi
-                        ?
-                        `<button
-                type="button"
-                class="btn-download-receipt"
-                data-id="${idInscription}">
-                <i class="fa-solid fa-download"></i>
-                Télécharger reçu
-            </button>`
-                        :
-                        `<button
-                type="button"
-                class="btn-payment"
-                data-id="${idInscription}"
-                data-concours="${idConcours}">
-                <i class="fa-solid fa-credit-card"></i>
-                Finaliser paiement
-            </button>`
-                    }
-    </span>
-`;
+                <span class="col-actions">
+                    ${actions}
+                </span>
+            `;
 
-                container.appendChild(row);
-
-
+                rowsContainer.appendChild(row);
             });
-
 
             this.currentPage++;
 
-            this.hasMore = this.currentPage <= result.pageTot;
+            if (result.pageTot && this.currentPage > result.pageTot) {
+                this.hasMore = false;
+            } else if (!result.pageTot && candidatures.length < 5) {
+                this.hasMore = false;
+            }
 
-        } catch (err) {
+        } catch (error) {
+            console.error("Erreur chargement candidatures :", error);
 
-            // console.error("ERREUR CANDIDATURES :", err);
-
+            if (loading) {
+                loading.textContent = "Erreur lors du chargement des candidatures.";
+                loading.classList.remove("hidden");
+            }
         } finally {
-
             this.isLoading = false;
 
             if (loading) {
                 loading.classList.add("hidden");
             }
         }
+    }
 
-        // setTimeout(() => {
-
-        //     if (
-        //         container &&
-        //         container.scrollHeight <= container.clientHeight &&
-        //         this.hasMore &&
-        //         !this.isLoading
-        //     ) {
-        //         this.loadMoreCandidatures();
-        //     }
-
-        // }, 100);
+    static escapeHTML(value) {
+        const div = document.createElement("div");
+        div.textContent = value ?? "";
+        return div.innerHTML;
     }
 
     static bindModalEvents() {

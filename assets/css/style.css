@@ -6437,7 +6437,7 @@ body {
 
 .profil-cand-row {
   display: grid;
-  grid-template-columns: minmax(0, 1.5fr) minmax(100px, 0.8fr) minmax(110px, 0.9fr) minmax(160px, 1.2fr);
+  grid-template-columns: 1.2fr 1.2fr 1fr 1.5fr;
   align-items: center;
   gap: 10px;
   min-height: 46px;
@@ -6449,7 +6449,7 @@ body {
   width: 100%;
 }
 
-.profil-cand-row>span {
+.profil-cand-row span {
   min-width: 0;
   text-align: center;
   overflow-wrap: anywhere;
@@ -11983,4 +11983,64 @@ button:disabled {
 .motif-rejet p {
     margin: 0;
     line-height: 1.5;
+}
+
+/* Correction finale de l'alignement des candidatures */
+
+.profil-body #candidaturesContainer .profil-cand-row,
+.profil-body #candidaturesModalContainer .profil-cand-row {
+    display: grid !important;
+    grid-template-columns:
+        minmax(0, 1.5fr)
+        minmax(0, 1.3fr)
+        minmax(0, 0.8fr)
+        minmax(140px, 1fr) !important;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.profil-body #candidaturesContainer .profil-cand-row > span,
+.profil-body #candidaturesModalContainer .profil-cand-row > span {
+    min-width: 0;
+    width: 100%;
+    box-sizing: border-box;
+    overflow-wrap: anywhere;
+    text-align: center;
+}
+
+.profil-body #candidaturesContainer .profil-cand-row > span:first-child,
+.profil-body #candidaturesModalContainer .profil-cand-row > span:first-child {
+    text-align: left;
+}
+
+.profil-body #candidaturesContainer .profil-cand-row.header,
+.profil-body #candidaturesModalContainer .profil-cand-row.header {
+    display: grid !important;
+    grid-template-columns:
+        minmax(0, 1.5fr)
+        minmax(0, 1.3fr)
+        minmax(0, 0.8fr)
+        minmax(140px, 1fr) !important;
+}
+
+.profil-body #candidaturesContainer .profil-cand-row > span:nth-child(4),
+.profil-body #candidaturesModalContainer .profil-cand-row > span:nth-child(4) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+}
+
+@media screen and (max-width: 700px) {
+    .profil-body #candidaturesContainer {
+        overflow-x: auto;
+    }
+
+    .profil-body #candidaturesContainer .profil-cand-row,
+    .profil-body #candidaturesModalContainer .profil-cand-row {
+        width: 650px;
+        min-width: 650px;
+    }
 }
