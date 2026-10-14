@@ -56,6 +56,7 @@ export default class CandidatController {
             document.getElementById("infoMinistere").innerText = c.ministere || "-";
             document.getElementById("infoEmploi").innerText = c.emploi || "-";
             document.getElementById("infoMatricule").innerText = c.matricule || "-";
+            document.getElementById("infoNumeroRecepisse").innerText = c.recepisse || "-";
 
             document.getElementById("infoEmail").innerText = c.email || "-";
             document.getElementById("infoTelephone").innerText = c.telephone || "-";
@@ -505,10 +506,9 @@ export default class CandidatController {
                 const row = document.createElement("div");
                 row.className = "profil-cand-row";
 
-                const nomConcours = cand.concours?.nom_concours
-                    || cand.concours?.libelle
-                    || cand.concours?.titre
-                    || "Concours non renseigné";
+                const nomConcours = cand.concours?.nom
+                    || "-";
+
 
                 let statutCandidature = "";
                 let classeStatut = "";
@@ -527,8 +527,8 @@ export default class CandidatController {
                 const paiementReussi = cand.statut_paiement === "REUSSI";
 
                 const statutPaiement = paiementReussi
-                    ? `<span class="badge-paiement paiement-reussi">Payé</span>`
-                    : `<span class="badge-paiement paiement-attente">Non payé</span>`;
+                    ? `<span class="status paid">Payé</span>`
+                    : `<span class="status unpaid">Non payé</span>`;
 
                 const motifs = Array.isArray(cand.motif)
                     ? cand.motif.map(m => m.contenu).filter(Boolean)
@@ -564,7 +564,9 @@ export default class CandidatController {
                         type="button"
                         class="btn-payment"
                         data-id-inscription="${cand.id_inscription}">
-                        Payer
+                        style="background:#eda618;color:white;border:none;">
+                        <i class="fa-solid fa-credit-card"></i>
+                        Finaliser paiement
                     </button>
                 `;
                 }
@@ -846,8 +848,8 @@ export default class CandidatController {
         const certificatNationalite = document.getElementById("nationalite");
         const certificatName = document.getElementById("certificatName");
 
-        const ficheCandidature = document.getElementById("fiche_candidature");
-        const ficheCandidatureName = document.getElementById("ficheCandidatureName");
+        // const ficheCandidature = document.getElementById("fiche_candidature");
+        // const ficheCandidatureName = document.getElementById("ficheCandidatureName");
 
         const certificatNaissance = document.getElementById("acte");
         const certificatNaissanceName = document.getElementById("naissanceName");
@@ -883,16 +885,16 @@ export default class CandidatController {
             }
         });
 
-        ficheCandidature.addEventListener("change", () => {
+        // ficheCandidature.addEventListener("change", () => {
 
-            const file = ficheCandidature.files[0];
+        //     const file = ficheCandidature.files[0];
 
-            if (file) {
-                ficheCandidatureName.textContent = file.name;
-            } else {
-                ficheCandidatureName.textContent = "";
-            }
-        });
+        //     if (file) {
+        //         ficheCandidatureName.textContent = file.name;
+        //     } else {
+        //         ficheCandidatureName.textContent = "";
+        //     }
+        // });
 
         certificatNaissance.addEventListener("change", () => {
 
@@ -943,7 +945,7 @@ export default class CandidatController {
             // const typeDocument = typePiece.value;
             const pieceFile = pieceIdentite.files[0];
             const certificatFile = certificatNationalite.files[0];
-            const ficheCandidatureFile = ficheCandidature.files[0];
+            //const ficheCandidatureFile = ficheCandidature.files[0];
             const certificatNaissanceFile = certificatNaissance.files[0];
             const lettreEquivalenceFile = lettreEquivalence.files[0];
             const arreteHabilitationFile = arreteHabilitation.files[0];
@@ -969,15 +971,15 @@ export default class CandidatController {
                 return;
             }
 
-            if (!ficheCandidatureFile && !certificatNaissanceFile && !arreteHabilitationFile && !certificatMedicalFile) {
-                Swal.fire({
-                    icon: "warning",
-                    title: "Document manquant",
-                    text: "Veuillez sélectionner au moins un document à envoyer."
-                });
+            // if (!ficheCandidatureFile && !certificatNaissanceFile && !arreteHabilitationFile && !certificatMedicalFile) {
+            //     Swal.fire({
+            //         icon: "warning",
+            //         title: "Document manquant",
+            //         text: "Veuillez sélectionner au moins un document à envoyer."
+            //     });
 
-                return;
-            }
+            //     return;
+            // }
 
             const token = localStorage.getItem("token");
 
@@ -1049,30 +1051,30 @@ export default class CandidatController {
                     documentsEnvoyes++;
                 }
 
-                if (ficheCandidatureFile) {
+                // if (ficheCandidatureFile) {
 
-                    const resFiche = await DocumentModel.uploadDocuments(
-                        token,
-                        "FICHE_CANDIDATURE",
-                        ficheCandidatureFile
-                    );
+                //     const resFiche = await DocumentModel.uploadDocuments(
+                //         token,
+                //         "FICHE_CANDIDATURE",
+                //         ficheCandidatureFile
+                //     );
 
-                    // console.log("UPLOAD FICHE :", resFiche);
+                //     // console.log("UPLOAD FICHE :", resFiche);
 
-                    if (!resFiche.ok) {
+                //     if (!resFiche.ok) {
 
-                        Swal.fire({
-                            icon: "error",
-                            title: "Erreur",
-                            text: resFiche.data?.error ||
-                                "Impossible d'envoyer la fiche de candidature."
-                        });
+                //         Swal.fire({
+                //             icon: "error",
+                //             title: "Erreur",
+                //             text: resFiche.data?.error ||
+                //                 "Impossible d'envoyer la fiche de candidature."
+                //         });
 
-                        return;
-                    }
+                //         return;
+                //     }
 
-                    documentsEnvoyes++;
-                }
+                //     documentsEnvoyes++;
+                // }
 
                 if (certificatNaissanceFile) {
 
@@ -1304,41 +1306,59 @@ export default class CandidatController {
             }
 
             if (uploadSection) {
-                const hasIdentite = documents.some(
-                    document => document.type_document === "IDENTITE"
+                const correspondanceDocuments = {
+                    IDENTITE: "identite",
+                    NATIONALITE: "nationalite",
+                    NAISSANCE: "acte",
+                    EQUIVALENCE: "equivalence",
+                    ARRETE_HABILITATION: "arrete_habilitation",
+                    MEDICAL: "medical"
+                };
+
+                const documentsEnregistres = new Set(
+                    documents.map(doc =>
+                        String(doc.type_document || "").trim().toUpperCase()
+                    )
                 );
 
-                const hasNationalite = documents.some(
-                    document => document.type_document === "NATIONALITE"
-                );
+                Object.entries(correspondanceDocuments).forEach(([type, id]) => {
+                    const champ = document.getElementById(id);
 
-                const hasCandidature = documents.some(
-                    document => document.type_document === "CANDIDATURE"
-                );
+                    if (!champ) {
+                        console.warn(`Champ introuvable : ${id}`);
+                        return;
+                    }
 
-                const hasNaissance = documents.some(
-                    document => document.type_document === "ACTE"
-                );
+                    const conteneur = champ.closest(".profil-field");
 
-                const hasEquivalence = documents.some(
-                    document => document.type_document === "EQUIVALENCE"
-                );
+                    if (!conteneur) {
+                        console.warn(`Conteneur introuvable pour : ${id}`);
+                        return;
+                    }
 
-                const hasHabilitation = documents.some(
-                    document => document.type_document === "HABILITATION"
-                );
+                    const estEnregistre = documentsEnregistres.has(type);
 
-                const hasMedical = documents.some(
-                    document => document.type_document === "MEDICAL"
-                );
+                    conteneur.style.display = estEnregistre ? "none" : "";
 
-                const allDocumentsRegistered =
-                    hasIdentite && hasNationalite && hasCandidature && hasNaissance && hasEquivalence && hasHabilitation && hasMedical;
+                    if (id === "identite") {
+                        const libelle = conteneur.previousElementSibling;
 
-                uploadSection.style.display =
-                    allDocumentsRegistered ? "none" : "block";
+                        if (libelle && libelle.classList.contains("profil-field")) {
+                            libelle.style.display = estEnregistre ? "none" : "";
+                        }
+                    }
+
+                });
+
+                const tousLesDocumentsEnregistres = Object.keys(
+                    correspondanceDocuments
+                ).every(type => documentsEnregistres.has(type));
+
+                uploadSection.style.display = tousLesDocumentsEnregistres
+                    ? "none"
+                    : "block";
             }
-
+            
             if (documents.length === 0) {
 
                 documentsList.innerHTML = `
@@ -1382,10 +1402,10 @@ export default class CandidatController {
                     icone = "fa-passport";
                 }
 
-                if (document.type_document === "CANDIDATURE") {
-                    nomDocument = "Fiche de candidature";
-                    icone = "fa-file-lines";
-                }
+                // if (document.type_document === "CANDIDATURE") {
+                //     nomDocument = "Fiche de candidature";
+                //     icone = "fa-file-lines";
+                // }
 
                 if (document.type_document === "ACTE") {
                     nomDocument = "Extrait de naissance";

@@ -173,6 +173,11 @@
                 <p class="profil-value" id="infoMatricule">-</p>
               </div>
 
+              <div class="profil-field">
+                <p class="profil-label">NUMERO DE RECEPISSE</p>
+                <p class="profil-value" id="infoNumeroRecepisse">-</p>
+              </div>
+
             </div>
           </div>
 
@@ -345,23 +350,26 @@
 
               </div>
 
-              <div class="profil-field">
+              <!-- <div class="profil-field" hidden>
 
                 <p class="profil-label">
                   Fiche de candidature
+                  
                 </p>
 
                 <input
                   type="file"
                   id="fiche_candidature"
                   class="form-control"
-                  accept=".pdf,.jpg,.jpeg,.png">
+                  accept=".pdf,.jpg,.jpeg,.png"
+                  >
 
                 <small
                   id="ficheCandidatureName"
                   class="text-muted"></small>
+                 
 
-              </div>
+              </div> -->
 
                <div class="profil-field">
 

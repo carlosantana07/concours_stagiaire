@@ -12044,3 +12044,39 @@ button:disabled {
         min-width: 650px;
     }
 }
+
+.profil-body .statut-validee {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 10px;
+    border-radius: 20px;
+    background: #E8F7F0;
+    color: #16845B;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.profil-body .statut-rejetee {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 10px;
+    border-radius: 20px;
+    background: #FDE8E8;
+    color: #C53030;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.profil-body .statut-attente {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 10px;
+    border-radius: 20px;
+    background: #FFF7E5;
+    color: #B7791F;
+    font-size: 11px;
+    font-weight: 600;
+}
