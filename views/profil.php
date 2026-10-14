@@ -463,16 +463,43 @@
 
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-  <script>
+<script>
     document.querySelectorAll(".profil-tab").forEach(tab => {
-      tab.addEventListener("click", () => {
-        document.querySelectorAll(".profil-tab").forEach(t => t.classList.remove("active"));
-        document.querySelectorAll(".profil-tab-content").forEach(c => c.classList.remove("active"));
-        tab.classList.add("active");
-        document.getElementById("tab-" + tab.dataset.tab).classList.add("active");
-      });
+        tab.addEventListener("click", () => {
+            document.querySelectorAll(".profil-tab").forEach(t => {
+                t.classList.remove("active");
+            });
+
+            document.querySelectorAll(".profil-tab-content").forEach(c => {
+                c.classList.remove("active");
+            });
+
+            tab.classList.add("active");
+
+            const contenu = document.getElementById("tab-" + tab.dataset.tab);
+
+            if (contenu) {
+                contenu.classList.add("active");
+            }
+        });
     });
-  </script>
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const params = new URLSearchParams(window.location.search);
+        const section = params.get("section");
+
+        if (section === "candidatures") {
+            const ongletCandidatures = document.querySelector(
+                '.profil-tab[data-tab="candidatures"]'
+            );
+
+            if (ongletCandidatures) {
+                ongletCandidatures.click();
+            }
+        }
+    });
+</script>
+
 
   <script type="module">
     import CandidatController from "../controllers/candidatController.js";

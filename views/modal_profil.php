@@ -65,10 +65,11 @@
 
 <div id="modalCandidatures" class="modal hidden">
 
-    <div class="modal-content large">
+    <div class="modal-content large xl">
 
         <div class="modal-header">
-            <h4>Modifier mon profil</h4>
+            <h4>
+                Mes candidatures</h4>
             <span class="close-candidatures">&times;</span>
         </div>
 

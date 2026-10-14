@@ -2,12 +2,15 @@ const API = "http://localhost:4000/api/candidat";
 
 export default class DocumentModel {
 
-    static async uploadDocuments(token, typeDocument, file) {
+    // documents = [{ typeDocument: "IDENTITE", file }, ...]
+    static async uploadDocuments(token, documents) {
 
         const formData = new FormData();
 
-        formData.append("type_document", typeDocument);
-        formData.append("files", file);
+        documents.forEach(({ typeDocument, file }) => {
+            formData.append("type_document", typeDocument);
+            formData.append("files", file);
+        });
 
         const res = await fetch(`${API}/documents`, {
             method: "POST",
@@ -19,7 +22,7 @@ export default class DocumentModel {
 
         const data = await res.json();
 
-      //  console.log("Réponse upload document :", data);
+        //  console.log("Réponse upload document :", data);
 
         return {
             ok: res.ok,
@@ -38,7 +41,7 @@ export default class DocumentModel {
 
         const data = await res.json();
 
-       // console.log("Mes documents :", data);
+        // console.log("Mes documents :", data);
 
         return {
             ok: res.ok,
@@ -65,7 +68,7 @@ export default class DocumentModel {
 
         const data = await res.json();
 
-       // console.log("Réponse modification document :", data);
+        // console.log("Réponse modification document :", data);
 
         return {
             ok: res.ok,
@@ -87,7 +90,7 @@ export default class DocumentModel {
 
         const data = await res.json();
 
-      //  console.log("Réponse suppression document :", data);
+        //  console.log("Réponse suppression document :", data);
 
         return {
             ok: res.ok,

@@ -115,6 +115,11 @@
                     Mes résultats
                 </a>
 
+                <a href="profil.php?section=candidatures">
+                     <i class="fa-solid fa-file-lines"></i>
+                    Mes candidatures
+                </a>
+
                 <a
                     href="#"
                     class="logout-link"
