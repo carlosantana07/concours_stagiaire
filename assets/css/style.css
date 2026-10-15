@@ -12096,3 +12096,192 @@ button:disabled {
         margin: 10px auto;
     }
 }
+
+.register-page .register-documents-section {
+    background: #FFFFFF;
+}
+
+.register-page .documents-info {
+    display: flex;
+    align-items: flex-start;
+    gap: 11px;
+    margin-bottom: 22px;
+    padding: 13px 15px;
+    border: 1px solid #DCEFE1;
+    border-radius: 8px;
+    background: #F2FAF4;
+    color: #365C40;
+}
+
+.register-page .documents-info > i {
+    margin-top: 3px;
+    color: #14B53A;
+    font-size: 15px;
+}
+
+.register-page .documents-info p {
+    margin: 0;
+    font-size: 11px;
+    line-height: 1.8;
+}
+
+.register-page .documents-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 15px;
+}
+
+.register-page .document-upload-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 13px;
+    min-width: 0;
+    padding: 17px 14px;
+    border: 1px solid #E2E7EE;
+    border-radius: 10px;
+    background: #FFFFFF;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.register-page .document-upload-card:hover {
+    border-color: #14B53A;
+    box-shadow: 0 4px 14px rgba(20, 181, 58, 0.07);
+}
+
+.register-page .document-upload-card-full {
+    grid-column: 1 / -1;
+}
+
+.register-page .document-upload-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 42px;
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    background: #EAF7ED;
+    color: #14B53A;
+    font-size: 17px;
+}
+
+.register-page .document-upload-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.register-page .document-upload-content > label:first-child {
+    display: block;
+    margin-bottom: 5px;
+    color: #172033;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.register-page .document-upload-content > p {
+    margin: 0 0 13px;
+    color: #6B7280;
+    font-size: 11px;
+    line-height: 1.7;
+}
+
+.register-page .document-upload-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    min-height: 34px;
+    padding: 0 12px;
+    border: 1px solid #BFE5C8;
+    border-radius: 6px;
+    background: #F2FAF4;
+    color: #168B32;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.register-page .document-upload-button:hover {
+    background: #14B53A;
+    color: #FFFFFF;
+}
+
+.register-page .document-file-input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    clip-path: inset(50%);
+}
+
+.register-page .document-file-input:focus-visible + .document-file-name {
+    outline: 2px solid #14B53A;
+    outline-offset: 3px;
+}
+
+.register-page .document-file-name {
+    display: block;
+    margin-top: 9px;
+    overflow-wrap: anywhere;
+    color: #8A94A3;
+    font-size: 10px;
+    line-height: 1.7;
+}
+
+.register-page .document-file-name.has-files {
+    color: #168B32;
+    font-weight: 600;
+}
+
+.register-page .documents-security {
+    display: flex;
+    align-items: flex-start;
+    gap: 9px;
+    margin-top: 18px;
+    padding-top: 15px;
+    border-top: 1px solid #E9EDF2;
+    color: #6B7280;
+    font-size: 10px;
+    line-height: 1.8;
+}
+
+.register-page .documents-security i {
+    margin-top: 3px;
+    color: #14B53A;
+    font-size: 13px;
+}
+
+@media screen and (max-width: 520px) {
+    .register-page .documents-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .register-page .document-upload-card-full {
+        grid-column: auto;
+    }
+
+    .register-page .document-upload-card {
+        gap: 10px;
+        padding: 14px 11px;
+    }
+
+    .register-page .document-upload-icon {
+        flex-basis: 36px;
+        width: 36px;
+        height: 36px;
+        font-size: 15px;
+    }
+
+    .register-page .document-upload-content > label:first-child {
+        font-size: 12px;
+    }
+
+    .register-page .document-upload-button {
+        min-height: 36px;
+        font-size: 11px;
+    }
+}

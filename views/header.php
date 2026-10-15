@@ -120,6 +120,16 @@
                     Mes candidatures
                 </a>
 
+                 <a href="profil.php?section=documents">
+                     <i class="fa-solid fa-file-upload"></i>
+                    Mes documents
+                </a>
+
+                 <a href="profil.php?section=securite">
+                     <i class="fa-solid fa-lock"></i>
+                     Sécurité
+                </a>
+
                 <a
                     href="#"
                     class="logout-link"

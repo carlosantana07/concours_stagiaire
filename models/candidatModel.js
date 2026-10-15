@@ -33,9 +33,7 @@ export default class CandidatModel {
             }
         );
 
-        const data = await res.json();
-
-        console.log("DATA", data);
+        const data = await res.json(); 
 
         return { ok: res.ok, data };
     }

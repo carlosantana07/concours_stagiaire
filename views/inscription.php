@@ -294,6 +294,242 @@
 
                     </div>
 
+                    <div class="register-section register-documents-section">
+
+                        <div class="section-title">
+                            <div class="section-icon">
+                                <i class="fa-solid fa-folder-open"></i>
+                            </div>
+
+                            <div>
+                                <h3>Documents à fournir</h3>
+                                <p>
+                                    Ajoutez les documents nécessaires à la constitution de votre dossier.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="documents-info">
+                            <i class="fa-solid fa-circle-info"></i>
+                            <p>
+                                Formats acceptés : PDF, JPG, JPEG et PNG.
+                                Veillez à fournir des documents lisibles.
+                                Certains documents peuvent être exigés selon le concours choisi.
+                            </p>
+                        </div>
+
+                        <div class="documents-grid">
+
+                            <div class="document-upload-card">
+                                <div class="document-upload-icon">
+                                    <i class="fa-solid fa-id-card"></i>
+                                </div>
+
+                                <div class="document-upload-content">
+                                    <label for="documentIdentite">Pièce d'identité</label>
+                                    <p>NINA ou pièce d'identité</p>
+
+                                    <label for="documentIdentite" class="document-upload-button">
+                                        <i class="fa-solid fa-cloud-arrow-up"></i>
+                                        Choisir un fichier
+                                    </label>
+
+                                    <input
+                                        type="file"
+                                        id="documentIdentite"
+                                        name="identite"
+                                        class="document-file-input"
+                                        accept=".pdf,.jpg,.jpeg,.png"
+                                        data-label="documentIdentiteNom">
+
+                                    <span id="documentIdentiteNom" class="document-file-name">
+                                        Aucun fichier sélectionné
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="document-upload-card">
+                                <div class="document-upload-icon">
+                                    <i class="fa-solid fa-passport"></i>
+                                </div>
+
+                                <div class="document-upload-content">
+                                    <label for="documentNationalite">Certificat de nationalité</label>
+                                    <p>Certificat attestant votre nationalité</p>
+
+                                    <label for="documentNationalite" class="document-upload-button">
+                                        <i class="fa-solid fa-cloud-arrow-up"></i>
+                                        Choisir un fichier
+                                    </label>
+
+                                    <input
+                                        type="file"
+                                        id="documentNationalite"
+                                        name="nationalite"
+                                        class="document-file-input"
+                                        accept=".pdf,.jpg,.jpeg,.png"
+                                        data-label="documentNationaliteNom">
+
+                                    <span id="documentNationaliteNom" class="document-file-name">
+                                        Aucun fichier sélectionné
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="document-upload-card">
+                                <div class="document-upload-icon">
+                                    <i class="fa-solid fa-graduation-cap"></i>
+                                </div>
+
+                                <div class="document-upload-content">
+                                    <label for="documentDiplome">Diplôme</label>
+                                    <p>Diplôme ou attestation équivalente</p>
+
+                                    <label for="documentDiplome" class="document-upload-button">
+                                        <i class="fa-solid fa-cloud-arrow-up"></i>
+                                        Choisir un fichier
+                                    </label>
+
+                                    <input
+                                        type="file"
+                                        id="documentDiplome"
+                                        name="diplome"
+                                        class="document-file-input"
+                                        accept=".pdf,.jpg,.jpeg,.png"
+                                        data-label="documentDiplomeNom">
+
+                                    <span id="documentDiplomeNom" class="document-file-name">
+                                        Aucun fichier sélectionné
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="document-upload-card">
+                                <div class="document-upload-icon">
+                                    <i class="fa-solid fa-file-lines"></i>
+                                </div>
+
+                                <div class="document-upload-content">
+                                    <label for="documentNaissance">Acte de naissance</label>
+                                    <p>Acte ou extrait de naissance</p>
+
+                                    <label for="documentNaissance" class="document-upload-button">
+                                        <i class="fa-solid fa-cloud-arrow-up"></i>
+                                        Choisir un fichier
+                                    </label>
+
+                                    <input
+                                        type="file"
+                                        id="documentNaissance"
+                                        name="acte"
+                                        class="document-file-input"
+                                        accept=".pdf,.jpg,.jpeg,.png"
+                                        data-label="documentNaissanceNom">
+
+                                    <span id="documentNaissanceNom" class="document-file-name">
+                                        Aucun fichier sélectionné
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="document-upload-card">
+                                <div class="document-upload-icon">
+                                    <i class="fa-solid fa-file-circle-check"></i>
+                                </div>
+
+                                <div class="document-upload-content">
+                                    <label for="documentEquivalence">Lettre d'équivalence</label>
+                                    <p>À fournir si applicable</p>
+
+                                    <label for="documentEquivalence" class="document-upload-button">
+                                        <i class="fa-solid fa-cloud-arrow-up"></i>
+                                        Choisir un fichier
+                                    </label>
+
+                                    <input
+                                        type="file"
+                                        id="documentEquivalence"
+                                        name="equivalence"
+                                        class="document-file-input"
+                                        accept=".pdf,.jpg,.jpeg,.png"
+                                        data-label="documentEquivalenceNom">
+
+                                    <span id="documentEquivalenceNom" class="document-file-name">
+                                        Aucun fichier sélectionné
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="document-upload-card">
+                                <div class="document-upload-icon">
+                                    <i class="fa-solid fa-file-signature"></i>
+                                </div>
+
+                                <div class="document-upload-content">
+                                    <label for="documentHabilitation">Arrêté d'habilitation</label>
+                                    <p>Arrêté ou document d'habilitation</p>
+
+                                    <label for="documentHabilitation" class="document-upload-button">
+                                        <i class="fa-solid fa-cloud-arrow-up"></i>
+                                        Choisir un fichier
+                                    </label>
+
+                                    <input
+                                        type="file"
+                                        id="documentHabilitation"
+                                        name="arrete_habilitation"
+                                        class="document-file-input"
+                                        accept=".pdf,.jpg,.jpeg,.png"
+                                        data-label="documentHabilitationNom">
+
+                                    <span id="documentHabilitationNom" class="document-file-name">
+                                        Aucun fichier sélectionné
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="document-upload-card document-upload-card-full">
+                                <div class="document-upload-icon">
+                                    <i class="fa-solid fa-heart-pulse"></i>
+                                </div>
+
+                                <div class="document-upload-content">
+                                    <label for="documentCertificat">Certificat médical</label>
+                                    <p>Certificat médical établi par un professionnel habilité</p>
+
+                                    <label for="documentCertificat" class="document-upload-button">
+                                        <i class="fa-solid fa-cloud-arrow-up"></i>
+                                        Choisir un fichier
+                                    </label>
+
+                                    <input
+                                        type="file"
+                                        id="documentCertificat"
+                                        name="medical"
+                                        class="document-file-input"
+                                        accept=".pdf,.jpg,.jpeg,.png"
+                                        data-label="documentCertificatNom">
+
+                                    <span id="documentCertificatNom" class="document-file-name">
+                                        Aucun fichier sélectionné
+                                    </span>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="documents-security">
+                            <i class="fa-solid fa-shield-halved"></i>
+                            <span>
+                                Vos documents contiennent des informations personnelles.
+                                Assurez-vous de transmettre uniquement les pièces nécessaires
+                                à votre candidature.
+                            </span>
+                        </div>
+
+                    </div>
+
+
                     <div class="register-section">
 
                         <div class="section-title">
@@ -486,6 +722,33 @@
                 button.setAttribute("aria-label", "Afficher le mot de passe");
             }
         };
+
+        document.addEventListener("DOMContentLoaded", () => {
+            document.querySelectorAll(".document-file-input").forEach(input => {
+                input.addEventListener("change", () => {
+                    const labelId = input.dataset.label;
+                    const label = document.getElementById(labelId);
+
+                    if (!label) {
+                        return;
+                    }
+
+                    const fichiers = Array.from(input.files || []);
+
+                    if (fichiers.length === 0) {
+                        label.textContent = "Aucun fichier sélectionné";
+                        label.classList.remove("has-files");
+                        return;
+                    }
+
+                    label.textContent = fichiers
+                        .map(fichier => fichier.name)
+                        .join(", ");
+
+                    label.classList.add("has-files");
+                });
+            });
+        });
     </script>
 
 </body>

@@ -498,6 +498,38 @@
             }
         }
     });
+    
+     document.addEventListener("DOMContentLoaded", () => {
+        const params = new URLSearchParams(window.location.search);
+        const section = params.get("section");
+
+        if (section === "documents") {
+            const ongletDocuments = document.querySelector(
+                '.profil-tab[data-tab="documents"]'
+            );
+
+            if (ongletDocuments) {
+                ongletDocuments.click();
+            }
+        }
+    });
+
+     document.addEventListener("DOMContentLoaded", () => {
+        const params = new URLSearchParams(window.location.search);
+        const section = params.get("section");
+
+        if (section === "securite") {
+            const ongletSecurite = document.querySelector(
+                '.profil-tab[data-tab="securite"]'
+            );
+
+            if (ongletSecurite) {
+                ongletSecurite.click();
+            }
+        }
+    });
+
+
 </script>
 
 

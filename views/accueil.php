@@ -285,7 +285,7 @@
 
           </div>
 
-          <a href="tel:+223 92 48 28 40" class="btn-support">
+          <a href="contact.php" class="btn-support">
             <i class="fa-solid fa-phone"></i>
 
             <span>
