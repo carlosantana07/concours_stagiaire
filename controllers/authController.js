@@ -52,14 +52,14 @@ export default class AuthController {
                         errorEl.textContent =
                             res.data.erreurs[0];
 
-                    } 
-                    
+                    }
+
                     else if (res.data.error) {
 
                         errorEl.textContent =
-                        res.data.error;
-                    } 
-                    
+                            res.data.error;
+                    }
+
                     else {
 
                         errorEl.textContent =
@@ -299,62 +299,223 @@ export default class AuthController {
     }
 
 
+    // static initRegister() {
+
+    //     const form =
+    //         document.getElementById("registerForm");
+
+    //     const messageEl =
+    //         document.getElementById("formMessage");
+
+    //     form.addEventListener("submit", async (e) => {
+
+    //         e.preventDefault();
+
+    //         // reset message
+    //         messageEl.style.display = "none";
+    //         messageEl.textContent = "";
+
+    //         const formData =
+    //             new FormData(form);
+
+    //         const data =
+    //             Object.fromEntries(
+    //                 formData.entries()
+    //             );
+
+    //         // console.log(
+    //         //     "DATA ENVOYÉE :",
+    //         //     data
+    //         // );
+
+    //         // ===== VALIDATIONS =====
+
+    //         if (!data.sexe) {
+
+    //             messageEl.style.display =
+    //                 "block";
+
+    //             messageEl.className =
+    //                 "form-message error";
+
+    //             messageEl.textContent =
+    //                 "Veuillez sélectionner votre sexe";
+
+    //             return;
+    //         }
+
+    //         if (!data.numero_cnib) {
+
+    //             messageEl.style.display =
+    //                 "block";
+
+    //             messageEl.className =
+    //                 "form-message error";
+
+    //             messageEl.textContent =
+    //                 "Le CNIB est requis";
+
+    //             return;
+    //         }
+
+    //         if (
+    //             !data.mot_de_passe ||
+    //             data.mot_de_passe.length < 8
+    //         ) {
+
+    //             messageEl.style.display =
+    //                 "block";
+
+    //             messageEl.className =
+    //                 "form-message error";
+
+    //             messageEl.textContent =
+    //                 "Mot de passe trop court (min 8 caractères)";
+
+    //             return;
+    //         }
+
+    //         if (
+    //             data.mot_de_passe !==
+    //             data.mot_de_passe_confirm
+    //         ) {
+
+    //             messageEl.style.display =
+    //                 "block";
+
+    //             messageEl.className =
+    //                 "form-message error";
+
+    //             messageEl.textContent =
+    //                 "Les mots de passe ne correspondent pas";
+
+    //             return;
+    //         }
+
+    //         try {
+
+    //             const res =
+    //                 await AuthModel.register(data);
+
+    //             // console.log(
+    //             //     "REPONSE API :",
+    //             //     res.data
+    //             // );
+
+    //             // ===== ERREUR API =====
+    //             if (!res.ok) {
+
+    //                 messageEl.style.display =
+    //                     "block";
+
+    //                 messageEl.className =
+    //                     "form-message error";
+
+    //                 messageEl.textContent =
+    //                     res.data.error ||
+    //                     "Erreur inscription";
+
+    //                 return;
+    //             }
+
+    //             // ===== SUCCÈS =====
+
+    //             messageEl.style.display =
+    //                 "block";
+
+    //             messageEl.className =
+    //                 "form-message success";
+
+    //             messageEl.textContent =
+    //                 res.data.message;
+
+    //             // stockage session
+    //             sessionStorage.setItem(
+    //                 "email",
+    //                 data.email
+    //             );
+
+    //             sessionStorage.setItem(
+    //                 "otp_token",
+    //                 res.data.candidat.token
+    //             );
+
+    //             // loader
+    //             const loader =
+    //                 document.getElementById(
+    //                     "pageLoader"
+    //                 );
+
+    //             if (loader) {
+
+    //                 loader.classList.remove(
+    //                     "hidden"
+    //                 );
+    //             }
+
+    //             // redirection
+    //             setTimeout(() => {
+
+    //                 window.location.href =
+    //                     "otp.php";
+
+    //             }, 1200);
+
+    //         }
+
+    //         catch (err) {
+
+    //             // console.log(err);
+    //             err;
+
+    //             messageEl.style.display =
+    //                 "block";
+
+    //             messageEl.className =
+    //                 "form-message error";
+
+    //             messageEl.textContent =
+    //                 "Erreur serveur";
+
+    //         }
+
+    //     });
+
+    // }
+
     static initRegister() {
+        const form = document.getElementById("registerForm");
+        const messageEl = document.getElementById("formMessage");
 
-        const form =
-            document.getElementById("registerForm");
-
-        const messageEl =
-            document.getElementById("formMessage");
+        if (!form || !messageEl) {
+            return;
+        }
 
         form.addEventListener("submit", async (e) => {
-
             e.preventDefault();
 
-            // reset message
             messageEl.style.display = "none";
             messageEl.textContent = "";
 
-            const formData =
-                new FormData(form);
+            const formData = new FormData(form);
 
-            const data =
-                Object.fromEntries(
-                    formData.entries()
-                );
-
-            // console.log(
-            //     "DATA ENVOYÉE :",
-            //     data
-            // );
-
-            // ===== VALIDATIONS =====
+            const data = Object.fromEntries(
+                Array.from(formData.entries()).filter(
+                    ([key, value]) => !(value instanceof File)
+                )
+            );
 
             if (!data.sexe) {
-
-                messageEl.style.display =
-                    "block";
-
-                messageEl.className =
-                    "form-message error";
-
-                messageEl.textContent =
-                    "Veuillez sélectionner votre sexe";
-
+                messageEl.style.display = "block";
+                messageEl.className = "form-message error";
+                messageEl.textContent = "Veuillez sélectionner votre sexe";
                 return;
             }
 
             if (!data.numero_cnib) {
-
-                messageEl.style.display =
-                    "block";
-
-                messageEl.className =
-                    "form-message error";
-
-                messageEl.textContent =
-                    "Le CNIB est requis";
-
+                messageEl.style.display = "block";
+                messageEl.className = "form-message error";
+                messageEl.textContent = "Le CNIB est requis";
                 return;
             }
 
@@ -362,125 +523,61 @@ export default class AuthController {
                 !data.mot_de_passe ||
                 data.mot_de_passe.length < 8
             ) {
-
-                messageEl.style.display =
-                    "block";
-
-                messageEl.className =
-                    "form-message error";
-
+                messageEl.style.display = "block";
+                messageEl.className = "form-message error";
                 messageEl.textContent =
                     "Mot de passe trop court (min 8 caractères)";
-
                 return;
             }
 
-            if (
-                data.mot_de_passe !==
-                data.mot_de_passe_confirm
-            ) {
-
-                messageEl.style.display =
-                    "block";
-
-                messageEl.className =
-                    "form-message error";
-
+            if (data.mot_de_passe !== data.mot_de_passe_confirm) {
+                messageEl.style.display = "block";
+                messageEl.className = "form-message error";
                 messageEl.textContent =
                     "Les mots de passe ne correspondent pas";
-
                 return;
             }
 
             try {
+                const res = await AuthModel.register(formData);
 
-                const res =
-                    await AuthModel.register(data);
-
-                // console.log(
-                //     "REPONSE API :",
-                //     res.data
-                // );
-
-                // ===== ERREUR API =====
                 if (!res.ok) {
-
-                    messageEl.style.display =
-                        "block";
-
-                    messageEl.className =
-                        "form-message error";
-
+                    messageEl.style.display = "block";
+                    messageEl.className = "form-message error";
                     messageEl.textContent =
-                        res.data.error ||
-                        "Erreur inscription";
-
+                        res.data.error || "Erreur inscription";
                     return;
                 }
 
-                // ===== SUCCÈS =====
+                messageEl.style.display = "block";
+                messageEl.className = "form-message success";
+                messageEl.textContent = res.data.message;
 
-                messageEl.style.display =
-                    "block";
-
-                messageEl.className =
-                    "form-message success";
-
-                messageEl.textContent =
-                    res.data.message;
-
-                // stockage session
-                sessionStorage.setItem(
-                    "email",
-                    data.email
-                );
+                sessionStorage.setItem("email", data.email);
 
                 sessionStorage.setItem(
                     "otp_token",
                     res.data.candidat.token
                 );
 
-                // loader
-                const loader =
-                    document.getElementById(
-                        "pageLoader"
-                    );
+                const loader = document.getElementById("pageLoader");
 
                 if (loader) {
-
-                    loader.classList.remove(
-                        "hidden"
-                    );
+                    loader.classList.remove("hidden");
                 }
 
-                // redirection
                 setTimeout(() => {
-
-                    window.location.href =
-                        "otp.php";
-
+                    window.location.href = "otp.php";
                 }, 1200);
 
+            } catch (err) {
+                console.error("Erreur inscription :", err);
+
+                messageEl.style.display = "block";
+                messageEl.className = "form-message error";
+                messageEl.textContent = "Erreur serveur";
             }
-
-            catch (err) {
-
-                // console.log(err);
-                err;
-
-                messageEl.style.display =
-                    "block";
-
-                messageEl.className =
-                    "form-message error";
-
-                messageEl.textContent =
-                    "Erreur serveur";
-
-            }
-
         });
-
     }
 
     static initOtp() {
@@ -724,7 +821,7 @@ export default class AuthController {
 
                 const res = await AuthModel.resendOtp(email);
 
-               // console.log("RESEND OTP:", res.data);
+                // console.log("RESEND OTP:", res.data);
 
                 if (!res.ok) {
                     //alert(res.data.error || "Erreur renvoi OTP");

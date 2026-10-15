@@ -15,16 +15,30 @@ export default class AuthModel {
         return { ok: res.ok, data: result };
     }
 
-    static async register(data) {
-        const res = await fetch(`${API_URL}/register`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(data)
-        });
+    // static async register(data) {
+    //     const res = await fetch(`${API_URL}/register`, {
+    //         method: "POST",
+    //         headers: { "Content-Type": "application/json" },
+    //         body: JSON.stringify(data)
+    //     });
 
-        const result = await res.json();
-        return { ok: res.ok, data: result };
-    }
+    //     const result = await res.json();
+    //     return { ok: res.ok, data: result };
+    // }
+
+    static async register(formData) {
+    const res = await fetch(`${API_URL}/register`, {
+        method: "POST",
+        body: formData
+    });
+
+    const result = await res.json();
+
+    return {
+        ok: res.ok,
+        data: result
+    };
+}
 
     static async verifyOtp(data, token) {
         const res = await fetch(`${API_URL}/verify`, {
