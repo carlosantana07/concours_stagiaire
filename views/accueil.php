@@ -171,7 +171,8 @@
           <div class="step-content">
 
             <h3>
-              Créer un compte
+              <a href="inscription.php">Créer un compte</a>
+              
             </h3>
 
             <p>
@@ -198,7 +199,7 @@
           <div class="step-content">
 
             <h3>
-              Rechercher un concours
+              <a href="liste_concours.php">Rechercher un concours</a>
             </h3>
 
             <p>

@@ -382,23 +382,23 @@
                                 </div>
 
                                 <div class="document-upload-content">
-                                    <label for="documentDiplome">Diplôme</label>
+                                    <label for="documentMedical">Certificat medical</label>
                                     <p>Diplôme ou attestation équivalente</p>
 
-                                    <label for="documentDiplome" class="document-upload-button">
+                                    <label for="documentMedical" class="document-upload-button">
                                         <i class="fa-solid fa-cloud-arrow-up"></i>
                                         Choisir un fichier
                                     </label>
 
                                     <input
                                         type="file"
-                                        id="documentDiplome"
-                                        name="diplome"
+                                        id="documentMedical"
+                                        name="medical"
                                         class="document-file-input"
                                         accept=".pdf,.jpg,.jpeg,.png"
-                                        data-label="documentDiplomeNom">
+                                        data-label="documentMedicalNom">
 
-                                    <span id="documentDiplomeNom" class="document-file-name">
+                                    <span id="documentMedicalNom" class="document-file-name">
                                         Aucun fichier sélectionné
                                     </span>
                                 </div>
@@ -488,7 +488,7 @@
                                 </div>
                             </div>
 
-                            <div class="document-upload-card document-upload-card-full">
+                            <!-- <div class="document-upload-card document-upload-card-full">
                                 <div class="document-upload-icon">
                                     <i class="fa-solid fa-heart-pulse"></i>
                                 </div>
@@ -513,8 +513,8 @@
                                     <span id="documentCertificatNom" class="document-file-name">
                                         Aucun fichier sélectionné
                                     </span>
-                                </div>
-                            </div>
+                                </div> 
+                            </div> -->
 
                         </div>
 
